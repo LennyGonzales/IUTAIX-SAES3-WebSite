@@ -1,27 +1,39 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>Contact</title>
-</head>
-
-<body>
-<h1>Contact</h1>
-<form method="post">
-    <label>Votre email</label>
-    <input type="email" name="email" required><br>
-    <label>Message</label>
-    <textarea name="message" required></textarea><br>
-    <input type="submit">
-</form>
 <?php
-if (isset($_POST['message'])) {
-    $retour = mail('alex.ganassi@free.fr', 'Envoi depuis la page Contact', $_POST['message test'], 'From: ' . "\r\n" . 'Reply-to: ' . $_POST['email']);
-    if($retour)
-        echo '<p>Votre message a bien été envoyé.</p>';
-    else
-        echo '<p>Votre message na pas été envoyé.</p>';
+
+require 'path/to/PHPMailer/src/Exception.php';
+require 'path/to/PHPMailer/src/PHPMailer.php';
+require 'path/to/PHPMailer/src/SMTP.php';
+
+$mail = new PHPMailer(true);
+try {
+    $mail->SMTPDebub = SMTP::DEBUG_SERVER;
+
+    $mail->isSMTP();
+    $mail->Host = "localhost";
+    $mail->Port = 1025;
+
+    $mail->Charet = "utf-8";
+
+    $mail->addAdresse("ganassialex@gmail.com");
+
+    $mail->SetFrom("ganassialex@gmail.com");
+
+    $mail->Subject = "sujet du message";
+    $mail->Body = "Coucou";
+
+    $mail->send();
+    echo "message envoyer";
+}catch (Exception){
+    echo "Message non envoyé, Erreur: {$mail->ErrorInfo}";
 }
-?>
-</body>
-</html>
+
+
+
+
+// $to = "ganassialex@gmail.com";
+// $subject = "sujet";
+// $message = 'massage';
+// $headers = [
+//        "From" => "ganassialex@gmail.com"
+//];
+//mail($to, $subject, $message, $headers);

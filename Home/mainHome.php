@@ -21,8 +21,16 @@
 </form><form action="connectionPage.php">
     <input type="submit" value="Connection">
 </form>
+<br>
+<form action="../App/Download.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="fichier" />
+    <input type="submit" value="Télécharger l'app" />
+</form>
 <form action="inscriptionPage.php">
     <input type="submit" value="Crée un compte">
 </form>
+<br>
+
+
 <br>
 <?php echo "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "?>
