@@ -1,3 +1,3 @@
-<form action="mainHome.php">
+<form action="navBar.php">
     <input type="submit" value="Retour">
 </form>

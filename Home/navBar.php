@@ -10,7 +10,7 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
-            width: 10vh;
+            width: 12vh;
             background-color:  #e5e5e5 ;
             position: fixed;
             height: 100%;
@@ -31,20 +31,23 @@
 
         li a:hover:not(.active) {
             background-color:  #e5e5e5;
-            color: white;7
+            color: white;
         }
     </style>
 </head>
 <body>
 
 <ul>
-    <li><a class="active" href="#home">Home</a></li>
-    <li><a href="#news">News</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a class="active" href="./mainHome.php">Home</a></li>
+    <li><a href="./quiz.php">Quiz</a></li>
+    <li><a href="./connectionPage.php">Connection</a></li>
+    <li><a href="./inscriptionPage.php">Inscription</a></li>
 </ul>
 
 <div style="margin-left:10%;padding:1px 16px;height:0px;">
+    <video src="../Video/vidTest.mp4"
+           type="video/mp4" controls="" poster="">
+    </video>
     <h2>Fixed Full-height Side Nav</h2>
     <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
     <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
