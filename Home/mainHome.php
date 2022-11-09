@@ -1,3 +1,4 @@
+<link href="../Css/styles.php" rel="stylesheet" type="text/css" media="all" />
 <html>
 <head>
     <meta content="text/html; charset=ISO-8859-1"
@@ -5,9 +6,9 @@
     <title>Site web de l'app</title>
 </head>
 <body>
-        <video src="../Video/vidTest.mp4"
-               type="video/mp4" controls="" poster="">
-        </video>
+<video src="../Video/vidTest.mp4"
+       type="video/mp4" controls="" poster="">
+</video>
 <br>
 <br>
 </body>
