@@ -4,7 +4,7 @@
         <title>Modifications/ajouter des questions</title>
     </head>
     <body>
-        <form action="../Html/navBar.php">
+        <form action="../Html/navBar.html">
             <input type="submit" value="Acceuil">
         </form>
         <a href="../App/downloadApp.php">
@@ -30,23 +30,11 @@
                 </tr>
             </thead>
         </table>
+        
         <?php
         $query = "SELECT * FROM qcm_fr";
         $result = pg_query($con, $query);
         while($row = pg_fetch_assoc($result)){
-             //Supprimer les questions
-                    if(isset($_GET['delete'])){
-                        $id=$_GET['delete'];
-                        $sql="DELETE FROM QCM_FR WHERE ID='$id'";
-                        $query=pg_query($sql);
-                        if($query){
-                            echo "Supprimer avec succes.";
-                            header("refresh:0; url=scenario.php");
-                        }else{
-                            echo "ça n'a pas été supprimé.";
-                            header("refresh:0; url=scenario.php");
-                        }
-                    }
             ?>
             <tr class="Rows">
                         <td><?php echo $row['id']?></td>&nbsp;
@@ -62,50 +50,46 @@
                         
                     </tr>
                     <?php
-                   
+        }
+        ?>
+<?php
+        //Supprimer les questions
+                    if(isset($_GET['delete'])){
+                        $id=$_GET['delete'];
+                        $sql="DELETE FROM QCM_FR WHERE ID='$id'";
+                        $query=pg_query($sql);
+                        if($query){
+                            echo "Supprimer avec succes.";
+                            header("refresh:0; url=scenario.php");
+                        }else{
+                            echo "ça n'a pas été supprimé.";
+                            header("refresh:0; url=scenario.php");
+                        }
+                    }
 
                     //Modifier les questions
-                    if(isset($_GET['modify'])){
-                        $id = $_GET['modify'];
-                        $sql= "SELECT * FROM QCM_FR WHERE id='$id'";
-                        $query = pg_query($sql);
-                        $row = pg_fetch_array($query);
-                        $id = $row['id'];
-                        $module = $row['module'];
-                        $question = $row['question'];
-                        $true_answer = $row['true_answer'];
-                        $answer_1 = $row['answer_1'];
-                        $answer_2 = $row['answer_2'];
-                        $answer_3 = $row['answer_3'];
-                        $modify = true;
-                    }
-                    if(isset($_POST['btn_edit'])){
-                        $id = $_POST['id'];
+                    if(isset($_POST['Mbutton'])){
                         $module = $_POST['module'];
                         $question = $_POST['question'];
                         $true_answer = $_POST['true_answer'];
                         $answer_1 = $_POST['answer_1'];
                         $answer_2 = $_POST['answer_2'];
                         $answer_3 = $_POST['answer_3'];
-                        $sql = "UPDATE QCM_FR SET module = '$module', question = '$question', true_answer = '$true_answer', answer_1 = '$answer_1', answer_2 = '$answer_2', answer_3 = '$answer_3' WHERE id='$id'";
-                        $query = pg_query($sql);
 
-                        if($query){
-                            echo "Modifier avec success";
-                            header("refresh:0; url=scenario.php");
-                        }else{
-                            echo "ça n'a pas marché";
-                            header("refresh:0; url=scenario.php");
+                        $query = "UPDATE qcm_fr SET module='$module', question='$question', true_answer='$true_answer', answer_1='$answer_1', answer_2='$answer_2', answer_3='$answer_3' WHERE ID='$id'";
+                        $q = $con ->prepare($query);
+                        $res = $q->execute();
+                        $modify = true;
+                        if($q)
+                        {
+                            echo "modification successful";
                         }
+                        echo "modification unsuccessful";
+                            header("refresh:1; url=scenario.php");
+                            exit;
+
                     }
 
-
-        }
-        ?>
-
-        
-
-        <?php
         if(isset($_REQUEST['module'], $_REQUEST['question'], $_REQUEST['true_answer'], $_REQUEST['answer_1'], $_REQUEST['answer_2'], $_REQUEST['answer_3'])){
             $module = stripslashes($_REQUEST['module']);
             $module = pg_escape_string($con, $module);
