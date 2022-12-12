@@ -2,7 +2,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="style.css" />
-  <title>Connection</title>
+  <title>Connexion</title>
 </head>
 <body>
 <?php
@@ -24,7 +24,7 @@ if (isset($_POST['email'])){
     $user = pg_fetch_assoc($result);
     // vérifier si l'utilisateur est un administrateur ou un utilisateur
     if ($user['user_status'] == 'Student') {
-      header('location: ../Html/download.php');      
+      header('location: ../Html/download.html');      
     }else{
       header('location: ./scenario.php');
     }
@@ -33,12 +33,12 @@ if (isset($_POST['email'])){
   }
 }
 ?>
-<form action="../Html/navBar.php">
+<form action="../Html/navBar.html">
   <input type="submit" value="Acceuil">
 </form>
 <form class="box" action="" method="post" name="login">
 
-<h1 class="box-title">Connection</h1>        
+<h1 class="box-title">Connexion</h1>        
 <input type="text" class="box-input" name="email" placeholder="Nom d'utilisateur">
 <input type="password" class="box-input" name="user_password" placeholder="Mot de passe">
 <input type="submit" value="Connexion " name="submit" class="box-button">

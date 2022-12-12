@@ -43,7 +43,7 @@
 
   }else{
   ?>
-  <form action="../Html/navBar.php">
+  <form action="../Html/navBar.html">
     <input type="submit" value="Acceuil">
   </form>
   <form class="box" action="" method="post">
