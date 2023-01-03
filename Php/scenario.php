@@ -5,7 +5,7 @@
     </head>
     <body>
         <form action="../Html/navBar.html">
-            <input type="submit" value="Acceuil">
+            <input type="submit" value="Accueil">
         </form>
         <a href="../App/downloadApp.php">
             <input type="submit" value="Télécharger l'App?">
@@ -45,7 +45,7 @@
                         <td><?php echo $row['answer_2']?></td>&nbsp;
                         <td><?php echo $row['answer_3']?></td>&nbsp;
                         <td><a href="scenario.php?modify=<?php echo $row['id'] ?>" class="Mbutton"> Modifier</a></td>&nbsp;
-                        <td><a href="scenario.php?delete=<?php echo $row['id'] ?>" class="Dbutton">Supprimer</a></td>&nbsp;
+                        <td><a href="scenario.php?delete=<?php echo $row['id'] ?>" class="delete">Supprimer</a></td>&nbsp;
                         <br>
                         
                     </tr>
@@ -68,7 +68,8 @@
                     }
 
                     //Modifier les questions
-                    if(isset($_POST['Mbutton'])){
+                    if(isset($_POST['modify'])){
+                        $id = $_POST['id'];
                         $module = $_POST['module'];
                         $question = $_POST['question'];
                         $true_answer = $_POST['true_answer'];
@@ -76,17 +77,17 @@
                         $answer_2 = $_POST['answer_2'];
                         $answer_3 = $_POST['answer_3'];
 
-                        $query = "UPDATE qcm_fr SET module='$module', question='$question', true_answer='$true_answer', answer_1='$answer_1', answer_2='$answer_2', answer_3='$answer_3' WHERE ID='$id'";
-                        $q = $con ->prepare($query);
-                        $res = $q->execute();
-                        $modify = true;
+                        $query = "UPDATE qcm_fr SET module='$module', question='$question', true_answer='$true_answer', answer_1='$answer_1', answer_2='$answer_2', answer_3='$answer_3' WHERE id='$id'";
+                        $q = pg_query($con, $query);
                         if($q)
                         {
                             echo "modification successful";
-                        }
-                        echo "modification unsuccessful";
+                        }else{
+                            echo "modification unsuccessful";
                             header("refresh:1; url=scenario.php");
-                            exit;
+                        }
+                        
+                        
 
                     }
 
@@ -134,18 +135,9 @@
             <input type="text" class="box-input" name="answer_1" placeholder="Réponse 1" required /> 
             <input type="text" class="box-input" name="answer_2" placeholder="Réponse 2" required /> 
             <input type="text" class="box-input" name="answer_3" placeholder="Réponse 3" required /> 
-            <?php if($modify==true){
-                ?>
-            <input type="submit" name="submit" value="Modifier" class="modify-button" onclick="$res" />
-
-                <?php
-            }else{
-                ?>
             <input type="submit" name="submit" value="Ajouter" class="ajout-button" onclick="$res" />
-                <?php
-            }
-            ?>
-            </form>
+            <input type="submit" name="modify" value="Modifier" class="modify-button"/>
+        </form>
             <?php
         }
         ?>          

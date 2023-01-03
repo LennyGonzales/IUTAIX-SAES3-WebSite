@@ -39,7 +39,7 @@ if (isset($_POST['email'])){
 <form class="box" action="" method="post" name="login">
 
 <h1 class="box-title">Connexion</h1>        
-<input type="text" class="box-input" name="email" placeholder="Nom d'utilisateur">
+<input type="text" class="box-input" name="email" placeholder="Email">
 <input type="password" class="box-input" name="user_password" placeholder="Mot de passe">
 <input type="submit" value="Connexion " name="submit" class="box-button">
 <p class="box-register">Vous êtes nouveau ici? 
