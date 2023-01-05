@@ -46,7 +46,7 @@
                         <td><a href="scenario.php?modify=<?php echo $row['id'] ?>" class="Mbutton"> Modifier</a></td>&nbsp;
                         <td><a href="scenario.php?delete=<?php echo $row['id'] ?>" class="delete">Supprimer</a></td>&nbsp;
                         <br>
-                        
+                       
                     </tr>
                     <?php
                 }
@@ -81,12 +81,13 @@
                         $answer_1 = $_POST['answer_1'];
                         $answer_2 = $_POST['answer_2'];
                         $answer_3 = $_POST['answer_3'];
-                
+               
                         $query = "UPDATE qcm_fr SET module='$module', question='$question', true_answer='$true_answer', answer_1='$answer_1', answer_2='$answer_2', answer_3='$answer_3' WHERE id='$id'";
                         $q = pg_query($con, $query);
                         if($q)
                         {
                             echo "modification successful";
+                            header("refresh:0; url=scenario.php");
                         }else{
                             echo "modification unsuccessful";
                             header("refresh:0; url=scenario.php");
@@ -129,6 +130,50 @@
         </form>
         <?php
     }
-    ?>
+    ?> 
+
+        <?php
+            
+            if (isset($_POST['add'])) {
+                $module = $_POST['module'];
+                $question = $_POST['question'];
+                $true_answer = $_POST['true_answer'];
+                $answer_1 = $_POST['answer_1'];
+                $answer_2 = $_POST['answer_2'];
+                $answer_3 = $_POST['answer_3'];
+            
+                $query = "INSERT INTO qcm_fr (module, question, true_answer, answer_1, answer_2, answer_3) VALUES ('$module', '$question', '$true_answer', '$answer_1', '$answer_2', '$answer_3')";
+                $result = pg_query($con, $query);
+                if ($result) {
+                    echo "Ajouté avec succès.";
+                    header("refresh:0; url=scenario.php");
+                } else {
+                    echo "Erreur lors de l'ajout.";
+                    header("refresh:0; url=scenario.php");
+                }
+            }
+        ?>            
+
+
+            <form action="scenario.php" method="post">
+                <input type="hidden" name="add" value="true">
+                <label for="module">Module :</label><br>
+                <input type="text" name="module" required><br>
+                <label for="question">Question :</label><br>
+                <input type="text" name="question" required><br>
+                <label for="true_answer">Réponse correcte :</label><br>
+                <input type="text" name="true_answer" required><br>
+                <label for="answer_1">Réponse 1 :</label><br>
+                <input type="text" name="answer_1" required><br>
+                <label for="answer_2">Réponse 2 :</label><br>
+                <input type="text" name="answer_2" required><br>
+                <label for="answer_3">Réponse 3 :</label><br>
+                <input type="text" name="answer_3" required><br>
+                <br>
+                <input type="submit" value="Ajouter">
+            </form>
+
+       
+            
 </body>
 </html>
