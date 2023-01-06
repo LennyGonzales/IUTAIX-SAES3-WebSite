@@ -1,3 +1,6 @@
+<?php
+        session_start();
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +15,6 @@
 </head>
 
 <body>
-    <?php
-        session_start();
-    ?>
     <!-- navbar sections starts  -->
     <header class="header">
         <div class="logo">
@@ -24,7 +24,15 @@
         <nav class="navbar">
             <a href="acceuil.php" class="underline">Accueil</a>
             <a href="#features" class="underline">Histoires</a>
-            <a href="../Php/login.php" class="btn">Connexion</a>
+            <?php
+                 if (isset($_SESSION['connected'])){
+                    echo '<a href="./deconnection.php" class="btn">Deconnexion</a>';
+                 } else {
+                    echo '<a href="./login.php" class="btn">Connexion</a>';
+                 }
+            ?>
+
+            
         </nav>
         
 
@@ -39,8 +47,14 @@
         <div class="content">
             <h1>NetWork Stories</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-
-            <a href="#" class="all-btn">Télécharger</a>
+            <?php
+                 if (isset($_SESSION['connected'])){
+                    echo '<a href="../App/downloadApp.php" class="all-btn">Télécharger</a>';
+                 } else {
+                    echo '<a href="./login.php" class="all-btn">Télécharger</a>';
+                }
+            ?>
+            
         </div>
 
 

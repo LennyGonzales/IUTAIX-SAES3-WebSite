@@ -11,8 +11,7 @@
             <input type="submit" value="Télécharger l'App?">
         </a>
         <?php
-        session_start();
-
+        
         require("./connectionSQL.php");
         $modify ="";
         ?>

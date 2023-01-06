@@ -1,3 +1,6 @@
+<?php
+        session_start();
+    ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,7 +14,6 @@
 <?php
 
     require('connectionSQL.php');
-    session_start();
 
     if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
         $email2 = stripslashes($_REQUEST['email']);
@@ -60,7 +62,8 @@
             $user = pg_fetch_assoc($result);
             // vérifier si l'utilisateur est un administrateur ou un utilisateur
             if ($user['user_status'] == 'Student') {
-                header('location: ../Html/download.html');      
+                $_SESSION['connected'] = true;
+                header('location: ./acceuil.php');      
             }else{
                 header('location: ./history.php');
             }
