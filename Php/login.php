@@ -9,6 +9,7 @@
 </head>
 <body>
 <?php
+
     require('connectionSQL.php');
     session_start();
 
@@ -61,7 +62,7 @@
             if ($user['user_status'] == 'Student') {
                 header('location: ../Html/download.html');      
             }else{
-                header('location: ./scenario.php');
+                header('location: ./history.php');
             }
         }else{
             $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
