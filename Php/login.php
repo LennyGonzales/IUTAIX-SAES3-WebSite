@@ -47,7 +47,6 @@
             } 
         }
     }
-
     if (isset($_POST['email'], $_POST['user_password'])){
         $email = stripslashes($_REQUEST['email']);
         $email = pg_escape_string($con, $email);
@@ -62,10 +61,15 @@
             $user = pg_fetch_assoc($result);
             // vérifier si l'utilisateur est un administrateur ou un utilisateur
             if ($user['user_status'] == 'Student') {
+                $_SESSION['user'] = $user;
                 $_SESSION['connected'] = true;
+                
                 header('location: ./acceuil.php');      
             }else{
-                header('location: ./history.php');
+                $_SESSION['user'] = $user;
+                $_SESSION['connected'] = true;
+                
+                header('location: ./acceuil.php');
             }
         }else{
             $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";

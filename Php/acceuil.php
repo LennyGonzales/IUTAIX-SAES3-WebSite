@@ -1,8 +1,15 @@
-<?php
-        session_start();
+ <?php
+    session_start();
+       
     ?>
+
+<?php
+    if (isset($_SESSION['connected'])){
+        $user = $_SESSION['user'];
+    }
+?>   
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -16,25 +23,27 @@
 
 <body>
     <!-- navbar sections starts  -->
+    
     <header class="header">
         <div class="logo">
             <img src="../Image/logo-nws.png" alt="logo-nws">
         </div>
         
-        <nav class="navbar">
-            <a href="acceuil.php" class="underline">Accueil</a>
-            <a href="#features" class="underline">Histoires</a>
-            <?php
-                 if (isset($_SESSION['connected'])){
-                    echo '<a href="./deconnection.php" class="btn">Deconnexion</a>';
-                 } else {
-                    echo '<a href="./login.php" class="btn">Connexion</a>';
-                 }
-            ?>
-
-            
+                <nav class="navbar">
+        <a href="acceuil.php" class="underline">Accueil</a>
+        <?php
+            if (isset($_SESSION['connected'])){
+            // Vérifiez si l'utilisateur est un administrateur
+            if ($user['user_status'] !== 'Student') {
+                echo '<a href="history.php" class="underline">Histoires</a>';
+            }
+            echo '<a href="./deconnection.php" class="btn">Deconnexion</a>';
+            } 
+            else {
+                echo '<a href="./login.php" class="btn">Connexion</a>';
+            }
+        ?>
         </nav>
-        
 
         <div class="fas fa-bars" id="menu-btn"></div>
     </header>
@@ -76,7 +85,14 @@
            <div class="box">
                <h3>Liens rapides</h3>
                <a href="acceuil.php"><i class="fas fa-chevron-right"></i>Accueil</a>
-               <a href="#"><i class="fas fa-chevron-right"></i>Histoires</a>
+               <?php
+                if (isset($_SESSION['connected'])){
+                // Vérifiez si l'utilisateur est un administrateur
+                if ($user['user_status'] !== 'Student') {
+                    echo '<a href="history.php"><i class="fas fa-chevron-right"></i>Histoires</a>';
+                }
+            }
+               ?>
                <a href="../Php/login.php"><i class="fas fa-chevron-right"></i>Connexion</a>
             </div>
             
@@ -103,6 +119,8 @@
 
 
     <script src="../Js/main.js"></script>
+
+    
 </body>
 
 </html>
