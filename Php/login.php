@@ -16,18 +16,29 @@
     
     require('connectionSQL.php');
 
-    if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
-        $email2 = stripslashes($_REQUEST['email']);
-        $email2 = pg_escape_string($con, $email2);
-        
-        $user_password2 = stripslashes($_REQUEST['user_password']);
-        $user_password2 = pg_escape_string($con, $user_password2);
+if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
+    $email2 = stripslashes($_REQUEST['email']);
+    $email2 = pg_escape_string($con, $email2);
+    
+    $user_password2 = stripslashes($_REQUEST['user_password']);
+    $user_password2 = pg_escape_string($con, $user_password2);
 
-        $check_email_run = pg_query($con,"SELECT EMAIL FROM USERS AS U WHERE U.EMAIL='$email2'");
-        if (pg_num_rows($check_email_run) == 1) {
-        echo "Ce mail est déja utilisé.";
-        }else{
-            if (substr($email2, -16,16) == "@etu.univ-amu.fr" OR substr($email2, -12, 12) == "@univ-amu.fr"){
+    $check_email_run = pg_query($con,"SELECT EMAIL FROM USERS AS U WHERE U.EMAIL='$email2'");
+    if (pg_num_rows($check_email_run) == 1) {
+    echo "Ce mail est déja utilisé.";
+    }else{
+        if (substr($email2, -16,16) == "@etu.univ-amu.fr" OR substr($email2, -12, 12) == "@univ-amu.fr"){
+            //Vérifier si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
+            if (strlen($user_password2) < 12) {
+                echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
+                header("refresh:1; url=login.php");
+            } elseif (!preg_match('/[A-Z]/', $user_password2)) {
+                echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
+                header("refresh:1; url=login.php");
+            } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)) {
+                echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
+                header("refresh:1; url=login.php");
+            } else {
                 $query = "INSERT into USERS (EMAIL, USER_PASSWORD) VALUES ('$email2', '" . hash('sha512', $user_password2) . "')";
                 $res = pg_query($con, $query);
                 if($res){
@@ -46,10 +57,10 @@
 
                 }   
             }
-
         }
-    }
 
+    }
+}
 
     if (isset($_POST['email'], $_POST['user_password'])){
         $email = stripslashes($_REQUEST['email']);
