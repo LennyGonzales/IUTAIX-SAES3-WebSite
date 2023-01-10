@@ -11,8 +11,9 @@
     <title>NetWork Stories Login</title>
 </head>
 <body>
+  
 <?php
-
+    
     require('connectionSQL.php');
 
     if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
@@ -44,9 +45,12 @@
                         header("refresh:1; url=login.php");
 
                 }   
-            } 
+            }
+
         }
     }
+
+
     if (isset($_POST['email'], $_POST['user_password'])){
         $email = stripslashes($_REQUEST['email']);
         $email = pg_escape_string($con, $email);
@@ -84,8 +88,11 @@
             <form action="#" method="POST">
                 <h1>Créer un compte</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email" required />  
-                <input type="password" class="box-input" name="user_password" placeholder="Mots de passe" required />
-                <input type="submit" name="inscription" value="S'inscrire" class="box-button" onclick="$res" />
+                <input type="password" class="box-input" name="user_password" placeholder="Mots de passe" required />            
+                <input type="checkbox"  name="terms" id="terms" required>
+                <label for="terms" style="font-size: 0.6em">J'accepte les conditions générales d'utilisation</label>
+                <br>
+                <input type="submit" name="inscription" value="S'inscrire" class="box-button" onclick="$res" />          
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -107,7 +114,7 @@
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Re bonjour !</h1>
-                    <p>Connectes toi pour commencer.</p>
+                    <p>Connecte-toi pour commencer.</p>
                     <button class="ghost"id="signIn">Connexion</button>
                 </div>
                 <div class="overlay-panel overlay-right">
