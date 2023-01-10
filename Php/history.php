@@ -8,12 +8,12 @@
         <title>Modifications/ajouter des questions</title>
     </head>
     <body>
+ 
         <form action="./acceuil.php">
             <input type="submit" value="Accueil">
         </form>
-        <a href="../App/downloadApp.php">
-            <input type="submit" value="Télécharger l'App?">
-        </a>
+
+
         <?php
         
         require("./connectionSQL.php");
@@ -25,6 +25,7 @@
                     <tr class="column">
                         <th>Id</th>
                         <th>Module</th>
+                        <th>Description</th>
                         <th>Question</th>
                         <th>Réponse question</th>
                         <th>Réponse 1</th>
@@ -35,14 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $query = "SELECT * FROM qcm_fr";
-                    $result = pg_query($con, $query);
-                    while($row = pg_fetch_assoc($result)){
+                
+<?php
+                    $query = "SELECT h.id, h.module, h.description, h.question, q.true_answer, q.answer_1, q.answer_2, q.answer_3 FROM history h INNER JOIN qcm q ON h.id = q.id";
+                    $stmt = $con->prepare($query);
+                    $stmt->execute();
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         ?>
                         <tr class="Rows">
                             <td><?php echo $row['id']; ?></td>&nbsp;
                             <td><?php echo $row['module']; ?></td>&nbsp;
+                            <td><?php echo $row['description']; ?></td>&nbsp;
                             <td><?php echo $row['question']; ?></td>&nbsp;
                             <td><?php echo $row['true_answer']; ?></td>&nbsp;
                             <td><?php echo $row['answer_1']; ?></td>&nbsp;
