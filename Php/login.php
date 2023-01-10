@@ -16,80 +16,83 @@
     
     require('connectionSQL.php');
 
-if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
-    $email2 = stripslashes($_REQUEST['email']);
-    $email2 = pg_escape_string($con, $email2);
+    if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
+        try {
+            $email2 = stripslashes($_REQUEST['email']);
+            $user_password2 = stripslashes($_REQUEST['user_password']);
     
-    $user_password2 = stripslashes($_REQUEST['user_password']);
-    $user_password2 = pg_escape_string($con, $user_password2);
-
-    $check_email_run = pg_query($con,"SELECT EMAIL FROM USERS AS U WHERE U.EMAIL='$email2'");
-    if (pg_num_rows($check_email_run) == 1) {
-    echo "Ce mail est déja utilisé.";
-    }else{
-        if (substr($email2, -16,16) == "@etu.univ-amu.fr" OR substr($email2, -12, 12) == "@univ-amu.fr"){
-            //Vérifier si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
-            if (strlen($user_password2) < 12) {
-                echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
-                header("refresh:1; url=login.php");
-            } elseif (!preg_match('/[A-Z]/', $user_password2)) {
-                echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
-                header("refresh:1; url=login.php");
-            } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)) {
-                echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
-                header("refresh:1; url=login.php");
+            $check_email_run = $con->prepare("SELECT EMAIL FROM USERS AS U WHERE U.EMAIL = ?");
+            $check_email_run->execute([$email2]);
+            if ($check_email_run->rowCount() > 0) {
+                echo "Ce mail est déja utilisé.";
             } else {
-                $query = "INSERT into USERS (EMAIL, USER_PASSWORD) VALUES ('$email2', '" . hash('sha512', $user_password2) . "')";
-                $res = pg_query($con, $query);
-                if($res){
-                    echo "<div class='sucess'>
-                        <h3>Vous êtes inscrit avec succès.</h3>
-                        <p>Cliquez ici pour vous <a href='connectionPage.php'>connecter</a></p>
-                        </div>";
+                if (substr($email2, -16, 16) == "@etu.univ-amu.fr" || substr($email2, -12, 12) == "@univ-amu.fr") {
+                    //Vérifier si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
+                    if (strlen($user_password2) < 12) {
+                        echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
                         header("refresh:1; url=login.php");
-
-                }else{
-                    error_reporting(0);
-                    echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
-                        </div>";
-                        error_reporting(0);
+                    } elseif (!preg_match('/[A-Z]/', $user_password2)) {
+                        echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
                         header("refresh:1; url=login.php");
-
-                }   
+                    } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)) {
+                        echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
+                        header("refresh:1; url=login.php");
+                    } else {
+                        $query = $con->prepare("INSERT into USERS (EMAIL, USER_PASSWORD) VALUES (?, ?)");
+                        $res = $query->execute([$email2, hash('sha512', $user_password2)]);
+                        if($res){
+                            echo "<div class='sucess'>
+                                <h3>Vous êtes inscrit avec succès.</h3>
+                                <p>Cliquez ici pour vous <a href='connectionPage.php'>connecter</a></p>
+                                </div>";
+                                header("refresh:1; url=login.php");
+    
+                        }else{
+                            error_reporting(0);
+                            echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
+                                </div>";
+                                error_reporting(0);
+                                header("refresh:1; url=login.php");
+    
+                        }   
+                    }
+                }
+    
             }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
+    }
 
+
+if (isset($_POST['email'], $_POST['user_password'])){
+    $email = stripslashes($_REQUEST['email']);
+    $user_password = stripslashes($_REQUEST['user_password']);
+
+    $stmt = $con->prepare("SELECT * FROM USERS WHERE email=:email AND user_password=:user_password");
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':user_password', hash('sha512', $user_password), PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        $user = $result;
+        // vérifier si l'utilisateur est un administrateur ou un utilisateur
+        if ($user['user_status'] == 'Student') {
+            $_SESSION['user'] = $user;
+            $_SESSION['connected'] = true;
+
+            header('location: ./acceuil.php');      
+        }else{
+            $_SESSION['user'] = $user;
+            $_SESSION['connected'] = true;
+
+            header('location: ./acceuil.php');
+        }
+    }else{
+        $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
     }
 }
-
-    if (isset($_POST['email'], $_POST['user_password'])){
-        $email = stripslashes($_REQUEST['email']);
-        $email = pg_escape_string($con, $email);
-        $_SESSION['email'] = $email;
-        $user_password = stripslashes($_REQUEST['user_password']);
-        $user_password = pg_escape_string($con, $user_password);
-        $query = "SELECT * FROM USERS WHERE email='$email' and user_password='".hash('sha512', $user_password)."'";
-        
-        $result = pg_query($con,$query) or die(pg_last_error($conn=null));
-        
-        if (pg_num_rows($result) == 1) {
-            $user = pg_fetch_assoc($result);
-            // vérifier si l'utilisateur est un administrateur ou un utilisateur
-            if ($user['user_status'] == 'Student') {
-                $_SESSION['user'] = $user;
-                $_SESSION['connected'] = true;
-                
-                header('location: ./acceuil.php');      
-            }else{
-                $_SESSION['user'] = $user;
-                $_SESSION['connected'] = true;
-                
-                header('location: ./acceuil.php');
-            }
-        }else{
-            $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
-        }
-    }
 
     
     
