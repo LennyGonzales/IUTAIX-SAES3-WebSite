@@ -29,20 +29,19 @@ $query = editForm($con, $id);
 <?php
     if(isset($_GET['qcm'])) {
 ?>
-    <label for="true_answer">Vraie réponse</label>
-    <input type="number" name="true_answer" id="true_answer" value="<?php echo $query['true_answer'] ?>" />
-    <label for= 'answer_1'>Réponse 1</label>
-    <input type='text' name='answer_1' id='answer_1' value="<?php echo $query['answer_1'] ?>" />
-    <label for='answer_2'>Réponse 2</label>
-    <input type='text' name='answer_2' id='answer_2' value="<?php echo $query['answer_2'] ?>" />
-    <label for='answer_3'>Réponse 3</label>
-    <input type='text' name='answer_3' id='answer_3' value="<?php echo $query['answer_3'] ?>" />
+        <label for="true_answer">Vraie réponse</label>
+        <input type="number" name="true_answer" id="true_answer" value="<?php echo $query['true_answer'] ?>" />
+        <label for= 'answer_1'>Réponse 1</label>
+        <input type='text' name='answer_1' id='answer_1' value="<?php echo $query['answer_1'] ?>" />
+        <label for='answer_2'>Réponse 2</label>
+        <input type='text' name='answer_2' id='answer_2' value="<?php echo $query['answer_2'] ?>" />
+        <label for='answer_3'>Réponse 3</label>
+        <input type='text' name='answer_3' id='answer_3' value="<?php echo $query['answer_3'] ?>" />
 
 <?php
     } else {
 ?>
-    <label for="true_answer">Vraie réponse</label>
-    <input type="text" name="true_answer" id="true_answer" value="<?php echo $query['true_answer'] ?>" />
+        <input type="text" name="true_answer" id="true_answer" value="<?php echo $query['true_answer'] ?>" />
 <?php
     }
 ?>

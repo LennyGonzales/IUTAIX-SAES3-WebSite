@@ -9,17 +9,11 @@
         <title>Modifications/ajouter des questions</title>
     </head>
     <body>
- 
-        <form action="./acceuil.php">
+        <a href="./acceuil.php">
             <input type="submit" value="Accueil">
-        </form>
-
-
+        </a>
         <?php
-        
         require("./connectionSQL.php");
-        $update ="";
-        $delete="";
         ?>
         <div class="tabla-responsive">
             <table class="table-bordered">
@@ -39,18 +33,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                
-                <?php
-                   require 'showQcm.php'
-                ?>
-     
+                <?php require 'showQcm.php' ?>
                 </tbody>
             </table>
         </div>
-
-
-
-
         <div class="tabla-responsive">
             <table class="table-bordered">
                 <thead>
@@ -65,45 +51,10 @@
                         </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        require 'showWrittenResponseQuestion.php';
-                    ?>
+                    <?php require 'showWrittenResponseQuestion.php'; ?>
                 </tbody>
             </table>
         </div>
-        
-
-        <?php
-        //Supprimer les questions
-        if(isset($_GET['delete'])){
-            $delete = intval($_GET['delete']);
-            // delete from history and qcm
-            $sqldel="DELETE FROM history, qcm USING history INNER JOIN qcm 
-                    WHERE history.id = :id AND qcm.history_id = :id";
-            $querydel=$con->prepare($sqldel);
-            $querydel->bindValue(':id',$delete,PDO::PARAM_INT);
-            $qWR=$querydel->execute();
-    
-            // delete from history and writtenresponse
-            $sqldel="DELETE FROM history, writtenresponse USING history INNER JOIN writtenresponse 
-                    WHERE history.id = :id AND writtenresponse.history_id = :id";
-            $querydel=$con->prepare($sqldel);
-            $querydel->bindValue(':id',$delete,PDO::PARAM_INT);
-            $qDel=$querydel->execute();
-
-            $sqlDel="DELETE from history WHERE id = :id";
-            $queryDel=$con->prepare($sqlDel);
-            $queryDel->bindValue(':id',$delete,PDO::PARAM_INT);
-            $qtest=$queryDel->execute();
-
-            if($qtest) {
-                header("Location: historyPage.php");
-                exit();
-            }
-        }
-        ?>
-
-
 <?php
     if(isset($_GET['update'])){
         require "ShowUpdateFormQuestion.php";
