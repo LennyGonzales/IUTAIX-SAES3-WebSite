@@ -20,7 +20,7 @@ if (isset($_POST['email'], $_POST['user_password'])){
         $_SESSION['connected'] = true;
 
 
-        header('location: ./pages/acceuilPage.php');
+        header('location: ./pages/accueilPage.php');
         }
     }
 else{

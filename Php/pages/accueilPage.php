@@ -26,7 +26,7 @@
         </div>
         
         <nav class="navbar">
-            <a href="acceuilPage.php" class="underline">Accueil</a>
+            <a href="accueilPage.php" class="underline">Accueil</a>
             <?php
                 if (isset($_SESSION['connected'])){
                     // Vérifiez si l'utilisateur est un administrateur
@@ -80,7 +80,7 @@
        <div class="box-container">
            <div class="box">
                <h3>Liens rapides</h3>
-               <a href="acceuilPage.php"><i class="fas fa-chevron-right"></i>Accueil</a>
+               <a href="accueilPage.php"><i class="fas fa-chevron-right"></i>Accueil</a>
                <?php
                 if (isset($_SESSION['connected'])){
                 // Vérifiez si l'utilisateur est un administrateur

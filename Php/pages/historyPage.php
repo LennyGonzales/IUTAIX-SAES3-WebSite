@@ -21,7 +21,7 @@
             </div>
 
             <nav class="navbar">
-                <a href="acceuilPage.php" class="underline">Accueil</a>
+                <a href="accueilPage.php" class="underline">Accueil</a>
             </nav>
             <div class="fas fa-bars" id="menu-btn"></div>
         </header>
