@@ -15,13 +15,13 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
             //Vérifier si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
                 if (strlen($user_password2) < 12) {
                     echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
-                    header("refresh:1; url=loginPage.php");
+                    header("refresh:1; url=pages/loginPage.php");
                 } elseif (!preg_match('/[A-Z]/', $user_password2)) {
                     echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
-                    header("refresh:1; url=loginPage.php");
+                    header("refresh:1; url=pages/loginPage.php");
                 } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)) {
                     echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
-                    header("refresh:1; url=loginPage.php");
+                    header("refresh:1; url=pages/loginPage.php");
                 } else {
                     $query = $con->prepare("INSERT into USERS (EMAIL, USER_PASSWORD) VALUES (?, ?)");
                     $res = $query->execute([$email2, hash('sha512', $user_password2)]);
@@ -30,15 +30,13 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
                             <h3>Vous êtes inscrit avec succès.</h3>
                             <p>Cliquez ici pour vous <a href='connectionPage.php'>connecter</a></p>
                         </div>";
-                    header("refresh:1; url=pages/loginPage.php");
-
-                    }else{
-                    error_reporting(0);
-                    echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
-                        </div>";
-                    error_reporting(0);
-                    header("refresh:1; url=pages/loginPage.php");
-
+                        header("refresh:1; url=pages/loginPage.php");
+                    } else{
+                        error_reporting(0);
+                        echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
+                            </div>";
+                        error_reporting(0);
+                        header("refresh:1; url=pages/loginPage.php");
                     }
                 }
             }
