@@ -35,7 +35,7 @@
             if (isset($_SESSION['connected'])){
             // Vérifiez si l'utilisateur est un administrateur
             if ($user['user_status'] !== 'Student') {
-                echo '<a href="history.php" class="underline">Histoires</a>';
+                echo '<a href="historyPage.php" class="underline">Histoires</a>';
             }
             echo '<a href="./deconnection.php" class="btn">Deconnexion</a>';
             } 
@@ -89,7 +89,7 @@
                 if (isset($_SESSION['connected'])){
                 // Vérifiez si l'utilisateur est un administrateur
                 if ($user['user_status'] !== 'Student') {
-                    echo '<a href="history.php"><i class="fas fa-chevron-right"></i>Histoires</a>';
+                    echo '<a href="historyPage.php"><i class="fas fa-chevron-right"></i>Histoires</a>';
                 }
             }
                ?>

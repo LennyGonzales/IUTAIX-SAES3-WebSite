@@ -1,26 +1,6 @@
 <?php
 require("./connectionSQL.php");
-
-
-function addHistory($con, $description, $module, $question) {
-    $statement ="INSERT INTO history (module, question, description) VALUES (:module, :question, :description);";
-    $query=$con->prepare($statement);
-    $query->bindValue(':description',$description,PDO::PARAM_STR);
-    $query->bindValue(':module',$module,PDO::PARAM_STR);
-    $query->bindValue(':question',$question,PDO::PARAM_STR);
-    $query->execute();
-}
-
-function getIdFromHistory($con, $module, $description, $question) {
-    $statement ="SELECT ID FROM HISTORY WHERE module = :module and question = :question and description = :description;";
-    $query=$con->prepare($statement);
-    $query->bindValue(':description',$description,PDO::PARAM_STR);
-    $query->bindValue(':module',$module,PDO::PARAM_STR);
-    $query->bindValue(':question',$question,PDO::PARAM_STR);
-    $query->execute();
-    $id = $query->fetch();
-    return $id['id'];
-}
+require("./History.php");
 
 function addQcm($con, $id, $true_answer, $answer_1, $answer_2, $answer_3) {
     $statement="INSERT INTO qcm (id, true_answer, answer_1, answer_2, answer_3) 
@@ -59,5 +39,5 @@ if ($answer_1 || $answer_2 || $answer_3) {
     addWrittenResponseQuestion($con, $id, $true_answer);
 }
 
-header("Location: history.php");
+header("Location: historyPage.php");
 exit();
