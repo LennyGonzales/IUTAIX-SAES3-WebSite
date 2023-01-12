@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NetWork Stories</title>
-    <link rel="stylesheet"  type="text/css" href="../Css/style.css">
+    <link rel="stylesheet"  type="text/css" href="../../Css/style.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -26,21 +26,21 @@
     
     <header class="header">
         <div class="logo">
-            <img src="../Image/logo-nws.png" alt="logo-nws">
+            <img src="../../Image/logo-nws.png" alt="logo-nws">
         </div>
         
                 <nav class="navbar">
-        <a href="acceuil.php" class="underline">Accueil</a>
+        <a href="acceuilPage.php" class="underline">Accueil</a>
         <?php
             if (isset($_SESSION['connected'])){
             // Vérifiez si l'utilisateur est un administrateur
             if ($user['user_status'] !== 'Student') {
                 echo '<a href="historyPage.php" class="underline">Histoires</a>';
             }
-            echo '<a href="./deconnection.php" class="btn">Deconnexion</a>';
+            echo '<a href="deconnection.php" class="btn">Deconnexion</a>';
             } 
             else {
-                echo '<a href="./login.php" class="btn">Connexion</a>';
+                echo '<a href="loginPage.php" class="btn">Connexion</a>';
             }
         ?>
         </nav>
@@ -58,9 +58,9 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
             <?php
                  if (isset($_SESSION['connected'])){
-                    echo '<a href="../App/downloadApp.php" class="all-btn">Télécharger</a>';
+                    echo '<a href="../../App/downloadApp.php" class="all-btn">Télécharger</a>';
                  } else {
-                    echo '<a href="./login.php" class="all-btn">Télécharger</a>';
+                    echo '<a href="loginPage.php" class="all-btn">Télécharger</a>';
                 }
             ?>
             
@@ -69,7 +69,7 @@
 
         <div class="video">
             <video autoplay muted loop>
-                <source src="../Video/vidTest.mp4" type="video/mp4">
+                <source src="../../Video/vidTest.mp4" type="video/mp4">
             Your browser does not support the video tag.
             </video>
         </div>
@@ -84,7 +84,7 @@
        <div class="box-container">
            <div class="box">
                <h3>Liens rapides</h3>
-               <a href="acceuil.php"><i class="fas fa-chevron-right"></i>Accueil</a>
+               <a href="acceuilPage.php"><i class="fas fa-chevron-right"></i>Accueil</a>
                <?php
                 if (isset($_SESSION['connected'])){
                 // Vérifiez si l'utilisateur est un administrateur
@@ -93,7 +93,7 @@
                 }
             }
                ?>
-               <a href="../Php/login.php"><i class="fas fa-chevron-right"></i>Connexion</a>
+               <a href="loginPage.php"><i class="fas fa-chevron-right"></i>Connexion</a>
             </div>
             
             
@@ -118,7 +118,7 @@
     <!-- footer section ends -->
 
 
-    <script src="../Js/main.js"></script>
+    <script src="../../Js/main.js"></script>
 
     
 </body>

@@ -7,14 +7,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Css/login-style.css">
+    <link rel="stylesheet" href="../../Css/login-style.css">
     <title>NetWork Stories Login</title>
 </head>
 <body>
   
 <?php
     
-    require('connectionSQL.php');
+    require('../connectionSQL.php');
 
     if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
         try {
@@ -30,13 +30,13 @@
                     //Vérifier si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
                     if (strlen($user_password2) < 12) {
                         echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
-                        header("refresh:1; url=login.php");
+                        header("refresh:1; url=loginPage.php");
                     } elseif (!preg_match('/[A-Z]/', $user_password2)) {
                         echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
-                        header("refresh:1; url=login.php");
+                        header("refresh:1; url=loginPage.php");
                     } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)) {
                         echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
-                        header("refresh:1; url=login.php");
+                        header("refresh:1; url=loginPage.php");
                     } else {
                         $query = $con->prepare("INSERT into USERS (EMAIL, USER_PASSWORD) VALUES (?, ?)");
                         $res = $query->execute([$email2, hash('sha512', $user_password2)]);
@@ -45,14 +45,14 @@
                                 <h3>Vous êtes inscrit avec succès.</h3>
                                 <p>Cliquez ici pour vous <a href='connectionPage.php'>connecter</a></p>
                                 </div>";
-                                header("refresh:1; url=login.php");
+                                header("refresh:1; url=loginPage.php");
     
                         }else{
                             error_reporting(0);
                             echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
                                 </div>";
                                 error_reporting(0);
-                                header("refresh:1; url=login.php");
+                                header("refresh:1; url=loginPage.php");
     
                         }   
                     }
@@ -82,12 +82,12 @@ if (isset($_POST['email'], $_POST['user_password'])){
             $_SESSION['user'] = $user;
             $_SESSION['connected'] = true;
 
-            header('location: ./acceuil.php');      
+            header('location: ./acceuilPage.php');
         }else{
             $_SESSION['user'] = $user;
             $_SESSION['connected'] = true;
 
-            header('location: ./acceuil.php');
+            header('location: ./acceuilPage.php');
         }
     }else{
         $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
@@ -139,6 +139,6 @@ if (isset($_POST['email'], $_POST['user_password'])){
             </div>
         </div>
     </div>
-<script src="../Js/login.js"></script>
+<script src="../../Js/login.js"></script>
 </body>
 </html>
