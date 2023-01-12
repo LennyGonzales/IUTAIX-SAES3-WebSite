@@ -39,5 +39,5 @@ if ($answer_1 || $answer_2 || $answer_3) {
     addWrittenResponseQuestion($con, $id, $true_answer);
 }
 
-header("Location: historyPage.php");
+header("Location: pages/historyPage.php");
 exit();

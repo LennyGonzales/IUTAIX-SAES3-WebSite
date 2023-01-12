@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    require '../verifySession.php';
+?>
 
 <!DOCTYPE html>
 <html>

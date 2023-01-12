@@ -1,13 +1,9 @@
  <?php
     session_start();
-       
-    ?>
+    require '../verifySession.php';
+?>
 
-<?php
-    if (isset($_SESSION['connected'])){
-        $user = $_SESSION['user'];
-    }
-?>   
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -29,20 +25,20 @@
             <img src="../../Image/logo-nws.png" alt="logo-nws">
         </div>
         
-                <nav class="navbar">
-        <a href="acceuilPage.php" class="underline">Accueil</a>
-        <?php
-            if (isset($_SESSION['connected'])){
-            // Vérifiez si l'utilisateur est un administrateur
-            if ($user['user_status'] !== 'Student') {
-                echo '<a href="historyPage.php" class="underline">Histoires</a>';
-            }
-            echo '<a href="deconnection.php" class="btn">Deconnexion</a>';
-            } 
-            else {
-                echo '<a href="loginPage.php" class="btn">Connexion</a>';
-            }
-        ?>
+        <nav class="navbar">
+            <a href="acceuilPage.php" class="underline">Accueil</a>
+            <?php
+                if (isset($_SESSION['connected'])){
+                    // Vérifiez si l'utilisateur est un administrateur
+                    if ($user['user_status'] !== 'Student') {
+                        echo '<a href="historyPage.php" class="underline">Histoires</a>';
+                    }
+                    echo '<a href="deconnection.php" class="btn">Deconnexion</a>';
+                }
+                else {
+                    echo '<a href="loginPage.php" class="btn">Connexion</a>';
+                }
+            ?>
         </nav>
 
         <div class="fas fa-bars" id="menu-btn"></div>

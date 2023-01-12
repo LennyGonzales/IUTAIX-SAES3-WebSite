@@ -1,6 +1,6 @@
 <?php
         session_start();
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,95 +11,9 @@
     <title>NetWork Stories Login</title>
 </head>
 <body>
-  
-<?php
-    
-    require('../connectionSQL.php');
-
-    if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
-        try {
-            $email2 = stripslashes($_REQUEST['email']);
-            $user_password2 = stripslashes($_REQUEST['user_password']);
-    
-            $check_email_run = $con->prepare("SELECT EMAIL FROM USERS AS U WHERE U.EMAIL = ?");
-            $check_email_run->execute([$email2]);
-            if ($check_email_run->rowCount() > 0) {
-                echo "Ce mail est déja utilisé.";
-            } else {
-                if (substr($email2, -16, 16) == "@etu.univ-amu.fr" || substr($email2, -12, 12) == "@univ-amu.fr") {
-                    //Vérifier si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
-                    if (strlen($user_password2) < 12) {
-                        echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
-                        header("refresh:1; url=loginPage.php");
-                    } elseif (!preg_match('/[A-Z]/', $user_password2)) {
-                        echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
-                        header("refresh:1; url=loginPage.php");
-                    } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)) {
-                        echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
-                        header("refresh:1; url=loginPage.php");
-                    } else {
-                        $query = $con->prepare("INSERT into USERS (EMAIL, USER_PASSWORD) VALUES (?, ?)");
-                        $res = $query->execute([$email2, hash('sha512', $user_password2)]);
-                        if($res){
-                            echo "<div class='sucess'>
-                                <h3>Vous êtes inscrit avec succès.</h3>
-                                <p>Cliquez ici pour vous <a href='connectionPage.php'>connecter</a></p>
-                                </div>";
-                                header("refresh:1; url=loginPage.php");
-    
-                        }else{
-                            error_reporting(0);
-                            echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
-                                </div>";
-                                error_reporting(0);
-                                header("refresh:1; url=loginPage.php");
-    
-                        }   
-                    }
-                }
-    
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-
-if (isset($_POST['email'], $_POST['user_password'])){
-    $email = stripslashes($_REQUEST['email']);
-    $user_password = stripslashes($_REQUEST['user_password']);
-
-    $stmt = $con->prepare("SELECT * FROM USERS WHERE email=:email AND user_password=:user_password");
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':user_password', hash('sha512', $user_password), PDO::PARAM_STR);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($result) {
-        $user = $result;
-        // vérifier si l'utilisateur est un administrateur ou un utilisateur
-        if ($user['user_status'] == 'Student') {
-            $_SESSION['user'] = $user;
-            $_SESSION['connected'] = true;
-
-            header('location: ./acceuilPage.php');
-        }else{
-            $_SESSION['user'] = $user;
-            $_SESSION['connected'] = true;
-
-            header('location: ./acceuilPage.php');
-        }
-    }else{
-        $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
-    }
-}
-
-    
-    
-?>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#" method="POST">
+            <form action="../LoginCreation.php" method="POST">
                 <h1>Créer un compte</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email" required />  
                 <input type="password" class="box-input" name="user_password" placeholder="Mots de passe" required />            
@@ -110,7 +24,7 @@ if (isset($_POST['email'], $_POST['user_password'])){
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#" method="POST">
+            <form action="../LoginConnection.php" method="POST">
                 <h1>Connexion</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email"/>
                 <input type="password" class="box-input" name="user_password" placeholder="Mot de passe"/>

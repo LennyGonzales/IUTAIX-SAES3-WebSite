@@ -31,5 +31,5 @@ if(isset($_GET['qcm'])) {
 deleteHistory($con,$id);
 
 
-header("Location: historyPage.php");
+header("Location: pages/historyPage.php");
 exit();

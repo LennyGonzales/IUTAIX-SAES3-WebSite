@@ -15,7 +15,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         <td><?php echo $row['answer_1']; ?></td>&nbsp;
         <td><?php echo $row['answer_2']; ?></td>&nbsp;
         <td><?php echo $row['answer_3']; ?></td>
-        <td><a href="pages/historyPage.php?qcm=true&update=<?php echo $row['id'] ?>" class="Mbutton"> Modifier</a></td>&nbsp;
+        <td><a href="historyPage.php?qcm=true&update=<?php echo $row['id'] ?>" class="Mbutton"> Modifier</a></td>&nbsp;
         <td><a href="DeleteQuestion.php?qcm=true&id=<?php echo $row['id'] ?>" class="delete">Supprimer</a></td>&nbsp;
         <br>
 
