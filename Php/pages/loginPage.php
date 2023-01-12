@@ -1,5 +1,6 @@
 <?php
-        session_start();
+    // Initialisation de la session
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -38,15 +39,16 @@
                     <h1>Re bonjour !</h1>
                     <p>Connecte-toi pour commencer.</p>
                     <button class="ghost"id="signIn">Connexion</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Bienvenue !</h1>
-                    <p>Crée un compte pour rester connecté.</p>
-                    <button class="ghost" id="signUp">Créer un compte</button>
-                </div>
-            </div>
         </div>
-    </div>
-<script src="../../Js/login.js"></script>
+        <div class="overlay-panel overlay-right">
+        <h1>Bienvenue !</h1>
+        <p>Crée un compte pour rester connecté.</p>
+        <button class="ghost" id="signUp">Créer un compte</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <script src="../../Js/login.js"></script>
+
 </body>
 </html>

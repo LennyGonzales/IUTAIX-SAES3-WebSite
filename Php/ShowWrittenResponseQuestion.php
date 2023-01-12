@@ -1,7 +1,11 @@
 <?php
+// Sélection des données de l'historique des questions à réponse écrite
 $query = "SELECT h.id, h.module, h.description, h.question, wr.true_answer FROM history h INNER JOIN writtenresponse wr ON h.id = wr.id";
+// Préparation de la requête
 $stmt = $con->prepare($query);
+// Exécution de la requête
 $stmt->execute();
+// Boucle pour afficher les données de chaque question
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     ?>
     <tr class="Rows">
@@ -17,3 +21,4 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     </tr>
     <?php
 }
+?>

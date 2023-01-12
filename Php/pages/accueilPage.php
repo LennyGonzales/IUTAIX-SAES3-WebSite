@@ -29,6 +29,7 @@
             <a href="accueilPage.php" class="underline">Accueil</a>
             <?php
                 if (isset($_SESSION['connected'])){
+
                     // Vérifiez si l'utilisateur est un administrateur
                     if ($user['user_status'] !== 'Student') {
                         echo '<a href="historyPage.php" class="underline">Histoires</a>';
@@ -83,7 +84,9 @@
                <a href="accueilPage.php"><i class="fas fa-chevron-right"></i>Accueil</a>
                <?php
                 if (isset($_SESSION['connected'])){
+
                 // Vérifiez si l'utilisateur est un administrateur
+                
                 if ($user['user_status'] !== 'Student') {
                     echo '<a href="historyPage.php"><i class="fas fa-chevron-right"></i>Histoires</a>';
                 }

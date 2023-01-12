@@ -25,9 +25,12 @@
             </nav>
             <div class="fas fa-bars" id="menu-btn"></div>
         </header>
+
         <?php
+        // Connexion à la base de données
         require("../connectionSQL.php");
         ?>
+
         <div class="tabla-responsive">
             <table class="table-bordered">
                 <thead>
@@ -46,7 +49,9 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php require '../ShowQcm.php' ?>
+
                 </tbody>
             </table>
         </div>
@@ -64,15 +69,19 @@
                         </tr>
                 </thead>
                 <tbody>
+
                     <?php require '../ShowWrittenResponseQuestion.php'; ?>
+
                 </tbody>
             </table>
         </div>
+
 <?php
     if(isset($_GET['update'])){
         require "../ShowUpdateFormQuestion.php";
     } else {
 ?>
+
         <form action="../addQuestion.php" method="post">
             Module: <input type="text" name="module"><br>
             Description: <input type="text" name="description"><br>
