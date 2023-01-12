@@ -160,32 +160,29 @@
         <?php
         //Supprimer les questions
         if(isset($_GET['delete'])){
-            $delete = $_GET['delete'];
+            $delete = intval($_GET['delete']);
             // delete from history and qcm
             $sqldel="DELETE FROM history, qcm USING history INNER JOIN qcm 
                     WHERE history.id = :id AND qcm.history_id = :id";
             $querydel=$con->prepare($sqldel);
-            $querydel->bindValue(':id',$delete,PDO::PARAM_STR);
+            $querydel->bindValue(':id',$delete,PDO::PARAM_INT);
             $qWR=$querydel->execute();
     
             // delete from history and writtenresponse
             $sqldel="DELETE FROM history, writtenresponse USING history INNER JOIN writtenresponse 
                     WHERE history.id = :id AND writtenresponse.history_id = :id";
             $querydel=$con->prepare($sqldel);
-            $querydel->bindValue(':id',$delete,PDO::PARAM_STR);
+            $querydel->bindValue(':id',$delete,PDO::PARAM_INT);
             $qDel=$querydel->execute();
 
             $sqlDel="DELETE from history WHERE id = :id";
             $queryDel=$con->prepare($sqlDel);
-            $queryDel->bindValue(':id',$delete,PDO::PARAM_STR);
+            $queryDel->bindValue(':id',$delete,PDO::PARAM_INT);
             $qtest=$queryDel->execute();
-    
-            if ( $qtest || $qWR || $qDel) {
-                echo "suppression successful";
-                echo "<script>location.href='history.php';</script>";
-            } else {
-                echo "suppression unsuccessful";
-                echo "<script>location.href='history.php';</script>";
+
+            if($qtest) {
+                header("Location: history.php");
+                exit();
             }
         }
         ?>
@@ -230,13 +227,9 @@ if (isset($_POST['modify'])) {
     $queryh->bindValue(':id',$id,PDO::PARAM_INT);
     $qHIS=$queryh->execute();
 
-    if ($qQCM || $qWR) {
-        echo "modification successful";
-        echo "<script>location.href='history.php';</script>";
-
-    } else {
-        echo "modification unsuccessful";
-        echo "<script>location.href='history.php';</script>";
+    if($qHIS) {
+        header('Location: history.php');
+        exit();
     }
 }
 
@@ -285,70 +278,24 @@ if(isset($_GET['modify'])){
 
 <?php
 }
-
-if (isset($_POST['add'])) {
-    $module =  $_POST['module'] ?? null;
-    $description =  $_POST['description'] ?? null;
-    $question = $_POST['question'] ?? null;
-    $true_answer =  $_POST['true_answer'] ?? null;
-    $qQCM = false;
-    $qWR = false;
-
-    if (isset($_GET['typeqcm'])) {
-        $answer_1 =  $_POST['answer_1'] ?? null;
-        $answer_2 = $_POST['answer_2'] ?? null;
-        $answer_3 =  $_POST['answer_3'] ?? null;
-
-        if ($module && $description && $question && $true_answer && $answer_1 && $answer_2 && $answer_3) {
-            $qcmsql="INSERT INTO qcm (true_answer, answer_1, answer_2, answer_3) 
-            VALUES (:true_answer, :answer_1, :answer_2, :answer_3);";
-            $queryQCM = $con->prepare($qcmsql);
-            $queryQCM->bindValue(':true_answer',$true_answer,PDO::PARAM_INT);
-            $queryQCM->bindValue(':answer_1',$answer_1,PDO::PARAM_STR);
-            $queryQCM->bindValue(':answer_2',$answer_2,PDO::PARAM_STR);
-            $queryQCM->bindValue(':answer_3',$answer_3,PDO::PARAM_STR);
-            $qQCM = $queryQCM->execute();
-        }
-    } else {
-        if ($module && $description && $question && $true_answer) {
-            $sqlwr ="INSERT INTO writtenresponse (true_answer) VALUES (:true_answer);";
-            $queryWR = $con->prepare($sqlwr);
-            $queryWR->bindValue(':true_answer',$true_answer,PDO::PARAM_INT);
-            $qWR = $queryWR->execute();
-        }
-    }
-
-    if ($module && $description && $question) {
-        $sql="INSERT INTO history (module, question, description) VALUES (:module, :question, :description);";
-        $queryh=$con->prepare($sql);
-        $queryh->bindValue(':description',$description,PDO::PARAM_STR);
-        $queryh->bindValue(':module',$module,PDO::PARAM_STR);
-        $queryh->bindValue(':question',$question,PDO::PARAM_STR);
-        $qHIS=$queryh->execute();
-    }
-
-    if ($qQCM || $qWR) {
-        echo "ajout successful";
-        echo "<script>location.href='history.php';</script>";
-
-    } else {
-        echo "ajout unsuccessful";
-        echo "<script>location.href='history.php';</script>";
-    }
-}
 ?>
 
-<form action="" method="post">
-  Module: <input type="text" name="module"><br>
-  Description: <input type="text" name="description"><br>
-  Question: <input type="text" name="question"><br>
-  Réponse vraie Ecrite: <input type="text" name="true_answer"><br>
-  <input type="checkbox" name="typeqcm" value="qcm"> QCM <br>
-  Réponse vraie <input type="typeqcm" name="true_answer"><br>
-  Réponse 1: <input type="text" name="answer_1"><br>
-  Réponse 2: <input type="text" name="answer_2"><br>
-  Réponse 3: <input type="text" name="answer_3"><br>
-  <input type="submit" name="add" value="Ajouter">
-</form>
+
+        <form action="addQuestion.php" method="post">
+            Module: <input type="text" name="module"><br>
+            Description: <input type="text" name="description"><br>
+            Question: <input type="text" name="question"><br>
+            Réponse vraie Ecrite: <input type="text" name="true_answer"><br>
+            <input type="submit" name="add" value="Ajouter">
+        </form>
+        <form action="addQuestion.php" method="post">
+            Module: <input type="text" name="module"><br>
+            Description: <input type="text" name="description"><br>
+            Question: <input type="text" name="question"><br>
+            Réponse vraie <input type="typeqcm" name="true_answer"><br>
+            Réponse 1: <input type="text" name="answer_1"><br>
+            Réponse 2: <input type="text" name="answer_2"><br>
+            Réponse 3: <input type="text" name="answer_3"><br>
+        <input type="submit" name="add" value="Ajouter">
     </body>
 </html>
