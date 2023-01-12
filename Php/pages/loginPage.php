@@ -30,12 +30,6 @@
                 <input type="password" class="box-input" name="user_password" placeholder="Mot de passe"/>
                 <a href="#">Mot de passe oublié?</a>
                 <input type="submit" value="Connexion " name="connexion" class="box-button"/>
-                <?php 
-                if (! empty($message)) { 
-                    ?>
-                    <p class="errorMessage"><?php echo $message; ?></p>
-                    <?php 
-                } ?>
             </form>
         </div>
         <div class="overlay-container">

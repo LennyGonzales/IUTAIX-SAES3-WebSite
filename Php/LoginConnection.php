@@ -18,11 +18,11 @@ if (isset($_POST['email'], $_POST['user_password'])){
         // Verify if a user is an admin or a simple user
         $_SESSION['user'] = $user;
         $_SESSION['connected'] = true;
-
-
         header('location: ./pages/accueilPage.php');
-        }
     }
-else{
-    $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+
+    else{
+        echo "<h1>Le nom d'utilisateur ou le mot de passe est incorrect.</h1>";
+        header('refresh:1; url= ./pages/loginPage.php');
+    }
 }
