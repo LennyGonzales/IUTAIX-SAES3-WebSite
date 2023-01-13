@@ -23,6 +23,6 @@ if (isset($_POST['email'], $_POST['user_password'])){
 
     else{
         echo "<h1>Le nom d'utilisateur ou le mot de passe est incorrect.</h1>";
-        header('refresh:1; url= ./pages/loginPage.php');
+        header('Location: ./pages/loginPage.php?error=true');
     }
 }

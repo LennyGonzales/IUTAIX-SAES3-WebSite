@@ -30,6 +30,12 @@
                 <input type="password" class="box-input" name="user_password" placeholder="Mot de passe"/>
                 <a href="#">Mot de passe oublié?</a>
                 <input type="submit" value="Connexion " name="connexion" class="box-button"/>
+                <?php
+                if(isset($_GET['error'])) {
+                    ?>
+                    <p class="errorMessage">L'email et/ou le mot de passe est incorrect</p>
+                    <?php
+                } ?>
             </form>
         </div>
         <div class="overlay-container">
