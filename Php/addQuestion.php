@@ -7,7 +7,7 @@
     // Fonction pour ajouter une question à choix multiple
     function addQcm($con, $id, $true_answer, $answer_1, $answer_2, $answer_3) {
         // Préparation de la requête d'insertion
-        $statement="INSERT INTO qcm (id, true_answer, answer_1, answer_2, answer_3) 
+        $statement="INSERT INTO MULTIPLECHOICERESPONSES (id, true_answer, answer_1, answer_2, answer_3) 
         VALUES (:id, :true_answer, :answer_1, :answer_2, :answer_3);";
         // Préparation de la requête pour éviter les injections SQL
         $query = $con->prepare($statement);
@@ -24,7 +24,7 @@
     // Fonction pour ajouter une question à réponse libre
     function addWrittenResponseQuestion($con, $id, $true_answer) {
         // Préparation de la requête d'insertion
-        $statement ="INSERT INTO writtenresponse (id, true_answer) VALUES (:id, :true_answer);";
+        $statement ="INSERT INTO WRITTENRESPONSES (id, true_answer) VALUES (:id, :true_answer);";
         // Préparation de la requête pour éviter les injections SQL
         $query = $con->prepare($statement);
         // Liaison des valeurs à insérer aux paramètres de la requête

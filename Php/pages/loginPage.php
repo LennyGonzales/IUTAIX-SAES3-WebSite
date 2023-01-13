@@ -14,7 +14,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="../LoginCreation.php" method="POST">
+            <form action="../SignUp.php" method="POST">
                 <h1>Créer un compte</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email" required />  
                 <input type="password" class="box-input" name="user_password" placeholder="Mots de passe" required />            
@@ -25,7 +25,7 @@
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="../LoginConnection.php" method="POST">
+            <form action="../SignIn.php" method="POST">
                 <h1>Connexion</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email"/>
                 <input type="password" class="box-input" name="user_password" placeholder="Mot de passe"/>

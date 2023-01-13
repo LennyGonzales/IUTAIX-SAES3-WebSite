@@ -1,6 +1,6 @@
 <?php
 // Sélection des données de l'historique des questions à réponse écrite
-$query = "SELECT h.id, h.module, h.description, h.question, wr.true_answer FROM history h INNER JOIN writtenresponse wr ON h.id = wr.id";
+$query = "SELECT s.id, s.module, s.description, s.question, w.true_answer FROM STORIES s INNER JOIN WRITTENRESPONSES w ON s.id = w.id";
 // Préparation de la requête
 $stmt = $con->prepare($query);
 // Exécution de la requête

@@ -9,7 +9,7 @@
      */
     function addHistory($con, $description, $module, $question) {
         // Préparation de la requête pour insérer les données dans la table history
-        $statement ="INSERT INTO history (module, question, description) VALUES (:module, :question, :description);";
+        $statement ="INSERT INTO STORIES (module, question, description) VALUES (:module, :question, :description);";
         $query=$con->prepare($statement);
         // Liaison des variables à la requête
         $query->bindValue(':description',$description,PDO::PARAM_STR);
@@ -29,7 +29,7 @@
      */
     function getIdFromHistory($con, $module, $description, $question) {
         // Préparation de la requête pour récupérer l'id de la question
-        $statement ="SELECT ID FROM HISTORY WHERE module = :module and question = :question and description = :description;";
+        $statement ="SELECT ID FROM STORIES WHERE module = :module and question = :question and description = :description;";
         $query=$con->prepare($statement);
         // Liaison des variables à la requête
         $query->bindValue(':description',$description,PDO::PARAM_STR);
@@ -52,7 +52,7 @@
      */
     function updateHistory($con, $id, $module, $description, $question) {
         // Préparation de la requête pour mettre à jour les données dans la table history
-        $sql="UPDATE history SET module = :module, question = :question, description = :description WHERE id = :id;";
+        $sql="UPDATE STORIES SET module = :module, question = :question, description = :description WHERE id = :id;";
         $queryh=$con->prepare($sql);
         // Liaison des variables à la requête
         $queryh->bindValue(':description',$description,PDO::PARAM_STR);

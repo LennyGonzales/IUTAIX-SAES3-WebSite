@@ -16,7 +16,7 @@ require 'History.php';
  */
 function updateQcm($con, $id, $true_answer, $answer_1, $answer_2, $answer_3){
     // Requête SQL pour mettre à jour les données d'une question à choix multiple
-    $statement="UPDATE qcm SET true_answer = :true_answer, answer_1 = :answer_1, answer_2 = :answer_2, answer_3 =:answer_3 WHERE id = :id;";
+    $statement="UPDATE MULTIPLECHOICERESPONSES SET true_answer = :true_answer, answer_1 = :answer_1, answer_2 = :answer_2, answer_3 =:answer_3 WHERE id = :id;";
     $query = $con->prepare($statement);
     // Liaison des valeurs à la requête préparée
     $query->bindValue(':true_answer',$true_answer,PDO::PARAM_INT);
@@ -37,7 +37,7 @@ function updateQcm($con, $id, $true_answer, $answer_1, $answer_2, $answer_3){
  */
 function updateWrittenResponseQuestion($con, $id, $true_answer) {
     // Requête SQL pour mettre à jour les données d'une question à réponse écrite
-    $statement ="UPDATE writtenresponse SET true_answer = :true_answer WHERE id = :id;";
+    $statement ="UPDATE WRITTENRESPONSES SET true_answer = :true_answer WHERE id = :id;";
     $query = $con->prepare($statement);
     // Liaison des valeurs à la requête préparée
     $query->bindValue(':true_answer',$true_answer,PDO::PARAM_INT);

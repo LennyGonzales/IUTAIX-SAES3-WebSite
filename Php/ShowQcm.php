@@ -2,7 +2,7 @@
 require "connectionSQL.php";
 
 // Requête SQL pour récupérer les données de toutes les questions à choix multiple de la base de données
-$query = "SELECT h.id, h.module, h.description, h.question, q.true_answer, q.answer_1, q.answer_2, q.answer_3 FROM history h INNER JOIN qcm q ON h.id = q.id";
+$query = "SELECT s.id, s.module, s.description, s.question, m.true_answer, m.answer_1, m.answer_2, m.answer_3 FROM STORIES s INNER JOIN MULTIPLECHOICERESPONSES m ON s.id = m.id";
 
 // Préparation de la requête
 $stmt = $con->prepare($query);

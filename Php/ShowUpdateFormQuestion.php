@@ -11,10 +11,10 @@ require 'connectionSQL.php';
 function editForm($con, $id) {
     // Requête SQL pour récupérer les données d'une question à choix multiple
     if(isset($_GET['qcm'])){
-        $q = "SELECT h.id, h.module, h.description, h.question, q.true_answer, q.answer_1, q.answer_2, q.answer_3 FROM history h INNER JOIN qcm q ON h.id = q.id WHERE h.id=:id";
+        $q = "SELECT s.id, s.module, s.description, s.question, m.true_answer, m.answer_1, m.answer_2, m.answer_3 FROM STORIES s INNER JOIN MULTIPLECHOICERESPONSES m ON s.id = m.id WHERE s.id=:id";
     }else{
         // Requête SQL pour récupérer les données d'une question à réponse écrite
-        $q = "SELECT h.id, h.module, h.description, h.question, wr.true_answer FROM history h INNER JOIN writtenresponse wr ON h.id = wr.id WHERE h.id=:id";
+        $q = "SELECT s.id, s.module, s.description, s.question, w.true_answer FROM STORIES s INNER JOIN WRITTENRESPONSES w ON s.id = w.id WHERE s.id=:id";
     }
     // Préparation de la requête
     $query = $con->prepare($q);

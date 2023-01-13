@@ -9,7 +9,7 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
         $user_password2 = stripslashes($_REQUEST['user_password']);
 
         // Vérifie si l'email saisi est déjà utilisé dans la base de données
-        $check_email_run = $con->prepare("SELECT EMAIL FROM USERS AS U WHERE U.EMAIL = ?");
+        $check_email_run = $con->prepare("SELECT EMAIL FROM USERS WHERE EMAIL = ?");
         $check_email_run->execute([$email2]);
         if ($check_email_run->rowCount() > 0) {
             echo "Ce mail est déja utilisé.";
