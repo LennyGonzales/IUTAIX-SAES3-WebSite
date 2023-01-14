@@ -32,6 +32,12 @@
         require("../connectionSQL.php");
         ?>
 
+<?php
+    if(isset($_GET['update'])){
+        require "../ShowUpdateFormQuestion.php";
+    } else {
+?>
+
         <h1>Formulaire d'ajout questions à réponse écrite</h1>
         <form action="../addQuestion.php" method="post">
             Module: <input type="text" name="module"><br>
@@ -53,6 +59,10 @@
             Réponse 3: <input type="text" name="answer_3"><br>
             <input type="submit" name="add" value="Ajouter">
         </form>
+
+        <?php
+}
+?>
 
         <div class="tabla-responsive">
             <table class="table-bordered">
@@ -99,13 +109,6 @@
             </table>
         </div>
 
-<?php
-    if(isset($_GET['update'])){
-        require "../ShowUpdateFormQuestion.php";
-    } else {
-?>
-<?php
-}
-?>
+
     </body>
 </html>
