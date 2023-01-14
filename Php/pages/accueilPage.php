@@ -98,7 +98,13 @@
             
             <div class="box">
                 <h3>Application</h3>
-                <a href="#"><i class="fas fa-chevron-right"></i>Télécharger NetWork Stories</a>
+                <?php
+                 if (isset($_SESSION['connected'])){
+                    echo '<a href="../../App/downloadApp.php"> <i class="fas fa-chevron-right"></i>Télécharger NetWork Stories</a>';
+                 } else {
+                    echo '<a href="loginPage.php"><i class="fas fa-chevron-right"></i>Télécharger NetWork Stories</a>';
+                }
+            ?>
            </div>
 
            <div class="box">

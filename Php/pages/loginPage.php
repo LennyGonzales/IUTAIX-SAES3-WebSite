@@ -18,8 +18,10 @@
                 <h1>Créer un compte</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email" required />  
                 <input type="password" class="box-input" name="user_password" placeholder="Mots de passe" required />            
+                <label for="terms" class="terms-label">
                 <input type="checkbox"  name="terms" id="terms" required>
-                <label for="terms" style="font-size: 0.6em">J'accepte les conditions générales d'utilisation</label>
+                <a href="../../App/ConditionsUtilisations.php" class="terms-link" style="font-size: 0.6em"> J'accepte les conditions générales d'utilisation</a>
+                </label>
                 <br>
                 <input type="submit" name="inscription" value="S'inscrire" class="box-button" onclick="$res" />          
             </form>

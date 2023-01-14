@@ -1,85 +1,42 @@
-body {
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
-    background-size: cover;
-    background-position: center;
-    font-family: Arial, sans-serif;
-    color: #333333;
-  }
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // background-color: #333;
-    color: white;
-    padding: 10px 20px;
-  }
-  
-  nav a {
-    color: white;
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.tabla-responsive{
+    overflow-x:auto;
+}
+.table-bordered {
+    border: 1px solid #ddd;
+}
+.column {
+    color: #007bff;
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
     text-decoration: none;
-    font-size: 16px;
-  }
-  
-  nav a:hover {
-    color: #f2f2f2;
-  }
-  
-  table {
-    border-collapse: collapse;
-    width: 80%;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 12px;
-    font-size: 14px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: 20px auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-  }
-  
-  label {
-    margin: 8px 0;
-    font-size: 16px;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  input[type="submit"] {
-    width: 100%;
-    background-color: #4e73bd;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #32399c;
-  }
-  
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}

@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../Css/scenario-style.css">
-        <link rel="stylesheet"  type="text/css" href="../../Css/style.css">
+        <link rel="stylesheet"  type="text/css" href="../../Css/history-style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <title>Modifications/ajouter des questions</title>
     </head>
@@ -23,7 +23,7 @@
             <nav class="navbar">
                 <a href="accueilPage.php" class="underline">Accueil</a>
             </nav>
-            <div class="fas fa-bars" id="menu-btn"></div>
+
         </header>
 
         <?php
@@ -81,7 +81,7 @@
         require "../ShowUpdateFormQuestion.php";
     } else {
 ?>
-
+        <h1>Formulaire d'ajout questions à réponse écrite</h1>
         <form action="../addQuestion.php" method="post">
             Module: <input type="text" name="module"><br>
             Description: <input type="text" name="description"><br>
@@ -89,6 +89,9 @@
             Réponse vraie Ecrite: <input type="text" name="true_answer"><br>
             <input type="submit" name="add" value="Ajouter">
         </form>
+
+        <br>
+        <h1>Formulaire d'ajout questions à choix multiples</h1>
         <form action="../addQuestion.php" method="post">
             Module: <input type="text" name="module"><br>
             Description: <input type="text" name="description"><br>
