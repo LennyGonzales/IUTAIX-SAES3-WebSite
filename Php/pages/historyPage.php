@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="../../Css/scenario-style.css">
         <link rel="stylesheet"  type="text/css" href="../../Css/history-style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="icon" href="../../Image/logo-nws.png" type="image/ico" />
         <title>Modifications/ajouter des questions</title>
     </head>
     <body>
