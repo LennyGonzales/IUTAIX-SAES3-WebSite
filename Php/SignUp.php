@@ -24,7 +24,7 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
                     echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
                     header("refresh:1; url=pages/loginPage.php");
                 } 
-                elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user_password2)){
+                elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-.!;]/', $user_password2)){
                     echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
                     header("refresh:1; url=pages/loginPage.php");  
                 }
