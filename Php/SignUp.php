@@ -15,7 +15,7 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
             echo "Ce mail est déja utilisé.";
         } else {
             if (substr($email2, -16, 16) == "@etu.univ-amu.fr" || substr($email2, -12, 12) == "@univ-amu.fr") {
-                // Vérifie si le mot de passe contient 12 caractères, au moins une majuscule et un caractère spécial
+                // Vérifie si le mot de passe contient 12 caractères, au moins une majuscule,un caractère spécial et un chiffre
                 if (strlen($user_password2) < 12) {
                     echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
                     header("refresh:1; url=pages/loginPage.php");
@@ -24,9 +24,13 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
                     echo "<h3>Le mot de passe doit contenir au moins une majuscule.</h3>";
                     header("refresh:1; url=pages/loginPage.php");
                 } 
-                elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-.!;]/', $user_password2)){
+                elseif (!preg_match('/[\'^£$%&*()}{@#~?!><>,;.|=_+¬-]/', $user_password2)){
                     echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
-                    header("refresh:1; url=pages/loginPage.php");  
+                    header("refresh:1; url=pages/loginPage.php"); 
+                }
+                elseif (!preg_match('/\d/', $user_password2)) {
+                    echo "<h3>Le mot de passe doit contenir au moins un chiffre.</h3>";
+                    header("refresh:1; url=pages/loginPage.php"); 
                 }
                 
             else {
