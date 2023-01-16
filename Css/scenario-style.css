@@ -1,5 +1,4 @@
 body {
-
   background-size: cover;
   background-position: center;
   font-family: Arial, sans-serif;
@@ -8,9 +7,10 @@ body {
 
 
 table {
+  
   border-collapse: collapse;
   width: 80%;
-  margin: 20px auto;
+  margin: 1em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 

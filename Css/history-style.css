@@ -6,7 +6,7 @@ table {
   
   th, td {
     text-align: left;
-    padding: 8px;
+ 
   }
   
   th {
@@ -28,8 +28,17 @@ table {
   
   h1 {
       text-align: center;
-      margin-bottom: 1em;
+   
   }
+
+  caption{
+    margin-bottom: 1em;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+  }
+
+
   
   .btn {
       background-color: #007bff;
@@ -63,11 +72,18 @@ table {
     cursor: pointer;
     text-decoration: none;
 }
-.header .navbar a{
-    margin-left: 5rem;
-    font-size: 2rem;
-    color: blue;
-   
+
+nav.navbar a {
+    text-decoration: none;
+    color: rgb(60, 60, 246);
+    font-size: 1.7rem;
+    margin-left: 2em;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+nav.navbar a:hover {
+    color: var(--black);
 }
 
 

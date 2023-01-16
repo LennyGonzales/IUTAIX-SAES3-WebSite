@@ -64,10 +64,10 @@
 }
 ?>
 
-        <div class="tabla-responsive">
+<div class="tabla-responsive">
             <table class="table-bordered">
                 <thead>
-                    <h1>Tableau questions à choix multiples</h1> 
+                    <Caption>Tableau questions à choix multiples</Caption> 
                     <tr class="column">
                         <th>Id</th>
                         <th>Module</th>
@@ -88,10 +88,12 @@
                 </tbody>
             </table>
         </div>
+
         <div class="tabla-responsive">
             <table class="table-bordered">
+            <Caption>Tableau questions à réponse écrite</Caption>
+            <br>
                 <thead>
-                    <h1>Tableau questions à réponse écrite</h1>
                         <tr class="column"><th>Id</th>
                             <th>Module</th>
                             <th>Description</th>

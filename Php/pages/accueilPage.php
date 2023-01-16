@@ -53,7 +53,7 @@
     <section class="home" id="home">
         <div class="content">
             <h1>NetWork Stories</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+            <p>L'objectif de NetWork Stories est de rendre davantage ludique l'enseignement « Réseaux » de première année de l'IUT Informatique d'Aix-Marseille</p>
             <?php
                  if (isset($_SESSION['connected'])){
                     echo '<a href="../../App/downloadApp.php" class="all-btn">Télécharger</a>';
@@ -66,8 +66,8 @@
 
 
         <div class="video">
-            <video autoplay muted loop>
-                <source src="../../Video/vidTest.mp4" type="video/mp4">
+             <video controls>
+                <source src="../../Video/guide_utilisationSAE.mp4" type="video/mp4">
             Your browser does not support the video tag.
             </video>
         </div>
