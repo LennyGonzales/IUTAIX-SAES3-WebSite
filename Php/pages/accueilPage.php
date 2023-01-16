@@ -91,9 +91,13 @@
                 if ($user['user_status'] !== 'Student') {
                     echo '<a href="historyPage.php"><i class="fas fa-chevron-right"></i>Histoires</a>';
                 }
+
+            }
+            else{
+                echo'<a href="loginPage.php"><i class="fas fa-chevron-right"></i>Connexion</a>';
             }
                ?>
-               <a href="loginPage.php"><i class="fas fa-chevron-right"></i>Connexion</a>
+               
                <a href="../../App/ConditionsUtilisations.php"> <i class="fas fa-chevron-right"></i> Mentions légales & conditions générales</a>
             </div>
             
