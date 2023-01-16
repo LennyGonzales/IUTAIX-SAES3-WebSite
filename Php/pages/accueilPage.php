@@ -94,6 +94,7 @@
             }
                ?>
                <a href="loginPage.php"><i class="fas fa-chevron-right"></i>Connexion</a>
+               <a href="../../App/ConditionsUtilisations.php"> <i class="fas fa-chevron-right"></i> Mentions légales & conditions générales</a>
             </div>
             
             

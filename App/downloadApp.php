@@ -1,5 +1,5 @@
 <?php
-$file = './tbate.png';
+$file = './SAES3-Client-main.zip';
 
 if (file_exists($file)) {
     header('Content-Description: File Transfer');

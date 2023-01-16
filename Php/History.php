@@ -7,13 +7,13 @@
      * @param module : module de la question
      * @param question : question en elle-même
      */
-    function addHistory($con, $description, $module, $question) {
+    function addHistory($con, $module, $description, $question) {
         // Préparation de la requête pour insérer les données dans la table history
         $statement ="INSERT INTO STORIES (module, question, description) VALUES (:module, :question, :description);";
         $query=$con->prepare($statement);
         // Liaison des variables à la requête
-        $query->bindValue(':description',$description,PDO::PARAM_STR);
         $query->bindValue(':module',$module,PDO::PARAM_STR);
+        $query->bindValue(':description',$description,PDO::PARAM_STR);
         $query->bindValue(':question',$question,PDO::PARAM_STR);
         // Exécution de la requête
         $query->execute();

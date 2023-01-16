@@ -14,7 +14,7 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
         if ($check_email_run->rowCount() > 0) {
             echo "Ce mail est déja utilisé.";
         } else {
-            if (substr($email2, -16, 16) == "@etu.univ-amu.fr" || substr($email2, -12, 12) == "@univ-amu.fr") {
+            if (substr($email2, -16, 16) == "@etu.univ-amu.fr" || $email2 == "safa.yahi@univ-amu.fr") {
                 // Vérifie si le mot de passe contient 12 caractères, au moins une majuscule,un caractère spécial et un chiffre
                 if (strlen($user_password2) < 12) {
                     echo "<h3>Le mot de passe doit comporter 12 caractères.</h3>";
@@ -26,11 +26,11 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
                 } 
                 elseif (!preg_match('/[\'^£$%&*()}{@#~?!><>,;.|=_+¬-]/', $user_password2)){
                     echo "<h3>Le mot de passe doit contenir un caractère spécial.</h3>";
-                    header("refresh:1; url=pages/loginPage.php"); 
+                    header("refresh:1; url=pages/loginPage.php");
                 }
                 elseif (!preg_match('/\d/', $user_password2)) {
                     echo "<h3>Le mot de passe doit contenir au moins un chiffre.</h3>";
-                    header("refresh:1; url=pages/loginPage.php"); 
+                    header("refresh:1; url=pages/loginPage.php");
                 }
                 
             else {
@@ -44,14 +44,11 @@ if (isset($_REQUEST['email'], $_REQUEST['user_password'])){
                     </div>";
                     header("refresh:1; url=pages/loginPage.php");
                     } 
-                else{
-                    error_reporting(0);
-                    echo "<h3>Veuillez mettre une adresse mail amu valide.</h3>
-                    </div>";
-                    error_reporting(0);
-                    header("refresh:1; url=pages/loginPage.php");
-                    }
                 }
+            }
+            else{
+                echo'<h3>Veuillez mettre une adresse mail amu valide.</h3>';
+                header("refresh:1; url=pages/loginPage.php"); 
             }
         }
     } 

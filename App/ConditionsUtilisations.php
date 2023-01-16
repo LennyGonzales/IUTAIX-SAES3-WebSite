@@ -1,5 +1,5 @@
 <?php
-$file = './Condition_generales_utilisations_NWS.pdf';
+$file = './mentions-legales-et-conditions-generales.pdf';
 
 if (file_exists($file)) {
     header('Content-Description: File Transfer');
