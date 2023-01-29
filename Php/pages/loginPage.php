@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Css/login-style.css">
-    <link rel="icon" href="../../Image/logo-nws.png" type="image/ico" />
+    <link rel="stylesheet" href="../../static/styles/login-style.css">
+    <link rel="icon" href="../../static/content/images/logo-nws.png" type="image/ico" />
     <title>NetWork Stories Login</title>
 </head>
 <body>
@@ -57,7 +57,7 @@
         </div>
         </div>
         </div>
-        <script src="../../Js/login.js"></script>
+        <script src="../../static/js/login.js"></script>
 
 </body>
 </html>

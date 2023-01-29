@@ -9,16 +9,16 @@
     <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../Css/scenario-style.css">
-        <link rel="stylesheet"  type="text/css" href="../../Css/history-style.css">
+        <link rel="stylesheet" href="../../static/styles/scenario-style.css">
+        <link rel="stylesheet"  type="text/css" href="../../static/styles/history-style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="icon" href="../../Image/logo-nws.png" type="image/ico" />
+        <link rel="icon" href="../../static/content/images/logo-nws.png" type="image/ico" />
         <title>Modifications/ajouter des questions</title>
     </head>
     <body>
         <header class="header">
             <div class="logo">
-                <img src="../../Image/logo-nws.png" alt="logo-nws">
+                <img src="../../static/content/images/logo-nws.png" alt="logo-nws">
             </div>
 
             <nav class="navbar">

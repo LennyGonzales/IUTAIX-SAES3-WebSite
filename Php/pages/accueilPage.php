@@ -12,8 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
     <title>NetWork Stories</title>
-    <link rel="stylesheet"  type="text/css" href="../../Css/style.css">
-    <link rel="icon" href="../../Image/logo-nws.png" type="image/ico" />
+    <link rel="stylesheet"  type="text/css" href="../../static/styles/style.css">
+    <link rel="icon" href="../../static/content/images/logo-nws.png" type="image/ico" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -23,7 +23,7 @@
     
     <header class="header">
         <div class="logo">
-            <img src="../../Image/logo-nws.png" alt="logo-nws">
+            <img src="../../static/content/images/logo-nws.png" alt="logo-nws">
         </div>
         
         <nav class="navbar">
@@ -67,7 +67,7 @@
 
         <div class="video">
              <video controls>
-                <source src="../../Video/guide_utilisationSAE.mp4" type="video/mp4">
+                <source src="../../static/content/videos/guide_utilisationSAE.mp4" type="video/mp4">
             Your browser does not support the video tag.
             </video>
         </div>
@@ -129,7 +129,7 @@
     <!-- footer section ends -->
 
 
-    <script src="../../Js/main.js"></script>
+    <script src="../../static/js/main.js"></script>
 
     
 </body>
