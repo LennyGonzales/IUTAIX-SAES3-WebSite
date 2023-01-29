@@ -20,4 +20,6 @@ else {
 
 echo "</nav>
     <div class='fas fa-bars' id='menu-btn'></div>
-</header>";
+</header>
+<script src='/static/js/main.js'></script>
+";

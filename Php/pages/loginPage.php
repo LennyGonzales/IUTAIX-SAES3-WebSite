@@ -16,7 +16,7 @@
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="../SignUp.php" method="POST">
-                <h1>Créer un compte</h1>
+                <h1 class="account-title">Créer un compte</h1>
                 <input type="text" class="box-input" name="email" placeholder="Email" required />  
                 <input type="password" class="box-input" name="user_password" placeholder="Mots de passe" required />            
                 <label for="terms" class="terms-label">
@@ -48,16 +48,15 @@
                     <h1>Re bonjour !</h1>
                     <p>Connecte-toi pour commencer.</p>
                     <button class="ghost"id="signIn">Connexion</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Bienvenue !</h1>
+                    <p>Crée un compte pour rester connecté.</p>
+                    <button class="ghost" id="signUp">Créer un compte</button>
+                </div>
+            </div>
         </div>
-        <div class="overlay-panel overlay-right">
-        <h1>Bienvenue !</h1>
-        <p>Crée un compte pour rester connecté.</p>
-        <button class="ghost" id="signUp">Créer un compte</button>
-        </div>
-        </div>
-        </div>
-        </div>
-        <script src="../../static/js/login.js"></script>
-
+    </div>
+<script src="../../static/js/login.js"></script>
 </body>
 </html>

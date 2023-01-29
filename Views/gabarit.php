@@ -3,11 +3,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- <link rel="stylesheet" type="text/css" href="/static/styles/history-style.css">
-        <link rel="stylesheet" type="text/css" href="/static/styles/login-style.css">
         <link rel="stylesheet" type="text/css" href="/static/styles/scenario-style.css"> -->
+        <link rel="stylesheet" type="text/css" href="/static/styles/login-style.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
         <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
 
-        <script src='/static/js/main.js'></script>
         <title>NetWork Stories</title>
     </head>
     <body>

@@ -16,8 +16,8 @@ final class Session
      *
      * @return void
      */
-    public static function start(string $S_id):void {
-        $_SESSION['user_status'] = Users::selectById($S_id)['user_status'];
+    public static function start(string $S_status):void {
+        $_SESSION['user_status'] = $S_status;
     }
 
     /**
