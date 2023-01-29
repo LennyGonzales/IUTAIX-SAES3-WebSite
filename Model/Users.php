@@ -24,7 +24,7 @@ class Users extends Model {
      * @param string $S_user_id the user id
      * @return array the user
      */
-    public static function selectByUserEmail(string $S_email) : array{
+    public static function selectByUserEmail(string $S_email){
         $P_db = Connection::initConnection();
         $S_stmnt = "SELECT * FROM USERS WHERE EMAIL = :email";
         $P_sth = $P_db->prepare($S_stmnt);

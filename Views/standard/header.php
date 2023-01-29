@@ -12,10 +12,10 @@ if (Session::check()) {
     if(Session::getSession()['user_status'] !== 'Student') {
         echo "<a href='' class='underline'>Histoires</a>";
     }
-    echo "<a href='' class='btn'>Deconnexion</a>";
+    echo "<a href='/logout' class='btn'>Deconnexion</a>";
 }
 else {
-    echo "<a href='' class='btn'>Connexion</a>";
+    echo "<a href='/account' class='btn'>Connexion</a>";
 }
 
 echo "</nav>

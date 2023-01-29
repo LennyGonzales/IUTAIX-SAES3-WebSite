@@ -4,16 +4,15 @@ echo "
     <div class='container' id='container'>
     
         <div class='form-container sign-up-container'>
-            <form action='' method='POST'>
+            <form action='/account/create' method='POST'>
                 <h1>Créer un compte</h1>
                 <input type='text' class='box-input' name='email' placeholder='Email' required />  
                 <input type='password' class='box-input' name='user_password' placeholder='Mots de passe' required />            
-                <label for='terms' class='terms-label'>
-                <input type='checkbox'  name='terms' id='terms' required>
+                <input type='checkbox' id='terms' required>
                 <a href='' class='terms-link' style='font-size: 0.6em'> Accepter les conditions générales d'utilisation</a>
                 </label>
                 <br>
-                <input type='submit' name='inscription' value='Inscrire' onclick='' />          
+                <input type='submit' value='Inscrire' onclick='' />          
             </form>
         </div>
         
