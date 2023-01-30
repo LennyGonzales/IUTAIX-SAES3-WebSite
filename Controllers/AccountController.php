@@ -2,7 +2,7 @@
 
 final class AccountController
 {
-    public function defaultAction():void {
+    public function defaultAction(array $A_details = null):void {
         View::show("account/account");
     }
 
@@ -18,7 +18,7 @@ final class AccountController
             'messageType' => $A_details['messageType'],
             'message' => $A_details['message']
         ));
-        View::show("account/account", array("errorMessage" => true));
+        View::show("account/account");
     }
 
     public function createAction(Array $A_parametres = null, Array $A_postParams = null):void {
@@ -33,6 +33,6 @@ final class AccountController
             'messageType' => $A_details['messageType'],
             'message' => $A_details['message']
         ));
-        View::show("account/account", array("errorMessage" => true));
+        View::show("account/account");
     }
 }
