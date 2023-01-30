@@ -22,12 +22,7 @@ echo "
                 <input type='text' class='box-input' name='email' placeholder='Email'/>
                 <input type='password' class='box-input' name='user_password' placeholder='Mot de passe'/>
                 <a href='#'>Mot de passe oublié?</a>
-                <input type='submit' value='Connexion ' name='connexion'/>";
-
-                if(isset($A_view['errorMessage'])) {
-                    echo "<p class='errorMessage'>L'email et/ou le mot de passe est incorrect</p>";
-                }
-echo "
+                <input type='submit' value='Connexion ' name='connexion'/>
             </form>
         </div>
         <div class='overlay-container'>

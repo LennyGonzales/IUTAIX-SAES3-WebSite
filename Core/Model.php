@@ -9,11 +9,12 @@ abstract class Model{
      * @param string $S_id The id to search for
      * @return array The entry from the database
      */
-    public static function selectById($S_id) {
+    public static function selectByPrimaryKey(string $S_nameColumn, string $S_value) {
         $P_db = Connection::initConnection();
-        $S_stmnt = "SELECT * FROM ".get_called_class()." WHERE ID = ? ";
+        $S_stmnt = "SELECT * FROM ".get_called_class()." WHERE " . $S_nameColumn . " = :value ";
         $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->execute(array($S_id));
+        $P_sth->bindValue(':value', $S_value, PDO::PARAM_STR);
+        $P_sth->execute(array($S_value));
         $A_row = $P_sth->fetch(PDO::FETCH_ASSOC);
         $P_db = null;
         return $A_row;
@@ -126,11 +127,12 @@ abstract class Model{
      * @param string $S_id The id to search for
      * @return bool Returns true if the entry exists
      */
-    public static function checkIfExistsById(String $S_id) : bool{
+    public static function checkIfExistsByPrimaryKey(string $S_nameColumn, string $S_value) : bool{
         $P_db = Connection::initConnection();
-        $S_stmnt = "SELECT * FROM ".get_called_class()." WHERE ID = ? ";
+        $S_stmnt = "SELECT * FROM ".get_called_class()." WHERE " . $S_nameColumn . " = :value ";
         $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->execute(array($S_id));
+        $P_sth->bindValue(':value', $S_value, PDO::PARAM_STR);
+        $P_sth->execute(array($S_value));
         return ($P_sth->rowCount() > 0);
     }
 }

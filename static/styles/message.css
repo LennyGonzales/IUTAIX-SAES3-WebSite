@@ -1,0 +1,44 @@
+.message-container {
+    background-color: #f5f5f5;
+    box-shadow: 0px 37px 30px 0px rgba(0,0,0,0.1);
+    border-radius: 10px;
+
+    width: 33%;
+    height:fit-content;
+    padding: 2em;
+
+    position: fixed;
+
+    top:-10%;
+    left:33%;
+    display: flex;
+    justify-content: center;
+    animation: move-message-container 7s ease-in-out;
+}
+
+.error {
+    color: red;
+}
+
+.warning {
+    color: darkorange;
+}
+
+.successful {
+    color: limegreen;
+}
+
+@keyframes move-message-container {
+    from {
+        top: -10%;
+    }
+    25% {
+        top: 3%;
+    }
+    75% {
+        top: 3%;
+    }
+    to {
+        top: -10%;
+    }
+}
