@@ -6,7 +6,7 @@ echo "<header class='header'>
     </div>
 
     <nav class='navbar'>
-        <a href='accueilPage.php' class='underline'>Accueil</a>";
+        <a href='/home' class='underline'>Accueil</a>";
 
 if (Session::check()) {
     if(Session::getSession()['user_status'] !== 'Student') {
