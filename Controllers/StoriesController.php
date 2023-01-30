@@ -3,6 +3,15 @@
 final class StoriesController
 {
     public function defaultAction(array $A_message = null):void {
+        if (!Session::check()) {
+            header('Location: /account');
+            exit;
+        }
+        if (Session::getSession()['user_status'] == 'Student') {
+            header('Location: /home');
+            exit;
+        }
+
         if($A_message != null) {
             View::show("message", $A_message);
         }
@@ -10,7 +19,31 @@ final class StoriesController
         View::show("stories/multiplechoicequestions/empty-form");
         View::show("stories/writtenresponsequestions/show", WrittenResponses::selectAllWrittenResponsesQuestions());
         View::show("stories/multiplechoicequestions/show", MultipleChoiceResponses::selectAllMultipleChoiceResponsesQuestions());
+    }
 
+    public function deleteWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        $S_id = $A_parametres[0];
+
+        WrittenResponses::deleteByID($S_id);
+        if(MultipleChoiceResponses::checkIfExistsByPrimaryKey('ID', $S_id)) {
+            // DO SOMETHING
+            exit;
+        }
+        Stories::deleteByID($S_id);
+
+        self::defaultAction();
+    }
+
+    public function deleteMultipleChoiceResponsesQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        $S_id = $A_postParams['id'];
+        MultipleChoiceResponses::deleteByID($S_id);
+        if(WrittenResponses::checkIfExistsByPrimaryKey('ID', $S_id)) {
+            // DO SOMETHING
+            exit;
+        }
+        Stories::deleteByID($S_id);
+
+        self::defaultAction();
     }
 
     public function insertStory(Array $A_parameters = null):?string {
@@ -30,6 +63,7 @@ final class StoriesController
     }
 
     public function insertWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        var_dump($A_postParams);
         $S_id = self::insertStory($A_postParams);
 
         $A_row = array(     // Prepare the array

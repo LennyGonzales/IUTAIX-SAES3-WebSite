@@ -26,7 +26,7 @@ abstract class Model{
      * @return bool Returns true if the entry has been deleted
      */
     public static function deleteByID($S_id) : bool{
-        if(!self::checkIfExistsById($S_id)){
+        if(!self::checkIfExistsByPrimaryKey('ID', $S_id)){
             return false;
         }
         $P_db = Connection::initConnection();
