@@ -33,5 +33,6 @@ final class AccountController
             'messageType' => $A_details['messageType'],
             'message' => $A_details['message']
         ));
-        View::show("account/account", array("errorMessage" => true));    }
+        View::show("account/account", array("errorMessage" => true));
+    }
 }

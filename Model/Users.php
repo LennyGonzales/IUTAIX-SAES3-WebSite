@@ -12,7 +12,6 @@ class Users extends Model {
         $password = $A_parameters['user_password'];
 
         $messageType = 'error';
-        $message = null;
         if(self::checkIfExistsByPrimaryKey('EMAIL', $email)) { // Verify if the user already exists
             return array(
                 'messageType' => $messageType,
@@ -67,8 +66,6 @@ class Users extends Model {
 
     public static function verifyAuthentication(Array $A_parameters):array {
         $A_row = self::selectByPrimaryKey('EMAIL',$A_parameters['email']);
-        var_dump($A_row);
-        echo hash('sha512', $A_parameters['user_password']);
         if(($A_row != null) && ($A_row['user_password'] == hash('sha512', $A_parameters['user_password']))) {  // If the user exists and the password in the DB is equal to the password entered
             return array(
                 'user_status' => $A_row['user_status'],
