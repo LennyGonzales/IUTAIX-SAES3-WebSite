@@ -8,6 +8,7 @@ final class StoriesController
         }
         View::show("stories/writtenresponsequestions/empty-form");
         View::show("stories/multiplechoicequestions/empty-form");
+        View::show("stories/writtenresponsequestions/show", WrittenResponses::selectAllWrittenResponsesQuestions());
     }
 
     public function insertStory(Array $A_parameters = null):?string {
