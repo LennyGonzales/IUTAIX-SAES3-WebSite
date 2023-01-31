@@ -2,7 +2,7 @@
 
 final class StoriesController
 {
-    public function defaultAction(array $A_message = null):void {
+    public function verificationSession() {
         if (!Session::check()) {    // Check if the user is connected
             header('Location: /account');   // Redirect to the account page
             exit;
@@ -11,6 +11,10 @@ final class StoriesController
             header('Location: /home');  // Redirect to the home page
             exit;
         }
+    }
+
+    public function defaultAction(array $A_message = null):void {
+        self::verificationSession();
 
         if($A_message != null) {    // If there is a message, show it
             View::show("message", $A_message);
@@ -41,6 +45,20 @@ final class StoriesController
 
         self::defaultAction();
     }
+
+    public function showUpdateFormMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+        $S_id = $A_parametres[0]; // Get the id from the GET
+        View::show("stories/multiplechoicequestions/update-form", MultipleChoiceResponses::selectById($S_id));
+    }
+
+    public function updateMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        $S_id = $A_postParams['id'];
+        unset($A_postParams['id']); // We don't want to update the id of the tuple, so we remove it
+        MultipleChoiceResponses::updateById($A_postParams, $S_id);
+    }
+
+
 
     public function insertStory(Array $A_parameters = null):?string {
         $A_row = array(

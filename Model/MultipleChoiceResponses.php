@@ -2,6 +2,16 @@
 
 class MultipleChoiceResponses extends Model
 {
+    public static function selectById(string $S_id = null):?array {
+        $P_db = Connection::initConnection();
+        $S_stmnt = "SELECT * FROM STORIES s, MULTIPLECHOICERESPONSES m WHERE s.id = m.id AND m.id = :id";
+        $P_sth = $P_db->prepare($S_stmnt);
+        $P_sth->bindValue(':id', $S_id, PDO::PARAM_INT);
+        $P_sth->execute();
+        $P_db = null;
+        return $P_sth->fetch();
+    }
+
     public static function selectAllMultipleChoiceResponsesQuestions(Array $A_parameters = null):?array {
         $P_db = Connection::initConnection();
         $S_stmnt = "SELECT s.id, s.module, s.description, s.question, m.true_answer, m.answer_1, m.answer_2, m.answer_3 FROM STORIES s INNER JOIN MULTIPLECHOICERESPONSES m ON s.id = m.id";
