@@ -3,16 +3,16 @@
 final class StoriesController
 {
     public function defaultAction(array $A_message = null):void {
-        if (!Session::check()) {
-            header('Location: /account');
+        if (!Session::check()) {    // Check if the user is connected
+            header('Location: /account');   // Redirect to the account page
             exit;
         }
-        if (Session::getSession()['user_status'] == 'Student') {
-            header('Location: /home');
+        if (Session::getSession()['user_status'] == 'Student') {    // Check if the user is a Student
+            header('Location: /home');  // Redirect to the home page
             exit;
         }
 
-        if($A_message != null) {
+        if($A_message != null) {    // If there is a message, show it
             View::show("message", $A_message);
         }
         View::show("stories/writtenresponsequestions/empty-form");
@@ -25,11 +25,9 @@ final class StoriesController
         $S_id = $A_parametres[0];
 
         WrittenResponses::deleteByID($S_id);
-        if(MultipleChoiceResponses::checkIfExistsByPrimaryKey('ID', $S_id)) {
-            // DO SOMETHING
-            exit;
+        if(!MultipleChoiceResponses::checkIfExistsByPrimaryKey('ID', $S_id)) {  // If the story isn't link with a multiple choice response
+            Stories::deleteByID($S_id); // Delete the story
         }
-        Stories::deleteByID($S_id);
 
         self::defaultAction();
     }
@@ -37,11 +35,9 @@ final class StoriesController
     public function deleteMultipleChoiceResponsesQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         $S_id = $A_postParams['id'];
         MultipleChoiceResponses::deleteByID($S_id);
-        if(WrittenResponses::checkIfExistsByPrimaryKey('ID', $S_id)) {
-            // DO SOMETHING
-            exit;
+        if(!WrittenResponses::checkIfExistsByPrimaryKey('ID', $S_id)) {  // If the story isn't link with a written response
+            Stories::deleteByID($S_id); // Delete the story
         }
-        Stories::deleteByID($S_id);
 
         self::defaultAction();
     }
