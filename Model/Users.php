@@ -85,9 +85,20 @@ class Users extends Model {
         );
     }
 
+    public static function selectByEmail(string $S_Email = null):array {
+        $P_db = Connection::initConnection(self::DATABASE);
+        $S_stmnt = "SELECT EMAIL, USER_PASSWORD, USER_STATUS, POINTS FROM USERS WHERE EMAIL = :email";
+        $P_sth = $P_db->prepare($S_stmnt);
+        $P_sth->bindValue(':email', $S_Email, PDO::PARAM_INT);
+        $P_sth->execute();
+        $S_status = $P_sth->fetch(PDO::FETCH_ASSOC);
+        $P_db = null;
+        return $S_status;
+    }
+
     public static function verifyAuthentication(Array $A_parameters):array {
-        $A_row = self::selectByPrimaryKey('EMAIL',$A_parameters['email']);
-        if(($A_row != null) && ($A_row['user_password'] == hash('sha512', $A_parameters['user_password']))) {  // If the user exists and the password in the DB is equal to the password entered
+        $A_row = self::selectByEmail($A_parameters['email']);
+        if(($A_row != null) && ($A_row['user_password'] ==hash('sha512', $A_parameters['user_password']))) {  // If the user exists and the password in the DB is equal to the password entered
             return array(
                 'user_status' => $A_row['user_status'],
                 'messageType' => 'successful',
@@ -98,16 +109,5 @@ class Users extends Model {
             'messageType' => 'error',
             'message' => 'Votre email et/ou votre mot de passe est incorrect !'
         );
-    }
-
-    public static function selectStatus(Array $A_parameters):?string {
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "SELECT USER_STATUS FROM USERS WHERE EMAIL = :email";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':email', $A_parameters['email'], PDO::PARAM_INT);
-        $P_sth->execute();
-        $S_status = $P_sth->fetch(PDO::FETCH_ASSOC)['user_status'];
-        $P_db = null;
-        return $S_status;
     }
 }
