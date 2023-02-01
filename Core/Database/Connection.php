@@ -7,6 +7,17 @@
  */
 final class Connection
 {
+
+    public function getDbCredentials(string $S_databaseName = null):array {
+        $env = parse_ini_file('credentials.env');
+        return array(
+            'host' => $env['DB_' . $S_databaseName . '_HOST'],
+            'user' => $env['DB_' . $S_databaseName . '_USER'],
+            'password' => $env['DB_' . $S_databaseName . '_PASSWORD'],
+            'dbname' => $env['DB_' . $S_databaseName . '_DBNAME']
+        );
+    }
+
     /**
      * Establish connection with the database
      *
@@ -16,11 +27,17 @@ final class Connection
      *
      * @return PDO|null The PDO connection
      */
-    public static function connect(String $host,String $user,String $password) : PDO
+    public static function connect(array $A_credentials = null) : PDO
     {
         try
         {
-            $bdd = new PDO("pgsql:host=$host; port=5432; dbname=$user; user=$user; password=$password");
+            $bdd = new PDO(
+                "pgsql:host=" . $A_credentials['host'] . ";
+                port=5432;
+                dbname=" . $A_credentials['dbname'] . ";
+                user=" . $A_credentials['user'] . ";
+                password=" . $A_credentials['password']
+            );
             return $bdd;
         }
         catch (PDOException $e)
@@ -34,9 +51,11 @@ final class Connection
      *
      * @return PDO|null The PDO connection
      */
-    public static function initConnection() : PDO
+    public static function initConnection(string $S_dbName = "STORIES") : PDO
     {
-        return Connection::connect("peanut.db.elephantsql.com","lhnhqbrm","KWjwsNe0T5pXCtXHh5M3tXy_ppanNir4");
+        $P_connection = new Connection();
+        $A_credentials = $P_connection->getDbCredentials($S_dbName);    // Get the credentials
+        return $P_connection->connect($A_credentials);
     }
 
 }
