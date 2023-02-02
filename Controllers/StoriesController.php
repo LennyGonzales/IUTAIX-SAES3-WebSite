@@ -21,6 +21,9 @@ final class StoriesController
         }
         View::show("stories/multiplechoicequestions/empty-form");
         View::show("stories/writtenresponsequestions/empty-form");
+        View::show("stories/multiplechoicequestions/showAll", MultipleChoiceQuestions::selectAll());
+        View::show("stories/writtenresponsequestions/showAll", WrittenResponseQuestions::selectAll());
+
     }
 
     public function insertMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {

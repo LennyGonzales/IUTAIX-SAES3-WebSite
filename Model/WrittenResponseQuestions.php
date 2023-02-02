@@ -2,7 +2,6 @@
 
 class WrittenResponseQuestions extends Model
 {
-
     const DATABASE = "STORIES";
 
     public static function checkIfExists(Array $A_values = null):bool {
