@@ -1,3 +1,30 @@
+.stories-details {
+  background-color: #f5f5f5;
+  box-shadow: 0px 37px 30px 0px rgba(0,0,0,0.1);
+  border-radius: 10px;
+
+  width: 90%;
+  height:fit-content;
+  margin : 5%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.stories-details:hover {
+  margin-left:2%;
+}
+
+.stories-details > summary {
+  font-size:1.25em;
+  padding: 2em;
+}
+
+.stories-details:hover > summary {
+  font-size:1.5em;
+}
+
+
 table {
   border-collapse: collapse;
   width: 80%;

@@ -1,6 +1,8 @@
 <?php
 
-echo "  <h1>Formulaire d'ajout questions à choix multiples</h1>
+echo "<details class='stories-details'>
+        <summary>Ajouter une question à choix multiples</summary>
+        <h1>Formulaire d'ajout questions à choix multiples</h1>
         <form action='/stories/insertMultipleChoiceQuestion' method='post'>
             Module: <input type='text' name='module'><br>
             Description: <input type='text' name='description'><br>
@@ -10,4 +12,5 @@ echo "  <h1>Formulaire d'ajout questions à choix multiples</h1>
             Réponse 2: <input type='text' name='answer_2'><br>
             Réponse 3: <input type='text' name='answer_3'><br>
             <input type='submit' name='add' value='Ajouter'>
-        </form>";
+        </form>
+    </details>";
