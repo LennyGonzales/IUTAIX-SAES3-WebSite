@@ -31,7 +31,7 @@ foreach($A_view as $A_row) {
                 <td>" . $A_row['answer_2'] . "</td>
                 <td>" . $A_row['answer_3'] . "</td>
                 <td><a href='/stories/showUpdateFormMultipleChoiceQuestion/" . $A_row['id'] . "' class='Mbutton'> Modifier</a></td>&nbsp;
-                <td><a href='/stories/deleteWrittenResponseQuestion/" . $A_row['id'] . "' class='delete'>Supprimer</a></td>&nbsp;
+                <td><a href='/stories/deleteMultipleChoiceQuestion/" . $A_row['id'] . "' class='delete'>Supprimer</a></td>&nbsp;
                 <br>
             </tr>";
 }

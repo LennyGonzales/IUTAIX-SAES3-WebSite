@@ -31,8 +31,20 @@ final class StoriesController
         self::defaultAction($A_status);
     }
 
+    public function deleteMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        $S_id = $A_parametres[0];
+        $A_status = MultipleChoiceQuestions::delete($S_id);
+        self::defaultAction($A_status);
+    }
+
     public function insertWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         $A_status = WrittenResponseQuestions::create($A_postParams);
+        self::defaultAction($A_status);
+    }
+
+    public function deleteWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        $S_id = $A_parametres[0];
+        $A_status = WrittenResponseQuestions::delete($S_id);
         self::defaultAction($A_status);
     }
 }
