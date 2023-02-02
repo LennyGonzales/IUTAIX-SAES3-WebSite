@@ -69,4 +69,18 @@ final class StoriesController
         $A_status = WrittenResponseQuestions::delete($S_id);
         self::defaultAction($A_status);
     }
+
+    public function showUpdateFormWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
+        $S_id = $A_parametres[0];
+        View::show("stories/writtenresponsequestions/update-form", WrittenResponseQuestions::select($S_id));
+    }
+
+    public function updateWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
+        $A_status = WrittenResponseQuestions::update($A_postParams);
+        self::defaultAction($A_status);
+    }
 }
