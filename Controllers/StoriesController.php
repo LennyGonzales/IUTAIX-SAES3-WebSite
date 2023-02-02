@@ -27,22 +27,44 @@ final class StoriesController
     }
 
     public function insertMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
         $A_status = MultipleChoiceQuestions::create($A_postParams);
         self::defaultAction($A_status);
     }
 
     public function deleteMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
         $S_id = $A_parametres[0];
         $A_status = MultipleChoiceQuestions::delete($S_id);
         self::defaultAction($A_status);
     }
 
+    public function showUpdateFormMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
+        $S_id = $A_parametres[0];
+        View::show("stories/multiplechoicequestions/update-form", MultipleChoiceQuestions::select($S_id));
+    }
+
+    public function updateMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
+        $A_status = MultipleChoiceQuestions::update($A_postParams);
+        self::defaultAction($A_status);
+    }
+
     public function insertWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
         $A_status = WrittenResponseQuestions::create($A_postParams);
         self::defaultAction($A_status);
     }
 
     public function deleteWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        self::verificationSession();
+
         $S_id = $A_parametres[0];
         $A_status = WrittenResponseQuestions::delete($S_id);
         self::defaultAction($A_status);
