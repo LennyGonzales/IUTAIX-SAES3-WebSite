@@ -1,13 +1,4 @@
-body {
-  background-size: cover;
-  background-position: center;
-  font-family: Arial, sans-serif;
-  color: #333333;
-}
-
-
 table {
-  
   border-collapse: collapse;
   width: 80%;
   margin: 1em;

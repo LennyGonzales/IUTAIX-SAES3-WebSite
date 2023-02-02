@@ -7,7 +7,7 @@ echo "
             <a href='/home'><i class='fas fa-chevron-right'></i>Accueil</a>
             ";
             if ((Session::check()) && (Session::getSession()['user_status'] !== 'Student')) {
-                    echo "<a href=''><i class='fas fa-chevron-right'></i>Histoires</a>";
+                    echo "<a href='/stories'><i class='fas fa-chevron-right'></i>Histoires</a>";
             }
             else{
                 echo"<a href='/account'><i class='fas fa-chevron-right'></i>Connexion</a>";
