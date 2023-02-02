@@ -4,10 +4,7 @@
             <div class="four_zero_four_bg">
                 <h1 class="text-center ">404</h1>
             </div>
-            <div class="contant_box_404">
-                <p>La page n'est pas accessible!</p>
-                <a href="../home" class="link_404">Retour à l'accueil</a>
-            </div>
+            <h1 class="error404-message">La page que vous recherchez n'existe pas !</h1>
         </div>
     </div>
 </section>
