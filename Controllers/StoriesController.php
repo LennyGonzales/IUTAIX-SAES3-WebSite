@@ -20,10 +20,16 @@ final class StoriesController
             View::show("message", $A_message);
         }
         View::show("stories/multiplechoicequestions/empty-form");
+        View::show("stories/writtenresponsequestions/empty-form");
     }
 
     public function insertMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         $A_status = MultipleChoiceQuestions::create($A_postParams);
+        self::defaultAction($A_status);
+    }
+
+    public function insertWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
+        $A_status = WrittenResponseQuestions::create($A_postParams);
         self::defaultAction($A_status);
     }
 }
