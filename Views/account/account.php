@@ -7,7 +7,8 @@ echo "
             <form action='/account/create' method='POST'>
                 <h1>Créer un compte</h1>
                 <input type='text' class='box-input' name='email' placeholder='Email' required />  
-                <input type='password' class='box-input' name='user_password' placeholder='Mots de passe' required />            
+                <input type='password' class='box-input' name='user_password' placeholder='Mots de passe' required />           
+                <input type='password' class='box-input' name='user_password_verification' placeholder='Vérification du mot de passe' required />             
                 <input type='checkbox' id='terms' required>
                 <a href='' class='terms-link' style='font-size: 0.6em'> Accepter les conditions générales d'utilisation</a>
                 </label>

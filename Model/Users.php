@@ -40,6 +40,13 @@ class Users extends Model {
             );
         }
 
+        if($A_parameters['user_password_verification'] != $S_password) {
+            return array(
+                'messageType' => $S_messageType,
+                'message' => 'Le mot de passe et sa vérification doivent être équivalent !'
+            );
+        }
+
         // Verification of the email and the password
         if (substr($S_email, -16, 16) == "@etu.univ-amu.fr" || $S_email == "safa.yahi@univ-amu.fr") {
             // Vérifie si le mot de passe contient 12 caractères, au moins une majuscule,un caractère spécial et un chiffre
@@ -85,11 +92,11 @@ class Users extends Model {
         );
     }
 
-    public static function selectByEmail(string $S_Email = null):array {
+    public static function selectByEmail(array $A_parameters = null):array {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT EMAIL, USER_PASSWORD, USER_STATUS, POINTS FROM USERS WHERE EMAIL = :email";
         $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':email', $S_Email, PDO::PARAM_INT);
+        $P_sth->bindValue(':email', $A_parameters['email'], PDO::PARAM_INT);
         $P_sth->execute();
         $S_status = $P_sth->fetch(PDO::FETCH_ASSOC);
         $P_db = null;
@@ -97,7 +104,7 @@ class Users extends Model {
     }
 
     public static function verifyAuthentication(Array $A_parameters):array {
-        $A_row = self::selectByEmail($A_parameters['email']);
+        $A_row = self::selectByEmail($A_parameters);
         if(($A_row != null) && ($A_row['user_password'] ==hash('sha512', $A_parameters['user_password']))) {  // If the user exists and the password in the DB is equal to the password entered
             return array(
                 'user_status' => $A_row['user_status'],
