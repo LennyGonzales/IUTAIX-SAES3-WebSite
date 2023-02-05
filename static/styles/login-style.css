@@ -1,3 +1,13 @@
+.password {
+	display: flex;
+	flex-direction: row;
+}
+
+.togglePassword {
+	position:relative;
+	top: 50%;
+}
+
 .account-title {
 	font-weight: bold;
 	margin: 0;

@@ -7,8 +7,14 @@ echo "
             <form action='/account/create' method='POST'>
                 <h1>Créer un compte</h1>
                 <input type='text' class='box-input' name='email' placeholder='Email' required />  
-                <input type='password' class='box-input' name='user_password' placeholder='Mots de passe' required />           
-                <input type='password' class='box-input' name='user_password_verification' placeholder='Vérification du mot de passe' required />             
+                <div class='password'>
+                    <input type='password' id='signup_password_text' class='box-input' name='user_password' placeholder='Mots de passe' required />
+                    <i class='far fa-eye togglePassword' id='toggleSignupPassword'></i>   
+                </div>    
+                <div class='password'>    
+                    <input type='password' id='signup_verification_password_text' class='box-input' name='user_password_verification' placeholder='Vérification du mot de passe' required />  
+                    <i class='far fa-eye togglePassword' id='toggleSignupVerificationPassword'></i>
+                </div>           
                 <input type='checkbox' id='terms' required>
                 <a href='' class='terms-link' style='font-size: 0.6em'> Accepter les conditions générales d'utilisation</a>
                 </label>
@@ -21,7 +27,10 @@ echo "
             <form action='/account/connect' method='POST'>
                 <h1>Connexion</h1>
                 <input type='text' class='box-input' name='email' placeholder='Email'/>
-                <input type='password' class='box-input' name='user_password' placeholder='Mot de passe'/>
+                <div class='password'>
+                    <input type='password' id='signin_password_text' class='box-input' name='user_password' placeholder='Mot de passe'/>
+                    <i class='far fa-eye togglePassword' id='toggleSigninPassword'></i>
+                </div>
                 <a href='#'>Mot de passe oublié?</a>
                 <input type='submit' value='Connexion ' name='connexion'/>
             </form>
@@ -42,5 +51,6 @@ echo "
         </div>
     </div>
 <script src='/static/js/login.js'></script>
+<script src='/static/js/passwordsShowHide.js'></script>
 
 ";
