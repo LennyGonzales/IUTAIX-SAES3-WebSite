@@ -79,7 +79,7 @@
     <!-- footer section starts  -->
 
    <section class="footer" id="footer">
-       <div class="box-container">
+       <div class="box-container" id="box">
            <div class="box">
                <h3>Liens rapides</h3>
                <a href="accueilPage.php"><i class="fas fa-chevron-right"></i>Accueil</a>

@@ -36,7 +36,7 @@
 #signUpBtn {
     background-color: var(--blue);  
     background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);  
-    border-radius: 20px;   
+    border-radius: 20px;
     color: var(--white); 
 }
 .ghost:active {
@@ -59,9 +59,10 @@
                  -20px -20px 60px #ffffff;
 	position: relative;
 	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
+	max-width: 60%;
 	min-height: 480px;
+	display: flex;
+	margin: 10em auto 10em;
 }
 
 .form-container {
@@ -75,7 +76,6 @@
 	justify-content: center;
 	flex-direction: column;
 	padding: 0 50px;
-	height: 100%;
 	text-align: center;
 }
 
@@ -131,10 +131,8 @@
 }
 
 .overlay {
-	background: url("../content/images/macOS-Big-Sur-wallpaper-inspiration-javierocasio-idownloadblog-Waves-Dark-Alt-4K-1536x1536.jpg");
-	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: 0 0;
+	background:var(--blue);
 	color: #FFFFFF;
 	position: relative;
 	left: -100%;
@@ -142,6 +140,11 @@
 	width: 200%;
   	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
+}
+
+.overlay h1, p{
+	color: var(--white);
+	padding: 0.5em;
 }
 
 .container.right-panel-active .overlay {
