@@ -103,6 +103,16 @@ class Users extends Model {
         return $S_status;
     }
 
+    public static function updateByPrimaryKey(Array $A_postParams) : void {
+        $P_connection = Connection::initConnection(self::DATABASE);
+        $S_sql = "UPDATE users SET user_password = :password WHERE email = :email";
+        $P_statement = $P_connection->prepare($S_sql);
+        $P_statement->bindValue(":email", $A_postParams["email"], PDO::PARAM_STR);
+        $P_statement->bindValue(":password", $A_postParams["user_password"], PDO::PARAM_STR);
+        $P_statement->execute();
+
+    }
+
     public static function verifyAuthentication(Array $A_parameters):array {
         $A_row = self::selectByEmail($A_parameters);
         if(($A_row != null) && ($A_row['user_password'] ==hash('sha512', $A_parameters['user_password']))) {  // If the user exists and the password in the DB is equal to the password entered
@@ -117,4 +127,12 @@ class Users extends Model {
             'message' => 'Votre email et/ou votre mot de passe est incorrect !'
         );
     }
+
+
+
+
+
+
+
+
 }

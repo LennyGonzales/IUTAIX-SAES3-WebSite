@@ -4,7 +4,7 @@ echo "
     <div class='container' id='container'>
     
         <div class='form-container sign-up-container'>
-            <form action='/account/create' method='POST'>
+            <form action='/account/create' method='POST' >
                 <h1>Créer un compte</h1>
                 <input type='text' class='box-input' name='email' placeholder='Email' required />  
                 <div class='password'>
@@ -19,9 +19,14 @@ echo "
                 <a href='' class='terms-link' style='font-size: 0.6em'> Accepter les conditions générales d'utilisation</a>
                 </label>
                 <br>
-                <input type='submit' value='Inscrire' onclick='' />          
+                <input type='submit' value='Inscrire' onclick=''>          
             </form>
+            
         </div>
+        
+        
+        
+        
         
         <div class='form-container sign-in-container'>
             <form action='/account/connect' method='POST'>
@@ -31,7 +36,7 @@ echo "
                     <input type='password' id='signin_password_text' class='box-input' name='user_password' placeholder='Mot de passe'/>
                     <i class='far fa-eye togglePassword' id='toggleSigninPassword'></i>
                 </div>
-                <a href='#'>Mot de passe oublié?</a>
+                <a href='/retrievepwddirectives'>Mot de passe oublié?</a>
                 <input type='submit' value='Connexion ' name='connexion'/>
             </form>
         </div>

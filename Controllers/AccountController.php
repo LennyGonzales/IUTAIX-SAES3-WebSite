@@ -23,6 +23,7 @@ final class AccountController
 
     public function createAction(Array $A_parametres = null, Array $A_postParams = null):void {
         $A_details = Users::createAccount($A_postParams);
+
         if($A_details['messageType'] == 'successful') {  // Verify if the creation worked
             Session::start(Users::selectByEmail($A_postParams)['user_status']);
             header('Location: /home');
@@ -35,4 +36,8 @@ final class AccountController
         ));
         View::show("account/account", array("errorMessage" => true));
     }
+
+
+
+
 }
