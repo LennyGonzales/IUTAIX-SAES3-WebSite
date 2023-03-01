@@ -34,7 +34,7 @@ class verification_tokens extends Model
 
     public static function create(Array $A_postParams) : void {
         $P_connection = Connection::initConnection(self::DATABASE);
-        $S_sql = "INSERT INTO verification_tokens (user_email, token,expiration_date) VALUES (:email, :token,CURRENT_TIMESTAMP + INTERVAL '30 minutes')";
+        $S_sql = "INSERT INTO verification_tokens (user_email, token,expiration_date) VALUES (:email, :token,CURRENT_TIMESTAMP + INTERVAL '10 minutes')";
         $P_statement = $P_connection->prepare($S_sql);
         $P_statement->bindValue(":email", $A_postParams["email"], PDO::PARAM_STR);
         $P_statement->bindValue(":token", $A_postParams["token"], PDO::PARAM_INT);
@@ -59,9 +59,15 @@ class verification_tokens extends Model
         $P_sth = $P_db->prepare($S_stmnt);
         $P_sth->bindValue(':value', $S_value, PDO::PARAM_STR);
         $P_sth->execute(array($S_value));
-        return $P_sth->fetch(PDO::FETCH_ASSOC);
+        if ($P_sth->rowCount() > 0) {
+            return $P_sth->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return array();
+        }
 
     }
+
+
 
     public static function deleteByPrimaryKey(string $S_nameColumn, string $S_value) : bool{
         $P_db = Connection::initConnection(self::DATABASE);
@@ -72,6 +78,7 @@ class verification_tokens extends Model
 
 
     }
+
 
 
 

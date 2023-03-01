@@ -28,6 +28,15 @@ class Users extends Model {
         return $B_state;
     }
 
+    public static function deleteAccount(array $A_values = null):bool {
+        $P_db = Connection::initConnection(self::DATABASE);
+        $S_stmnt = "DELETE FROM USERS WHERE email = :email";
+        $P_sth = $P_db->prepare($S_stmnt);
+        $P_sth->bindValue(':email', $A_values['user_email'], PDO::PARAM_STR);
+        $B_state = $P_sth->execute();
+        return $B_state;
+    }
+
     public static function createAccount(Array $A_parameters):array {
         $S_email = $A_parameters['email'];
         $S_password = $A_parameters['user_password'];
@@ -48,7 +57,7 @@ class Users extends Model {
         }
 
         // Verification of the email and the password
-        if (substr($S_email, -16, 16) == "@etu.univ-amu.fr" || $S_email == "safa.yahi@univ-amu.fr") {
+        if (substr($S_email, -16, 16) == "@etu.univ-amu.fr" || substr($S_email, -12, 12) =="@univ-amu.fr") {
             // Vérifie si le mot de passe contient 12 caractères, au moins une majuscule,un caractère spécial et un chiffre
             if (strlen($S_password) < 12) {
                 return array(
@@ -128,11 +137,21 @@ class Users extends Model {
         );
     }
 
+    public static function sendMailVerification(Array $A_postParams) :void
+    {
 
+        Mailer::sendMail($A_postParams["email"], array("subject"=>"Récupération de mot de passe","body"=>"Votre Token de récupération :\n ".strval($A_postParams["token"])));
 
+    }
 
-
-
-
+    public static function createToken(Array $A_postParams) :void
+    {
+        $P_connection = Connection::initConnection(self::DATABASE);
+        $S_sql = "INSERT INTO verification_tokens (user_email, token,expiration_date) VALUES (:email, :token,CURRENT_TIMESTAMP + INTERVAL '30 minutes')";
+        $P_statement = $P_connection->prepare($S_sql);
+        $P_statement->bindValue(":email", $A_postParams["email"], PDO::PARAM_STR);
+        $P_statement->bindValue(":token", $A_postParams["token"], PDO::PARAM_INT);
+        $P_statement->execute();
+    }
 
 }
