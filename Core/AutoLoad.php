@@ -17,9 +17,23 @@ final class AutoLoad
         return static::_load($S_file);
     }
 
-    public static function loadModelClasses($S_className)
+    public static function loadDataClasses($S_className)
     {
-        $S_file = Constants::modelDirectory() . "$S_className.php";
+        $S_file = Constants::dataDirectory() . "$S_className.php";
+
+        return static::_load($S_file);
+    }
+
+    public static function loadServiceClasses($S_className)
+    {
+        $S_file = Constants::serviceDirectory() . "$S_className.php";
+
+        return static::_load($S_file);
+    }
+
+    public static function loadDomainClasses($S_className)
+    {
+        $S_file = Constants::domainDirectory() . "$S_className.php";
 
         return static::_load($S_file);
     }
@@ -64,7 +78,9 @@ final class AutoLoad
 // J'empile tout ce beau monde comme j'ai toujours appris à le faire...
 spl_autoload_register('AutoLoad::loadCoreClasses');
 spl_autoload_register('AutoLoad::loadExceptionClasses');
-spl_autoload_register('AutoLoad::loadModelClasses');
+spl_autoload_register('AutoLoad::loadDataClasses');
+spl_autoload_register('AutoLoad::loadServiceClasses');
+spl_autoload_register('AutoLoad::loadDomainClasses');
 spl_autoload_register('AutoLoad::loadViewClasses');
 spl_autoload_register('AutoLoad::loadControllerClass');
 spl_autoload_register('AutoLoad::loadDatabaseClass');

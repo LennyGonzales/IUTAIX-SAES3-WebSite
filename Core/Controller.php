@@ -8,7 +8,12 @@ final class Controller
 
     private $_A_postParams;
 
-    public function __construct ($S_url, $A_postParams)
+    // SQL Access (reversing dependencies)
+    private QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess;
+    private QuestionsAccessInterface $writtenResponseQuestionsSqlAccess;
+    private UsersAccessInterface $usersSqlAccess;
+
+    public function __construct ($S_url, $A_postParams, UsersAccessInterface $usersSqlAccess, QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess, QuestionsAccessInterface $writtenResponseQuestionsSqlAccess)
     {
         if(!empty($S_url)) {
             // On élimine l'éventuel slash en fin d'URL sinon notre explode renverra une dernière entrée vide
@@ -48,6 +53,10 @@ final class Controller
         $this->_A_postParams = $A_postParams;
 
 
+        // Sql Access (Reversing dependencies)
+        $this->multipleChoiceQuestionsSqlAccess = $multipleChoiceQuestionsSqlAccess;
+        $this->writtenResponseQuestionsSqlAccess = $writtenResponseQuestionsSqlAccess;
+        $this->usersSqlAccess = $usersSqlAccess;
     }
 
     // On exécute notre triplet
@@ -62,8 +71,14 @@ final class Controller
             throw new ControllerException();
         }
 
-        $B_called = call_user_func_array(array(new $this->_A_peeredUrl['controller'],
-            $this->_A_peeredUrl['action']), array($this->_A_urlParameters, $this->_A_postParams ));
+        $controllerClass = $this->_A_peeredUrl['controller'];
+        $controllerInstance = new $controllerClass($this->usersSqlAccess, $this->multipleChoiceQuestionsSqlAccess, $this->writtenResponseQuestionsSqlAccess);
+
+        $actionMethod = $this->_A_peeredUrl['action'];
+        $parameters = $this->_A_urlParameters;
+
+
+        $B_called = call_user_func_array(array($controllerInstance, $actionMethod), array($parameters, $this->_A_postParams));
 
         if (false === $B_called) {
             throw new ControllerException();

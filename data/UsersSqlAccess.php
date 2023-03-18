@@ -5,9 +5,7 @@
  *
  * This class represents the Users table in the DB and communicates with it
  */
-class Users extends Model {
-
-    const DATABASE = 'USERS';
+class UsersSqlAccess extends Model implements UsersAccessInterface {
 
     public static function checkIfExistsByEmail(string $S_email = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
@@ -103,18 +101,22 @@ class Users extends Model {
         return $S_status;
     }
 
-    public static function verifyAuthentication(Array $A_parameters):array {
-        $A_row = self::selectByEmail($A_parameters);
-        if(($A_row != null) && ($A_row['user_password'] ==hash('sha512', $A_parameters['user_password']))) {  // If the user exists and the password in the DB is equal to the password entered
-            return array(
-                'user_status' => $A_row['user_status'],
-                'messageType' => 'successful',
-                'message' => 'Vous êtes connecté'
-            );
+
+    public static function getUser(string $email, string $password):?User {
+        $P_db = Connection::initConnection(self::DATABASE);
+        $S_stmnt = "SELECT EMAIL, USER_PASSWORD, USER_STATUS, POINTS FROM USERS WHERE EMAIL = :email AND USER_PASSWORD= :password";
+        $P_sth = $P_db->prepare($S_stmnt);
+
+        $P_sth->bindValue(':email', $email, PDO::PARAM_STR);
+        $P_sth->bindValue(':password', $password, PDO::PARAM_STR);
+
+        $P_sth->execute();
+        $A_result = $P_sth->fetch(PDO::FETCH_ASSOC);
+        $P_db = null;
+
+        if($A_result != null) {
+            return new User($A_result['email'], $A_result['user_password'], $A_result['user_status'], $A_result['points']);
         }
-        return array(
-            'messageType' => 'error',
-            'message' => 'Votre email et/ou votre mot de passe est incorrect !'
-        );
+        return null;
     }
 }

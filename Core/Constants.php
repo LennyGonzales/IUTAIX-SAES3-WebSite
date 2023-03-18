@@ -9,7 +9,9 @@ final class Constants
 
     const VIEW_DIRECTORY        = '/Views/';
 
-    const MODEL_DIRECTORY      = '/Model/';
+    const DATA_DIRECTORY      = '/data/';
+    const SERVICE_DIRECTORY     = '/service/';
+    const DOMAIN_DIRECTORY      = '/domain/';
 
     const CORE_DIRECTORY       = '/Core/';
 
@@ -37,8 +39,16 @@ final class Constants
         return self::rootDirectory() . self::VIEW_DIRECTORY;
     }
 
-    public static function modelDirectory() {
-        return self::rootDirectory() . self::MODEL_DIRECTORY;
+    public static function dataDirectory() {
+        return self::rootDirectory() . self::DATA_DIRECTORY;
+    }
+
+    public static function serviceDirectory() {
+        return self::rootDirectory() . self::SERVICE_DIRECTORY;
+    }
+
+    public static function domainDirectory() {
+        return self::rootDirectory() . self::DOMAIN_DIRECTORY;
     }
 
     public static function controllersDirectory() {

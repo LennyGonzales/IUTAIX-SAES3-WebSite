@@ -21,15 +21,15 @@ final class StoriesController
         }
         View::show("stories/multiplechoicequestions/empty-form");
         View::show("stories/writtenresponsequestions/empty-form");
-        View::show("stories/multiplechoicequestions/showAll", MultipleChoiceQuestions::selectAll());
-        View::show("stories/writtenresponsequestions/showAll", WrittenResponseQuestions::selectAll());
+        View::show("stories/multiplechoicequestions/showAll", MultipleChoiceQuestionsSqlAccess::selectAll());
+        View::show("stories/writtenresponsequestions/showAll", WrittenResponseQuestionsSqlAccess::selectAll());
 
     }
 
     public function insertMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $A_status = MultipleChoiceQuestions::create($A_postParams);
+        $A_status = MultipleChoiceQuestionsSqlAccess::create($A_postParams);
         self::defaultAction($A_status);
     }
 
@@ -37,7 +37,7 @@ final class StoriesController
         self::verificationSession();
 
         $S_id = $A_parametres[0];
-        $A_status = MultipleChoiceQuestions::delete($S_id);
+        $A_status = MultipleChoiceQuestionsSqlAccess::delete($S_id);
         self::defaultAction($A_status);
     }
 
@@ -45,20 +45,20 @@ final class StoriesController
         self::verificationSession();
 
         $S_id = $A_parametres[0];
-        View::show("stories/multiplechoicequestions/update-form", MultipleChoiceQuestions::select($S_id));
+        View::show("stories/multiplechoicequestions/update-form", MultipleChoiceQuestionsSqlAccess::select($S_id));
     }
 
     public function updateMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $A_status = MultipleChoiceQuestions::update($A_postParams);
+        $A_status = MultipleChoiceQuestionsSqlAccess::update($A_postParams);
         self::defaultAction($A_status);
     }
 
     public function insertWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $A_status = WrittenResponseQuestions::create($A_postParams);
+        $A_status = WrittenResponseQuestionsSqlAccess::create($A_postParams);
         self::defaultAction($A_status);
     }
 
@@ -66,7 +66,7 @@ final class StoriesController
         self::verificationSession();
 
         $S_id = $A_parametres[0];
-        $A_status = WrittenResponseQuestions::delete($S_id);
+        $A_status = WrittenResponseQuestionsSqlAccess::delete($S_id);
         self::defaultAction($A_status);
     }
 
@@ -74,13 +74,13 @@ final class StoriesController
         self::verificationSession();
 
         $S_id = $A_parametres[0];
-        View::show("stories/writtenresponsequestions/update-form", WrittenResponseQuestions::select($S_id));
+        View::show("stories/writtenresponsequestions/update-form", WrittenResponseQuestionsSqlAccess::select($S_id));
     }
 
     public function updateWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $A_status = WrittenResponseQuestions::update($A_postParams);
+        $A_status = WrittenResponseQuestionsSqlAccess::update($A_postParams);
         self::defaultAction($A_status);
     }
 }
