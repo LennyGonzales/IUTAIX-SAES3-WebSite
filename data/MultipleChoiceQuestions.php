@@ -22,15 +22,6 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         return null;
     }
 
-    public static function select(string $S_id = null): array {
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "SELECT * FROM MULTIPLECHOICEQUESTIONS WHERE ID = :id";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':id', $S_id, PDO::PARAM_STR);
-        $P_sth->execute();
-        return $P_sth->fetch();
-    }
-
     public static function create(Array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "INSERT INTO MULTIPLECHOICEQUESTIONS (MODULE, DESCRIPTION, QUESTION, TRUE_ANSWER, ANSWER_1, ANSWER_2, ANSWER_3) VALUES (:module, :description, :question, :true_answer, :answer_1, :answer_2, :answer_3)";

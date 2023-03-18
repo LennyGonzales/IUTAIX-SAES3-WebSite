@@ -30,7 +30,7 @@ class QuestionsChecking
     }
 
     public function deleteQuestion(string $S_id =null, QuestionsAccessInterface $questionsSqlAccess):array {
-        if($questionsSqlAccess->deleteById($S_id)) {  // The deletion worked
+        if($questionsSqlAccess->deleteById($questionsSqlAccess::DATABASE, $S_id)) {  // The deletion worked
             return array(
                 'messageType' => 'successful',
                 'message' => 'La question a été supprimée !'
@@ -41,5 +41,9 @@ class QuestionsChecking
             'messageType' => 'error',
             'message' => "La suppression de la question à échouée, veuillez réésayer."
         );
+    }
+
+    public function getQuestion(string $S_id = null, QuestionsAccessInterface $questionsSqlAccess):array {
+        return $questionsSqlAccess->getById($questionsSqlAccess::DATABASE, $S_id);
     }
 }

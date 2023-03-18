@@ -20,15 +20,6 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         return null;
     }
 
-    public static function select(string $S_id = null): array {
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "SELECT * FROM WRITTENRESPONSEQUESTIONS WHERE ID = :id";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':id', $S_id, PDO::PARAM_STR);
-        $P_sth->execute();
-        return $P_sth->fetch();
-    }
-
 
     public static function create(Array $A_values = null):bool
     {

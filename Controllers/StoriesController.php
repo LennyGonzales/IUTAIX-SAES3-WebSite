@@ -25,8 +25,8 @@ final class StoriesController extends DefaultController
         }
         View::show("stories/multiplechoicequestions/empty-form");
         View::show("stories/writtenresponsequestions/empty-form");
-        View::show("stories/multiplechoicequestions/showAll", MultipleChoiceQuestions::selectAll());
-        View::show("stories/writtenresponsequestions/showAll", WrittenResponseQuestions::selectAll());
+        View::show("stories/multiplechoicequestions/showAll", MultipleChoiceQuestions::selectAll($this->getMultipleChoiceQuestionsSqlAccess()::DATABASE));    //---
+        View::show("stories/writtenresponsequestions/showAll", WrittenResponseQuestions::selectAll($this->getWrittenResponseQuestionsSqlAccess()::DATABASE));  //---
 
     }
 
@@ -46,7 +46,7 @@ final class StoriesController extends DefaultController
     }
 
     /**
-     * Delete a multiple choice quesions
+     * Delete a multiple choice questions
      * @param array|null $A_parametres contains the id of a multiple choice question
      * @param array|null $A_postParams null
      * @return void
@@ -61,11 +61,18 @@ final class StoriesController extends DefaultController
         self::defaultAction($A_details);
     }
 
+    /**
+     * Show update form for a multiple choice ques(ions
+     * @param array|null $A_parametres contains the id of a multiple choice ques(ions
+     * @param array|null $A_postParams null
+     * @return void
+     */
     public function showUpdateFormMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
         $S_id = $A_parametres[0];
-        View::show("stories/multiplechoicequestions/update-form", MultipleChoiceQuestions::select($S_id));
+        $questionChecking = new QuestionsChecking();
+        View::show("stories/multiplechoicequestions/update-form", $questionChecking->getQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess()));
     }
 
     public function updateMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
@@ -106,11 +113,18 @@ final class StoriesController extends DefaultController
         self::defaultAction($A_details);
     }
 
+    /**
+     * Show update form for a written response question
+     * @param array|null $A_parametres contains the id of a written response question
+     * @param array|null $A_postParams null
+     * @return void
+     */
     public function showUpdateFormWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
         $S_id = $A_parametres[0];
-        View::show("stories/writtenresponsequestions/update-form", WrittenResponseQuestions::select($S_id));
+        $questionChecking = new QuestionsChecking();
+        View::show("stories/writtenresponsequestions/update-form", $questionChecking->getQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess()));
     }
 
     public function updateWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
