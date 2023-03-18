@@ -44,27 +44,6 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         return $B_state;
     }
 
-
-    public static function delete(string $S_id = null):array {
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "DELETE FROM WRITTENRESPONSEQUESTIONS WHERE ID = :id";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':id', $S_id, PDO::PARAM_INT);
-        $B_state = $P_sth->execute();
-
-        if($B_state) {  // The creation worked
-            return array(
-                'messageType' => 'successful',
-                'message' => 'La question a été supprimé !'
-            );
-        }
-
-        return array(
-            'messageType' => 'error',
-            'message' => "La suppression de la question à échoué, veuillez réésayer."
-        );
-    }
-
     public static function checkIfExistsById(string $S_id = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT COUNT(*) FROM WRITTENRESPONSEQUESTIONS WHERE ID = :id";

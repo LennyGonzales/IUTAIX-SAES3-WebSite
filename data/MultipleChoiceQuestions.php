@@ -47,26 +47,6 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         return $B_state;
     }
 
-    public static function delete(string $S_id = null):array {
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "DELETE FROM MULTIPLECHOICEQUESTIONS WHERE ID = :id";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':id', $S_id, PDO::PARAM_INT);
-        $B_state = $P_sth->execute();
-
-        if($B_state) {  // The creation worked
-            return array(
-                'messageType' => 'successful',
-                'message' => 'La question a été supprimée !'
-            );
-        }
-
-        return array(
-            'messageType' => 'error',
-            'message' => "La suppression de la question à échouée, veuillez réésayer."
-        );
-    }
-
     public static function checkIfExistsById(string $S_id = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT COUNT(*) FROM MULTIPLECHOICEQUESTIONS WHERE ID = :id";

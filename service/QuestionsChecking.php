@@ -8,7 +8,7 @@ class QuestionsChecking
      * @param QuestionsAccessInterface $questionsSqlAccess reverse dependencies (ask an interface)
      * @return string[] Create specific messages that need to be returned to the user
      */
-    public static function createQuestion(Array $A_values = null, QuestionsAccessInterface $questionsSqlAccess):array {
+    public function createQuestion(Array $A_values = null, QuestionsAccessInterface $questionsSqlAccess):array {
         if($questionsSqlAccess->getQuestion($A_values) != null) {   // Verify if the question already exists
             return array(
                 'messageType' => 'error',
@@ -29,4 +29,17 @@ class QuestionsChecking
         );
     }
 
+    public function deleteQuestion(string $S_id =null, QuestionsAccessInterface $questionsSqlAccess):array {
+        if($questionsSqlAccess->deleteById($S_id)) {  // The deletion worked
+            return array(
+                'messageType' => 'successful',
+                'message' => 'La question a été supprimée !'
+            );
+        }
+
+        return array(
+            'messageType' => 'error',
+            'message' => "La suppression de la question à échouée, veuillez réésayer."
+        );
+    }
 }

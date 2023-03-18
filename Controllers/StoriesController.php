@@ -45,12 +45,20 @@ final class StoriesController extends DefaultController
         self::defaultAction($A_details);
     }
 
+    /**
+     * Delete a multiple choice quesions
+     * @param array|null $A_parametres contains the id of a multiple choice question
+     * @param array|null $A_postParams null
+     * @return void
+     */
     public function deleteMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $S_id = $A_parametres[0];
-        $A_status = MultipleChoiceQuestions::delete($S_id);
-        self::defaultAction($A_status);
+        $S_id = $A_parametres[0];   // Get the id
+        $questionChecking = new QuestionsChecking();
+        $A_details = $questionChecking->deleteQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess());
+
+        self::defaultAction($A_details);
     }
 
     public function showUpdateFormMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
@@ -82,13 +90,20 @@ final class StoriesController extends DefaultController
         self::defaultAction($A_details);
     }
 
-
+    /**
+     * Delete a written response question
+     * @param array|null $A_parametres contains the id of a written response question
+     * @param array|null $A_postParams null
+     * @return void
+     */
     public function deleteWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $S_id = $A_parametres[0];
-        $A_status = WrittenResponseQuestions::delete($S_id);
-        self::defaultAction($A_status);
+        $S_id = $A_parametres[0];   // Get the id
+        $questionChecking = new QuestionsChecking();
+        $A_details = $questionChecking->deleteQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess());
+
+        self::defaultAction($A_details);
     }
 
     public function showUpdateFormWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
