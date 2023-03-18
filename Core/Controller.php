@@ -12,8 +12,10 @@ final class Controller
     private QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess;
     private QuestionsAccessInterface $writtenResponseQuestionsSqlAccess;
     private UsersAccessInterface $usersSqlAccess;
+    private UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess;
+    private RetrievePasswordAccessInterface $retrievePasswordSqlAccess;
 
-    public function __construct ($S_url, $A_postParams, UsersAccessInterface $usersSqlAccess, QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess, QuestionsAccessInterface $writtenResponseQuestionsSqlAccess)
+    public function __construct ($S_url, $A_postParams, UsersAccessInterface $usersSqlAccess, UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess, RetrievePasswordAccessInterface $retrievePasswordSqlAccess, QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess, QuestionsAccessInterface $writtenResponseQuestionsSqlAccess)
     {
         if(!empty($S_url)) {
             // On élimine l'éventuel slash en fin d'URL sinon notre explode renverra une dernière entrée vide
@@ -57,6 +59,8 @@ final class Controller
         $this->multipleChoiceQuestionsSqlAccess = $multipleChoiceQuestionsSqlAccess;
         $this->writtenResponseQuestionsSqlAccess = $writtenResponseQuestionsSqlAccess;
         $this->usersSqlAccess = $usersSqlAccess;
+        $this->usersNotVerifiedSqlAccess = $usersNotVerifiedSqlAccess;
+        $this->retrievePasswordSqlAccess = $retrievePasswordSqlAccess;
     }
 
     // On exécute notre triplet
@@ -72,7 +76,7 @@ final class Controller
         }
 
         $controllerClass = $this->_A_peeredUrl['controller'];
-        $controllerInstance = new $controllerClass($this->usersSqlAccess, $this->multipleChoiceQuestionsSqlAccess, $this->writtenResponseQuestionsSqlAccess);
+        $controllerInstance = new $controllerClass($this->usersSqlAccess, $this->usersNotVerifiedSqlAccess, $this->retrievePasswordSqlAccess, $this->multipleChoiceQuestionsSqlAccess, $this->writtenResponseQuestionsSqlAccess);
 
         $actionMethod = $this->_A_peeredUrl['action'];
         $parameters = $this->_A_urlParameters;

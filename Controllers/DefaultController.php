@@ -5,12 +5,16 @@ class DefaultController
     private UsersAccessInterface $usersSqlAccess;
     private QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess;
     private QuestionsAccessInterface $writtenResponseQuestionsSqlAccess;
+    private UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess;
+    private RetrievePasswordAccessInterface $retrievePasswordSqlAccess;
 
-    public function __construct(UsersAccessInterface $usersSqlAccess, QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess, QuestionsAccessInterface $writtenResponseQuestionsSqlAccess)
+    public function __construct(UsersAccessInterface $usersSqlAccess, UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess, RetrievePasswordAccessInterface  $retrievePasswordSqlAccess, QuestionsAccessInterface $multipleChoiceQuestionsSqlAccess, QuestionsAccessInterface $writtenResponseQuestionsSqlAccess)
     {
         $this->usersSqlAccess = $usersSqlAccess;
         $this->multipleChoiceQuestionsSqlAccess = $multipleChoiceQuestionsSqlAccess;
         $this->writtenResponseQuestionsSqlAccess = $writtenResponseQuestionsSqlAccess;
+        $this->usersNotVerifiedSqlAccess = $usersNotVerifiedSqlAccess;
+        $this->retrievePasswordSqlAccess = $retrievePasswordSqlAccess;
     }
 
     /**
@@ -37,5 +41,19 @@ class DefaultController
         return $this->usersSqlAccess;
     }
 
+    /**
+     * @return UsersNotVerifiedAccessInterface
+     */
+    public function getUsersNotVerifiedSqlAccess(): UsersNotVerifiedAccessInterface
+    {
+        return $this->usersNotVerifiedSqlAccess;
+    }
 
+    /**
+     * @return RetrievePasswordAccessInterface
+     */
+    public function getRetrievePasswordSqlAccess(): RetrievePasswordAccessInterface
+    {
+        return $this->retrievePasswordSqlAccess;
+    }
 }

@@ -1,9 +1,9 @@
 <?php
 
-//Les methodes pour charger les 3 classes ont été faites dans la classe AutoLoad et Constants, mais etant donnée qu'elles ne marchent pas on as du utiliser require
-require "Core/Phpmailer/PHPMailer.php";
-require "Core/Phpmailer/SMTP.php";
-require "Core/Phpmailer/Exception.php";
+//Les methodes pour charger les 3 classes ont été faites dans la classe AutoLoad et Constants, mais etant donnée qu'elles ne marchent pas on a du utiliser require
+require ("Core/Phpmailer/PHPMailer.php");
+require ("Core/Phpmailer/SMTP.php");
+require ("Core/Phpmailer/Exception.php");
 
 /**
  * Mailer class
@@ -36,20 +36,20 @@ class Mailer
         //We use the tls type encryption (Transport Layer Security)
         $P_sentMail->SMTPSecure = "tls";
 
-        //We connect to port 587 which is a secure port
+        //We connect to port  which is a secure port
         $P_sentMail->Port = "587";
 
         //We give the user, i.e. the login of the GMAIL account
-        $P_sentMail->Username = "LeGato.official.noreply@gmail.com";
+        $P_sentMail->Username = "official.nwstories@gmail.com";
 
         //We give the password that was generated in the security part of the GMAIL account
-        $P_sentMail->Password = "ryepxreaxmcqvphq";
+        $P_sentMail->Password = "hzxustrxezksmame";
 
         //The subject of the email
         $P_sentMail->Subject = $S_mailContent["subject"];
 
         //The person who sends the email
-        $P_sentMail->setFrom("LeGato.official.noreply@gmail.com");
+        $P_sentMail->setFrom("official.nwstories@gmail.com");
 
         //We enable the page format (We can use page syntax, i.e. tags in the body of the mail and it will be recognized)
         $P_sentMail->isHTML(true);

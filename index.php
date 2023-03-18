@@ -5,6 +5,8 @@
     $multipleChoiceQuestionsSqlAccess = new MultipleChoiceQuestions();
     $writtenResponseQuestionsSqlAccess = new WrittenResponseQuestions();
     $usersSqlAccess = new Users();
+    $usersNotVerifiedSqlAccess = new UsersNotVerified();
+    $retrievePasswordSqlAccess = new RetrievePasswords();
 
 
     $S_urlToPeer = isset($_GET['url']) ? $_GET['url'] : null;
@@ -16,7 +18,7 @@
 
     try
     {
-        $O_controller = new Controller($S_urlToPeer, $A_postParams, $usersSqlAccess, $multipleChoiceQuestionsSqlAccess, $writtenResponseQuestionsSqlAccess);
+        $O_controller = new Controller($S_urlToPeer, $A_postParams, $usersSqlAccess, $usersNotVerifiedSqlAccess, $retrievePasswordSqlAccess, $multipleChoiceQuestionsSqlAccess, $writtenResponseQuestionsSqlAccess);
         $O_controller->execute();
     }
     catch (ControllerException $O_exception)
