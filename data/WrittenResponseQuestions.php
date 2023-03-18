@@ -45,14 +45,7 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         return ($A_result['count'] > 0);
     }
 
-    public static function update(Array $A_values = null):array {
-        if(!WrittenResponseQuestions::checkIfExistsById($A_values['id'])) {
-            return array(
-                'messageType' => 'error',
-                'message' => 'La question n\'existe pas !'
-            );
-        }
-
+    public static function update(Array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "UPDATE WRITTENRESPONSEQUESTIONS SET MODULE = :module, DESCRIPTION = :description, QUESTION = :question, TRUE_ANSWER = :true_answer WHERE ID = :id";
         $P_sth = $P_db->prepare($S_stmnt);
@@ -63,16 +56,6 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':id', $A_values['id'], PDO::PARAM_INT);
         $B_state = $P_sth->execute();
 
-        if($B_state) {  // The creation worked
-            return array(
-                'messageType' => 'successful',
-                'message' => 'La question a été modifiée !'
-            );
-        }
-
-        return array(
-            'messageType' => 'error',
-            'message' => 'La modification de la question à échouée, veuillez réésayer.'
-        );
+        return $B_state;
     }
 }

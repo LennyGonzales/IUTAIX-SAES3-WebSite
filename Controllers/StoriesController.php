@@ -75,11 +75,18 @@ final class StoriesController extends DefaultController
         View::show("stories/multiplechoicequestions/update-form", $questionChecking->getQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess()));
     }
 
+    /**
+     * Update a multiple choice question
+     * @param array|null $A_parametres null
+     * @param array|null $A_postParams contains all the information to update a multiple choice question
+     * @return void
+     */
     public function updateMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $A_status = MultipleChoiceQuestions::update($A_postParams);
-        self::defaultAction($A_status);
+        $questionChecking = new QuestionsChecking();
+        $A_details = $questionChecking->updateQuestion($A_postParams, $this->getMultipleChoiceQuestionsSqlAccess());
+        self::defaultAction($A_details);
     }
 
     /**
@@ -127,10 +134,17 @@ final class StoriesController extends DefaultController
         View::show("stories/writtenresponsequestions/update-form", $questionChecking->getQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess()));
     }
 
+    /**
+     * Update a written response question
+     * @param array|null $A_parametres null
+     * @param array|null $A_postParams contains all the information to update a written response question
+     * @return void
+     */
     public function updateWrittenResponseQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
 
-        $A_status = WrittenResponseQuestions::update($A_postParams);
-        self::defaultAction($A_status);
+        $questionChecking = new QuestionsChecking();
+        $A_details = $questionChecking->updateQuestion($A_postParams, $this->getWrittenResponseQuestionsSqlAccess());
+        self::defaultAction($A_details);
     }
 }

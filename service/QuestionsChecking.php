@@ -46,4 +46,25 @@ class QuestionsChecking
     public function getQuestion(string $S_id = null, QuestionsAccessInterface $questionsSqlAccess):array {
         return $questionsSqlAccess->getById($questionsSqlAccess::DATABASE, $S_id);
     }
+
+    public function updateQuestion(Array $A_values = null, QuestionsAccessInterface $questionsSqlAccess): array {
+        if($questionsSqlAccess->getQuestion($A_values) != null) {   // Verify if the question already exists
+            return array(
+                'messageType' => 'error',
+                'message' => 'La question n\'existe pas !'
+            );
+        }
+
+        if($questionsSqlAccess->update($A_values)) {  // The creation worked
+            return array(
+                'messageType' => 'successful',
+                'message' => 'La question a été modifiée !'
+            );
+        }
+
+        return array(
+            'messageType' => 'error',
+            'message' => 'La modification de la question à échouée, veuillez réésayer.'
+        );
+    }
 }

@@ -38,7 +38,7 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         return $B_state;
     }
 
-    public static function checkIfExistsById(string $S_id = null):bool {
+    public static function checkIfExistsById(string $S_id = null):bool {        // !!!--- to delete
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT COUNT(*) FROM MULTIPLECHOICEQUESTIONS WHERE ID = :id";
         $P_sth = $P_db->prepare($S_stmnt);
@@ -48,14 +48,7 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         return ($A_result['count'] > 0);
     }
 
-    public static function update(Array $A_values = null):array {
-        if(!MultipleChoiceQuestions::checkIfExistsById($A_values['id'])) {
-            return array(
-                'messageType' => 'error',
-                'message' => 'La question n\'existe pas !'
-            );
-        }
-
+    public static function update(Array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "UPDATE MULTIPLECHOICEQUESTIONS SET MODULE = :module, DESCRIPTION = :description, QUESTION = :question, TRUE_ANSWER = :true_answer, ANSWER_1 = :answer_1, ANSWER_2 = :answer_2, ANSWER_3 = :answer_3 WHERE ID = :id";
         $P_sth = $P_db->prepare($S_stmnt);
@@ -69,16 +62,6 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':id', $A_values['id'], PDO::PARAM_INT);
         $B_state = $P_sth->execute();
 
-        if($B_state) {  // The creation worked
-            return array(
-                'messageType' => 'successful',
-                'message' => 'La question a été modifiée !'
-            );
-        }
-
-        return array(
-            'messageType' => 'error',
-            'message' => 'La modification de la question à échouée, veuillez réésayer.'
-        );
+        return $B_state;
     }
 }

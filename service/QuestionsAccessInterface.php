@@ -10,5 +10,5 @@ interface QuestionsAccessInterface
 
     public static function checkIfExistsById(string $S_id = null):bool;
 
-    public static function update(Array $A_values = null):array;
+    public static function update(Array $A_values = null):bool;
 }
