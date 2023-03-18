@@ -61,4 +61,13 @@ class QuestionsChecking
 
         return array('messageType' => 'error', 'message' => 'La modification de la question à échouée, veuillez réésayer.');
     }
+
+    /**
+     * Get all the questions
+     * @param QuestionsAccessInterface $questionsSqlAccess reverse dependencies (ask the interface)
+     * @return array contains all the tuples of the table
+     */
+    public function getAllQuestions(QuestionsAccessInterface $questionsSqlAccess):array {
+        return $questionsSqlAccess->getAll($questionsSqlAccess::DATABASE);
+    }
 }

@@ -8,7 +8,7 @@ abstract class Model{
      * @param string $database the database name concerned
      * @return array All entries from the database
      */
-    public static function selectAll(string $database): array{
+    public static function getAll(string $database): array{
         $P_db = Connection::initConnection($database);
         $S_stmnt = "SELECT * FROM ".get_called_class();
         $P_sth = $P_db->prepare($S_stmnt);

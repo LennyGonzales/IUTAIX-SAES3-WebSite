@@ -23,10 +23,12 @@ final class StoriesController extends DefaultController
         if($A_message != null) {    // If there is a message, show it
             View::show("message", $A_message);
         }
+
+        $questionChecking = new QuestionsChecking();
         View::show("stories/multiplechoicequestions/empty-form");
         View::show("stories/writtenresponsequestions/empty-form");
-        View::show("stories/multiplechoicequestions/showAll", MultipleChoiceQuestions::selectAll($this->getMultipleChoiceQuestionsSqlAccess()::DATABASE));    //---
-        View::show("stories/writtenresponsequestions/showAll", WrittenResponseQuestions::selectAll($this->getWrittenResponseQuestionsSqlAccess()::DATABASE));  //---
+        View::show("stories/multiplechoicequestions/showAll", $questionChecking->getAllQuestions($this->getMultipleChoiceQuestionsSqlAccess()));
+        View::show("stories/writtenresponsequestions/showAll", $questionChecking->getAllQuestions($this->getWrittenResponseQuestionsSqlAccess()));
 
     }
 
