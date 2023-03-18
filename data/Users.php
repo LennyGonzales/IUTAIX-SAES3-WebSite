@@ -5,7 +5,7 @@
  *
  * This class represents the Users table in the DB and communicates with it
  */
-class UsersSqlAccess extends Model implements UsersAccessInterface {
+class Users extends Model implements UsersAccessInterface {
     public static function create(array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "INSERT INTO USERS (EMAIL,USER_PASSWORD) VALUES (:email, :user_password)";

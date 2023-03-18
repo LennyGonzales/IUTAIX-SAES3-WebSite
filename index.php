@@ -2,9 +2,9 @@
 
     require 'Core/AutoLoad.php';
 
-    $multipleChoiceQuestionsSqlAccess = new MultipleChoiceQuestionsSqlAccess();
-    $writtenResponseQuestionsSqlAccess = new WrittenResponseQuestionsSqlAccess();
-    $usersSqlAccess = new UsersSqlAccess();
+    $multipleChoiceQuestionsSqlAccess = new MultipleChoiceQuestions();
+    $writtenResponseQuestionsSqlAccess = new WrittenResponseQuestions();
+    $usersSqlAccess = new Users();
 
 
     $S_urlToPeer = isset($_GET['url']) ? $_GET['url'] : null;

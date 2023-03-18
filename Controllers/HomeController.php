@@ -6,6 +6,10 @@ final class HomeController
         View::show("home/home");
     }
 
+    /**
+     * Download the application zip file
+     * @return void
+     */
     public function downloadApplicationAction():void {
         $file = 'static/content/downloads/NetworkStories.zip';
         if (file_exists($file)) {
