@@ -11,17 +11,11 @@ class UsersChecking
     public function verifyAuthentication(Array $A_parameters = null, UsersAccessInterface $usersSqlAccess):array {
         $E_User = $usersSqlAccess->getByEmailAndPassword($A_parameters['email'],hash('sha512', $A_parameters['user_password']));
 
-        if($E_User != null) {  // If the user exists and the password in the DB is equal to the password entered
-            return array(
-                'user_status' => $E_User->getUserStatus(),
-                'messageType' => 'successful',
-                'message' => 'Vous êtes connecté'
-            );
+        if($E_User != null) {  // If the user exists and the password hashed in the database is equal to the password hashed entered by the user
+            return array('user_status' => $E_User->getUserStatus(), 'messageType' => 'successful', 'message' => 'Vous êtes connecté');
         }
-        return array(
-            'messageType' => 'error',
-            'message' => 'Votre email et/ou votre mot de passe est incorrect !'
-        );
+
+        return array('messageType' => 'error', 'message' => 'Votre email et/ou votre mot de passe est incorrect !');
     }
 
 

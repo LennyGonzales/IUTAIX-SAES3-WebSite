@@ -2,6 +2,11 @@
 
 class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
 {
+    /**
+     * Get a multiple choice question with all the attributes excepts id
+     * @param array|null $A_values all the attributes excepts id
+     * @return MultipleChoiceQuestion|null an instance of MultipleChoiceQuestion or null if the question doesn't exist
+     */
     public static function getQuestion(Array $A_values = null):?MultipleChoiceQuestion {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT * FROM MULTIPLECHOICEQUESTIONS WHERE MODULE = :module AND DESCRIPTION = :description AND QUESTION = :question AND TRUE_ANSWER = :true_answer AND ANSWER_1 = :answer_1 AND ANSWER_2 = :answer_2 AND ANSWER_3 = :answer_3";
@@ -22,6 +27,11 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         return null;
     }
 
+    /**
+     * Create a multiple choice question
+     * @param array|null $A_values all the attributes of the table
+     * @return bool if the creation worked or not
+     */
     public static function create(Array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "INSERT INTO MULTIPLECHOICEQUESTIONS (MODULE, DESCRIPTION, QUESTION, TRUE_ANSWER, ANSWER_1, ANSWER_2, ANSWER_3) VALUES (:module, :description, :question, :true_answer, :answer_1, :answer_2, :answer_3)";
@@ -38,16 +48,11 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         return $B_state;
     }
 
-    public static function checkIfExistsById(string $S_id = null):bool {        // !!!--- to delete
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "SELECT COUNT(*) FROM MULTIPLECHOICEQUESTIONS WHERE ID = :id";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':id', $S_id, PDO::PARAM_INT);
-        $P_sth->execute();
-        $A_result = $P_sth->fetch();
-        return ($A_result['count'] > 0);
-    }
-
+    /**
+     * Update a multiple choice question with all the attributes
+     * @param array|null $A_values all the attributes of the table
+     * @return bool if the update worked or not
+     */
     public static function update(Array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "UPDATE MULTIPLECHOICEQUESTIONS SET MODULE = :module, DESCRIPTION = :description, QUESTION = :question, TRUE_ANSWER = :true_answer, ANSWER_1 = :answer_1, ANSWER_2 = :answer_2, ANSWER_3 = :answer_3 WHERE ID = :id";

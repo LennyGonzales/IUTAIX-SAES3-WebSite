@@ -3,6 +3,11 @@
 
 class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
 {
+    /**
+     * Get a written response question with all the attributes excepts id
+     * @param array|null $A_values all the attributes excepts id
+     * @return MultipleChoiceQuestion|null an instance of WrittenResponseQuestion or null if the question doesn't exist
+     */
     public static function getQuestion(Array $A_values = null):?WrittenResponseQuestion {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT * FROM WRITTENRESPONSEQUESTIONS WHERE MODULE = :module AND DESCRIPTION = :description AND QUESTION = :question AND TRUE_ANSWER = :true_answer";
@@ -20,7 +25,11 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         return null;
     }
 
-
+    /**
+     * Create a written response question
+     * @param array|null $A_values all the attributes of the table
+     * @return bool if the creation worked or not
+     */
     public static function create(Array $A_values = null):bool
     {
         $P_db = Connection::initConnection(self::DATABASE);
@@ -35,16 +44,11 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         return $B_state;
     }
 
-    public static function checkIfExistsById(string $S_id = null):bool {
-        $P_db = Connection::initConnection(self::DATABASE);
-        $S_stmnt = "SELECT COUNT(*) FROM WRITTENRESPONSEQUESTIONS WHERE ID = :id";
-        $P_sth = $P_db->prepare($S_stmnt);
-        $P_sth->bindValue(':id', $S_id, PDO::PARAM_INT);
-        $P_sth->execute();
-        $A_result = $P_sth->fetch();
-        return ($A_result['count'] > 0);
-    }
-
+    /**
+     * Update a written response question with all the attributes
+     * @param array|null $A_values all the attributes of the table
+     * @return bool if the update worked or not
+     */
     public static function update(Array $A_values = null):bool {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "UPDATE WRITTENRESPONSEQUESTIONS SET MODULE = :module, DESCRIPTION = :description, QUESTION = :question, TRUE_ANSWER = :true_answer WHERE ID = :id";

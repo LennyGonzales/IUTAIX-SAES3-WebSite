@@ -5,6 +5,7 @@
 abstract class Model{
     /**
      * Selects all entries from the database
+     * @param string $database the database name concerned
      * @return array All entries from the database
      */
     public static function selectAll(string $database): array{
@@ -16,6 +17,12 @@ abstract class Model{
         return $P_sth->fetchAll();
     }
 
+    /**
+     * Delete a tuple of a table by its id
+     * @param string $database the database name concerned
+     * @param string|null $S_id the id of the tuple
+     * @return bool if the deletion worked
+     */
     public static function deleteById(string $database, string $S_id = null):bool {
         $P_db = Connection::initConnection($database);
         $S_stmnt = "DELETE FROM ".get_called_class(). " WHERE ID = :id;";
@@ -27,6 +34,12 @@ abstract class Model{
         return $B_state;
     }
 
+    /**
+     * Get a tuple of a table by its id
+     * @param string $database the database name concerned
+     * @param string|null $S_id the id of the tuple
+     * @return array array containing all the parameters/attributes of the table
+     */
     public static function getById(string $database, string $S_id = null): array {
         $P_db = Connection::initConnection($database);
         $S_stmnt = "SELECT * FROM " . get_called_class() . " WHERE ID = :id";
