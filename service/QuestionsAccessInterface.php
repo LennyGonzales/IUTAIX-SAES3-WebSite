@@ -4,9 +4,11 @@ interface QuestionsAccessInterface
 {
     const DATABASE = "STORIES";
 
-    public static function getQuestion(Array $A_values = null):?Question;
+    public function getAll():?array;
 
-    public static function create(Array $A_values = null):bool;
+    public function getQuestion(Array $A_values = null):?Question;
 
-    public static function update(Array $A_values = null):bool;
+    public function create(Array $A_values = null):bool;
+
+    public function update(Array $A_values = null):bool;
 }

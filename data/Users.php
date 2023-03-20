@@ -13,6 +13,8 @@ class Users extends Model implements UsersAccessInterface {
         $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
         $P_sth->bindValue(':user_password', $A_values['user_password'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
+        $P_db = null;
+
         return $B_state;
     }
 
@@ -59,6 +61,7 @@ class Users extends Model implements UsersAccessInterface {
         $P_sth->bindValue(':user_password', hash('sha512', $A_values['user_password']), PDO::PARAM_STR);
         $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
+        $P_db = null;
 
         return $B_state;
 

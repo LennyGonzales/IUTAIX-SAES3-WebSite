@@ -6,6 +6,8 @@ class Question
     private string $module;
     private string $description;
     private string $question;
+    private int $nbAnswers;
+    private int $nbCorrectAnswers;
 
     /**
      * @param int $id
@@ -85,5 +87,35 @@ class Question
         $this->question = $question;
     }
 
+    /**
+     * @return int
+     */
+    public function getNbAnswers(): int
+    {
+        return $this->nbAnswers;
+    }
 
+    /**
+     * @param int $nbAnswers
+     */
+    public function setNbAnswers(int $nbAnswers): void
+    {
+        $this->nbAnswers = $nbAnswers;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbCorrectAnswers(): int
+    {
+        return $this->nbCorrectAnswers;
+    }
+
+    /**
+     * @param int $nbCorrectAnswers
+     */
+    public function setNbCorrectAnswers(int $nbCorrectAnswers): void
+    {
+        $this->nbCorrectAnswers = $nbCorrectAnswers;
+    }
 }

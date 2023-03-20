@@ -37,6 +37,7 @@ class RetrievePasswords implements RetrievePasswordAccessInterface
         $P_sth->bindValue(':token', $A_values['token'], PDO::PARAM_STR);
         $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
+        $P_db = null;
 
         return $B_state;
     }

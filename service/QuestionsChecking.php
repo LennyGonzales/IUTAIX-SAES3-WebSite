@@ -68,6 +68,6 @@ class QuestionsChecking
      * @return array contains all the tuples of the table
      */
     public function getAllQuestions(QuestionsAccessInterface $questionsSqlAccess):array {
-        return $questionsSqlAccess->getAll($questionsSqlAccess::DATABASE);
+        return $questionsSqlAccess->getAll();
     }
 }

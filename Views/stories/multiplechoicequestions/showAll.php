@@ -16,6 +16,7 @@ echo "
                             <th>Réponse 1</th>
                             <th>Réponse 2</th>
                             <th>Réponse 3</th>
+                            <th>% de réussite</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -32,6 +33,7 @@ foreach($A_view as $A_row) {
                         <td>" . $A_row['answer_1'] . "</td>
                         <td>" . $A_row['answer_2'] . "</td>
                         <td>" . $A_row['answer_3'] . "</td>
+                        <td>" . $A_row['percentage'] . "</td>
                         <td><a href='/stories/showUpdateFormMultipleChoiceQuestion/" . $A_row['id'] . "' class='Mbutton'> Modifier</a></td>&nbsp;
                         <td><a href='/stories/deleteMultipleChoiceQuestion/" . $A_row['id'] . "' class='delete'>Supprimer</a></td>&nbsp;
                         <br>
