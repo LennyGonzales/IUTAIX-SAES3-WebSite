@@ -41,8 +41,6 @@ class AccountControllerTest extends TestCase
     }
 
 
-
-
     public function testVerifyMailAction()
     {
         $controller = new AccountController( new Users(), new UsersNotVerified(), new RetrievePasswords(),new MultipleChoiceQuestions(),new WrittenResponseQuestions());
