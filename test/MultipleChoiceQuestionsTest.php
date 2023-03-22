@@ -77,7 +77,9 @@ class MultipleChoiceQuestionsTest extends TestCase
         $A_values['answer_1'] = 'getTest 2';
         $A_values['answer_2'] = 'getQuestion 2';
         $A_values['answer_3'] = 'testQuestion 2';
-        $B_state= MultipleChoiceQuestions::update($A_values);
+
+        $B_state = new MultipleChoiceQuestions();
+        $B_state=$B_state->update($A_values);
         $this->assertTrue($B_state);
     }
 

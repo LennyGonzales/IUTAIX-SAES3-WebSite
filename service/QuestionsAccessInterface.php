@@ -11,4 +11,5 @@ interface QuestionsAccessInterface
     public function create(Array $A_values = null):bool;
 
     public function update(Array $A_values = null):bool;
+
 }

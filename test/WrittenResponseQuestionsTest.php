@@ -52,8 +52,10 @@ class WrittenResponseQuestionsTest extends TestCase
         $A_values['description'] = 'test2';
         $A_values['question'] = 'test2';
         $A_values['true_answer'] = 'test2';
-        $B_state = WrittenResponseQuestions::update($A_values);
+        $B_state = new WrittenResponseQuestions();
+        $B_state=$B_state->update($A_values);
         $this->assertTrue($B_state);
+
     }
 
 }

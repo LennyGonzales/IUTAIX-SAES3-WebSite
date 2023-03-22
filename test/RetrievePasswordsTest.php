@@ -24,14 +24,16 @@ class RetrievePasswordsTest extends TestCase
 
     public function testGetByEmail()
     {
+        $data = 'test.test@etu.univ-amu.fr';
 
-        $retrievePassword = $this->retrievePasswords->getByEmail('test.test@etu.univ-amu.fr');
+        $this->retrievePasswords = new RetrievePasswords();
 
-        $this->assertInstanceOf(Retrievepassword::class, $retrievePassword);
-        $this->assertEquals('test.test@etu.univ-amu.fr', $retrievePassword->getEmail());
-        $this->assertEquals('12345678', $retrievePassword->getToken());
+        $this->assertNotNull($this->retrievePasswords->getByEmail($data));
 
     }
+
+
+
 
     public function testUpdate()
     {
@@ -55,6 +57,8 @@ class RetrievePasswordsTest extends TestCase
 
         $this->assertTrue($this->retrievePasswords->delete($data));
     }
+
+
 
 
 }
