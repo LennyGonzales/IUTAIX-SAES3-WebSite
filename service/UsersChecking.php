@@ -9,7 +9,7 @@ class UsersChecking
      * @return array Create specific messages that need to be returned to the user
      */
     public function verifyAuthentication(Array $A_parameters = null, UsersAccessInterface $usersSqlAccess):array {
-        sleep(100);     // Reduce the effectiveness of brute forcing because the opponent have to wait 0.1s for each request
+        sleep(0.1);     // Reduce the effectiveness of brute forcing because the opponent have to wait 0.1s for each request
 
         $E_User = $usersSqlAccess->getByEmailAndPassword($A_parameters['email'],hash('sha512', $A_parameters['user_password']));
 
