@@ -7,6 +7,12 @@ include_once '../Core/AutoLoad.php';
 
 class MultipleChoiceQuestionsTest extends TestCase
 {
+
+    public function testGetAll() {
+        $A_questions =new  MultipleChoiceQuestions();
+        $A_questions= $A_questions->getAll();
+        $this->assertNotEmpty($A_questions);
+    }
     public function testGetQuestion() {
         $A_values = array(
             'module' => 'Ethernet',
@@ -74,6 +80,8 @@ class MultipleChoiceQuestionsTest extends TestCase
         $B_state= MultipleChoiceQuestions::update($A_values);
         $this->assertTrue($B_state);
     }
+
+
 
 
 

@@ -11,7 +11,7 @@ class UsersTest extends TestCase
     public function testCreate()
     {
         $A_values = [
-            'email' => 'test.test@etu.univ-amu.fr',
+            'email' => 'test.test2@etu.univ-amu.fr',
             'user_password' => hash('sha512', 'testPassword12@')
         ];
 
@@ -47,6 +47,8 @@ class UsersTest extends TestCase
         $users = new Users();
         $this->assertTrue($users->update($A_values));
     }
+
+
 
 
 
