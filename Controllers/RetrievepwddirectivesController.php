@@ -29,23 +29,27 @@ class RetrievepwddirectivesController extends DefaultController
         $usersChecking = new UsersChecking();
 
         if($usersChecking->getByEmail($A_postParams['email'], $this->getUsersSqlAccess()) == null) {    // The user doesn't exists
-            header("Location: /home");
-            exit;
-        }
+            View::show("message", array('messageType' => 'error', 'message' => Errors::EMAIL_NOT_EXISTS));
+            $this->defaultAction();
+        } else {
+            $A_postParams["token"]  = (new RandomTokenGenerator())->generate();        // Generates token
+            $retrievePasswordChecking = new RetrievePasswordChecking();
 
-        $A_postParams["token"]  = rand(100000, 999999);        // Generates token
-        $retrievePasswordChecking = new RetrievePasswordChecking();
-        if($retrievePasswordChecking->getByEmail($A_postParams['email'], $this->getRetrievePasswordSqlAccess()) != null) {
-            $retrievePasswordChecking->update($A_postParams, $this->getRetrievePasswordSqlAccess());
-            header("Location: /retrievepwd");
-            exit;
-        }
+            if(($retrievePasswordChecking->getByEmail($A_postParams['email'], $this->getRetrievePasswordSqlAccess()) != null)  // If the user have already sent a request
+                && ($retrievePasswordChecking->update($A_postParams, $this->getRetrievePasswordSqlAccess()))) {    // We change the token stores in the database with the new token
+                $retrievePasswordChecking->sendMail($A_postParams);
+                header("Location: /retrievepwd");
+                exit;
+            }
 
-        if($retrievePasswordChecking->create($A_postParams, $this->getRetrievePasswordSqlAccess())) {
-            $retrievePasswordChecking->sendMail($A_postParams);
-            header("Location: /retrievepwd");
-            exit;
+            if($retrievePasswordChecking->create($A_postParams, $this->getRetrievePasswordSqlAccess())) {
+                $retrievePasswordChecking->sendMail($A_postParams);
+                header("Location: /retrievepwd");
+                exit;
+            }
+
+            View::show("message", array('messageType' => 'error', 'message' => Errors::GENERIC_ERROR));
+            $this->defaultAction();
         }
-        // to do
     }
 }

@@ -4,7 +4,7 @@ echo "
     <div class='container' id='container'>
     
         <div class='form-container sign-up-container'>
-            <form action='/account/send' method='POST' >
+            <form action='/account/signUpRequest' method='POST' >
                 <h1>Créer un compte</h1>
                 <input type='text' class='box-input' name='email' placeholder='Email' required />  
                 <div class='password'>

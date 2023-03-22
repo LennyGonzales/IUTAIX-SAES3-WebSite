@@ -6,29 +6,28 @@ class UsersChecking
      * Verify the user authentication
      * @param array|null $A_parameters contains the email and the password of the user
      * @param UsersAccessInterface $usersSqlAccess reverse dependencies (ask an interface)
-     * @return array|string[] Create specific messages that need to be returned to the user
+     * @return array Create specific messages that need to be returned to the user
      */
     public function verifyAuthentication(Array $A_parameters = null, UsersAccessInterface $usersSqlAccess):array {
         $E_User = $usersSqlAccess->getByEmailAndPassword($A_parameters['email'],hash('sha512', $A_parameters['user_password']));
 
         if($E_User != null) {  // If the user exists and the password hashed in the database is equal to the password hashed entered by the user
-            return array('user_status' => $E_User->getUserStatus(), 'messageType' => 'successful', 'message' => 'Vous êtes connecté');
+            return array('user_status' => $E_User->getUserStatus(), 'message' => Success::LOGIN);
         }
-
-        return array('messageType' => 'error', 'message' => 'Votre email et/ou votre mot de passe est incorrect !');
+        return array('message' => Errors::LOGIN);
     }
 
     /**
      * Create the account
      * @param array|null $A_values contains the email and the password of the user
      * @param UsersAccessInterface $usersSqlAccess reverse dependencies (ask the interface)
-     * @return array|string[] Create specific messages that need to be returned to the user
+     * @return string Create specific messages that need to be returned to the user
      */
-    public function createAccount(array $A_values = null, UsersAccessInterface $usersSqlAccess):array {
+    public function createAccount(array $A_values = null, UsersAccessInterface $usersSqlAccess):string {
         if($usersSqlAccess->create($A_values)) {
-            return array('messageType' => 'successful', 'message' => 'Votre compte a été crée');
+            return Success::SIGNUP_AFTER_VERIFIED;
         }
-        return array('messageType' => 'error', 'message' => 'Erreur du serveur, veuillez réessayer');
+        return Errors::GENERIC_ERROR;
     }
 
     /**
@@ -54,5 +53,42 @@ class UsersChecking
      */
     public function updateAccount(Array $A_values = null, UsersAccessInterface $usersSqlAccess):bool {
         return $usersSqlAccess->update($A_values);
+    }
+
+    /**
+     * Verify a password
+     * @param string $S_password the passqword
+     * @param string $S_verification_password the verification password
+     * @return string Create specific messages that need to be returned to the user
+     */
+    public function verifyPassword(string $S_password, string $S_verification_password):string {
+        // Verify if the password and the password verification are equals
+        if($S_verification_password != $S_password) { return Errors::PASSWORD_NOT_EQUALS_VERIFICATION_PASSWORD; }
+
+        // Verification of the password
+        if (strlen($S_password) < 12) { return Errors::PASSWORD_LENGTH_INSUFFICIENT; }
+
+        if (!preg_match('/[A-Z]/', $S_password)) { return Errors::PASSWORD_NO_UPPERCASE;}
+
+        if (!preg_match('/[\'^£$%&*()}{@#~?!><>,;.|=_+¬-]/', $S_password)) { return Errors::PASSWORD_NO_SPECIAL_CHARS;}
+
+        if(!preg_match('/\d/', $S_password)) { return Errors::PASSWORD_NO_NUMBER; }
+
+        return Success::PASSWORD_VERIFICATION;
+    }
+
+    /**
+     * Verify a mail
+     * @param string $S_mail the mail
+     * @return string Create specific messages that need to be returned to the user
+     */
+    public function verifyMail(UsersAccessInterface $usersSqlAccess , string $S_email):string {
+        // Verify if the user already exists
+        if($usersSqlAccess->getByEmail($S_email) != null) { return Errors::SIGNUP_ALREADY_EXISTS;}
+
+        // Verification of the email and the password
+        if ((substr($S_email, -16, 16) != "@etu.univ-amu.fr") && (substr($S_email, -12, 12) != "@univ-amu.fr")) { return Errors::EMAIL_NOT_AMU; }
+
+        return Success::EMAIL_VERIFICATION;
     }
 }

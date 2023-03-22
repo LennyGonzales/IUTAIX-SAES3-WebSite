@@ -30,27 +30,29 @@ class RetrievepwdController extends DefaultController
     public function updateAction(Array $A_parametres = null, Array $A_postParams = null) : void{
         $retrievePasswordChecking = new RetrievePasswordChecking();
         $A_retrievePassword = $retrievePasswordChecking->getByEmail($A_postParams['email'], $this->getRetrievePasswordSqlAccess());
-        if ($A_retrievePassword["token"] != $A_postParams["token"]){    // If the token entered isn't equals to the token in the database
-            header("Location: /retrievepwd");
-            exit;
-        }
 
-        $A_details = $retrievePasswordChecking->verifyPassword($A_postParams);
-        if($A_details['messageType'] == 'successful') {
-            $usersChecking = new UsersChecking();
-            $usersChecking->updateAccount($A_postParams, $this->getUsersSqlAccess());
-
+        if($A_retrievePassword == null) {   // If the email provides doesn't exist
+            View::show("message", array('messageType' => 'error', 'message' => Errors::EMAIL_NOT_EXISTS));
+        } else {
             $retrievePasswordChecking->deleteByEmail($A_postParams['email'], $this->getRetrievePasswordSqlAccess());
 
-            header("Location: /account");
-            exit;
+            if ($A_retrievePassword["token"] != $A_postParams["token"]) {    // If the token entered isn't equals to the token in the database
+                header("Location: /retrievepwd");
+                exit;
+            }
+
+            $usersChecking = new UsersChecking();
+            $A_details = $usersChecking->verifyPassword($A_postParams['user_password'], $A_postParams['user_password_verification']);
+            if ($A_details == Success::PASSWORD_VERIFICATION) {
+                $usersChecking = new UsersChecking();
+                $usersChecking->updateAccount($A_postParams, $this->getUsersSqlAccess());
+                header("Location: /account");
+                exit;
+            }
+            // If there is an error with the password
+            View::show("message", array('messageType' => 'error', 'message' => $A_details));
         }
 
-        // If there is an error (email already exists, password not as strong as expected, ...)
-        View::show("message", array(
-            'messageType' => $A_details['messageType'],
-            'message' => $A_details['message']
-        ));
         $this->defaultAction();
     }
 

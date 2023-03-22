@@ -17,19 +17,14 @@ final class StoriesController extends DefaultController
         }
     }
 
-    public function defaultAction(array $A_message = null):void {
+    public function defaultAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
-
-        if($A_message != null) {    // If there is a message, show it
-            View::show("message", $A_message);
-        }
 
         $questionChecking = new QuestionsChecking();
         View::show("stories/multiplechoicequestions/empty-form");
         View::show("stories/writtenresponsequestions/empty-form");
         View::show("stories/multiplechoicequestions/showAll", $questionChecking->getAllQuestions($this->getMultipleChoiceQuestionsSqlAccess()));
         View::show("stories/writtenresponsequestions/showAll", $questionChecking->getAllQuestions($this->getWrittenResponseQuestionsSqlAccess()));
-
     }
 
     /**
@@ -42,9 +37,10 @@ final class StoriesController extends DefaultController
         self::verificationSession();
 
         $questionChecking = new QuestionsChecking();
-        $A_details = $questionChecking->createQuestion($A_postParams, $this->getMultipleChoiceQuestionsSqlAccess());
+        $E_state = $questionChecking->createQuestion($A_postParams, $this->getMultipleChoiceQuestionsSqlAccess());
 
-        self::defaultAction($A_details);
+        View::show("message", array('messageType' => (($E_state == Success::QUESTION_ADDED) ? 'successful' : 'error'), 'message' => $E_state));
+        self::defaultAction();
     }
 
     /**
@@ -58,9 +54,10 @@ final class StoriesController extends DefaultController
 
         $S_id = $A_parametres[0];   // Get the id
         $questionChecking = new QuestionsChecking();
-        $A_details = $questionChecking->deleteQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess());
+        $E_state = $questionChecking->deleteQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess());
 
-        self::defaultAction($A_details);
+        View::show("message", array('messageType' => (($E_state == Success::QUESTION_DELETED) ? 'successful' : 'error'), 'message' => $E_state));
+        self::defaultAction();
     }
 
     /**
@@ -71,10 +68,16 @@ final class StoriesController extends DefaultController
      */
     public function showUpdateFormMultipleChoiceQuestionAction(Array $A_parametres = null, Array $A_postParams = null):void {
         self::verificationSession();
-
         $S_id = $A_parametres[0];
+
         $questionChecking = new QuestionsChecking();
-        View::show("stories/multiplechoicequestions/update-form", $questionChecking->getQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess()));
+        $A_details = $questionChecking->getQuestion($S_id, $this->getMultipleChoiceQuestionsSqlAccess());
+        if($A_details['message'] == Success::QUESTION_EXISTS) {
+            View::show("stories/multiplechoicequestions/update-form", $A_details['question']);
+        } else {
+            View::show("message", array('messageType' => 'error', 'message' => $A_details['message']));
+            self::defaultAction();
+        }
     }
 
     /**
@@ -87,8 +90,10 @@ final class StoriesController extends DefaultController
         self::verificationSession();
 
         $questionChecking = new QuestionsChecking();
-        $A_details = $questionChecking->updateQuestion($A_postParams, $this->getMultipleChoiceQuestionsSqlAccess());
-        self::defaultAction($A_details);
+        $E_state = $questionChecking->updateQuestion($A_postParams, $this->getMultipleChoiceQuestionsSqlAccess());
+
+        View::show("message", array('messageType' => (($E_state == Success::QUESTION_UPDATED) ? 'successful' : 'error'), 'message' => $E_state));
+        self::defaultAction();
     }
 
     /**
@@ -101,9 +106,10 @@ final class StoriesController extends DefaultController
         self::verificationSession();
 
         $questionChecking = new QuestionsChecking();
-        $A_details = $questionChecking->createQuestion($A_postParams, $this->getWrittenResponseQuestionsSqlAccess());
+        $E_state = $questionChecking->createQuestion($A_postParams, $this->getWrittenResponseQuestionsSqlAccess());
 
-        self::defaultAction($A_details);
+        View::show("message", array('messageType' => (($E_state == Success::QUESTION_ADDED) ? 'successful' : 'error'), 'message' => $E_state));
+        self::defaultAction();
     }
 
     /**
@@ -117,9 +123,10 @@ final class StoriesController extends DefaultController
 
         $S_id = $A_parametres[0];   // Get the id
         $questionChecking = new QuestionsChecking();
-        $A_details = $questionChecking->deleteQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess());
+        $E_state = $questionChecking->deleteQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess());
 
-        self::defaultAction($A_details);
+        View::show("message", array('messageType' => (($E_state == Success::QUESTION_DELETED) ? 'successful' : 'error'), 'message' => $E_state));
+        self::defaultAction();
     }
 
     /**
@@ -133,7 +140,13 @@ final class StoriesController extends DefaultController
 
         $S_id = $A_parametres[0];
         $questionChecking = new QuestionsChecking();
-        View::show("stories/writtenresponsequestions/update-form", $questionChecking->getQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess()));
+        $A_details = $questionChecking->getQuestion($S_id, $this->getWrittenResponseQuestionsSqlAccess());
+        if($A_details['message'] == Success::QUESTION_EXISTS) {
+            View::show("stories/writtenresponsequestions/update-form", $A_details['question']);
+        } else {
+            View::show("message", array('messageType' => 'error', 'message' => $A_details['message']));
+            self::defaultAction();
+        }
     }
 
     /**
@@ -146,7 +159,9 @@ final class StoriesController extends DefaultController
         self::verificationSession();
 
         $questionChecking = new QuestionsChecking();
-        $A_details = $questionChecking->updateQuestion($A_postParams, $this->getWrittenResponseQuestionsSqlAccess());
-        self::defaultAction($A_details);
+        $E_state = $questionChecking->updateQuestion($A_postParams, $this->getWrittenResponseQuestionsSqlAccess());
+
+        View::show("message", array('messageType' => (($E_state == Success::QUESTION_UPDATED) ? 'successful' : 'error'), 'message' => $E_state));
+        self::defaultAction();
     }
 }
