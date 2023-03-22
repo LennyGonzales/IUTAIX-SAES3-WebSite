@@ -15,6 +15,7 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         $A_result = $P_sth->fetchAll();
 
         $P_db = null;
+        $P_sth->closeCursor();
         return $A_result;
     }
 
@@ -39,6 +40,7 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         $A_result = $P_sth->fetch();
 
         $P_db = null;
+        $P_sth->closeCursor();
         if($A_result != null) {
             return new MultipleChoiceQuestion($A_result['id'], $A_result['module'], $A_result['description'], $A_result['question'], $A_result['true_answer'], $A_result['answer_1'], $A_result['answer_2'], $A_result['answer_3']);
         }
@@ -63,6 +65,7 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':answer_3', $A_values['answer_3'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
         $P_db = null;
+        $P_sth->closeCursor();
         return $B_state;
     }
 
@@ -85,6 +88,7 @@ class MultipleChoiceQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':id', $A_values['id'], PDO::PARAM_INT);
         $B_state = $P_sth->execute();
         $P_db = null;
+        $P_sth->closeCursor();
         return $B_state;
     }
 }

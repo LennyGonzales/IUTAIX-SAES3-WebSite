@@ -13,8 +13,9 @@ class Users extends Model implements UsersAccessInterface {
         $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
         $P_sth->bindValue(':user_password', $A_values['user_password'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         return $B_state;
     }
 
@@ -25,8 +26,9 @@ class Users extends Model implements UsersAccessInterface {
         $P_sth->bindValue(':email', $S_email, PDO::PARAM_INT);
         $P_sth->execute();
         $A_result = $P_sth->fetch(PDO::FETCH_ASSOC);
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         if($A_result != null) {
             return new User($A_result['email'], $A_result['user_password'], $A_result['user_status'], $A_result['points']);
         }
@@ -38,14 +40,13 @@ class Users extends Model implements UsersAccessInterface {
         $P_db = Connection::initConnection(self::DATABASE);
         $S_stmnt = "SELECT EMAIL, USER_PASSWORD, USER_STATUS, POINTS FROM USERS WHERE EMAIL = :email AND USER_PASSWORD= :password";
         $P_sth = $P_db->prepare($S_stmnt);
-
         $P_sth->bindValue(':email', $email, PDO::PARAM_STR);
         $P_sth->bindValue(':password', $password, PDO::PARAM_STR);
-
         $P_sth->execute();
         $A_result = $P_sth->fetch(PDO::FETCH_ASSOC);
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         if($A_result != null) {
             return new User($A_result['email'], $A_result['user_password'], $A_result['user_status'], $A_result['points']);
         }
@@ -61,8 +62,9 @@ class Users extends Model implements UsersAccessInterface {
         $P_sth->bindValue(':user_password', hash('sha512', $A_values['user_password']), PDO::PARAM_STR);
         $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         return $B_state;
 
     }

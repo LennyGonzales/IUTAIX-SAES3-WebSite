@@ -16,6 +16,7 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         $A_result = $P_sth->fetchAll();
 
         $P_db = null;
+        $P_sth->closeCursor();
         return $A_result;
     }
 
@@ -34,8 +35,9 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':true_answer', $A_values['true_answer'], PDO::PARAM_STR);
         $P_sth->execute();
         $A_result = $P_sth->fetch();
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         if($A_result != null) {
             return new WrittenResponseQuestion($A_result['id'], $A_result['module'], $A_result['description'], $A_result['question'], $A_result['true_answer']);
         }
@@ -57,8 +59,9 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':question', $A_values['question'], PDO::PARAM_STR);
         $P_sth->bindValue(':true_answer', $A_values['true_answer'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         return $B_state;
     }
 
@@ -77,8 +80,9 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         $P_sth->bindValue(':true_answer', $A_values['true_answer'], PDO::PARAM_INT);
         $P_sth->bindValue(':id', $A_values['id'], PDO::PARAM_INT);
         $B_state = $P_sth->execute();
-        $P_db = null;
 
+        $P_db = null;
+        $P_sth->closeCursor();
         return $B_state;
     }
 }

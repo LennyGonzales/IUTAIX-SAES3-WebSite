@@ -10,6 +10,8 @@ class RetrievePasswords implements RetrievePasswordAccessInterface
         $P_sth->bindValue(':token', $A_values['token'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
         $P_db = null;
+        $P_sth->closeCursor();
+
         return $B_state;
     }
 
@@ -22,6 +24,7 @@ class RetrievePasswords implements RetrievePasswordAccessInterface
         $P_sth->execute();
         $A_tuple = $P_sth->fetch(PDO::FETCH_ASSOC);
         $P_db = null;
+        $P_sth->closeCursor();
 
         if($A_tuple != null) {
             return new RetrievePassword($A_tuple['email'], $A_tuple['token'], $A_tuple['expiration_date']);
@@ -38,6 +41,7 @@ class RetrievePasswords implements RetrievePasswordAccessInterface
         $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
         $B_state = $P_sth->execute();
         $P_db = null;
+        $P_sth->closeCursor();
 
         return $B_state;
     }
@@ -49,6 +53,7 @@ class RetrievePasswords implements RetrievePasswordAccessInterface
         $P_sth->bindValue(':email', $S_email, PDO::PARAM_STR);
         $B_state = $P_sth->execute();
         $P_db = null;
+        $P_sth->closeCursor();
 
         return $B_state;
     }
