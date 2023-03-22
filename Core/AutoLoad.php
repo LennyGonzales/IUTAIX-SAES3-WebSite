@@ -1,5 +1,6 @@
 <?php
 
+set_include_path('../');
 require 'Core/Constants.php';
 
 final class AutoLoad

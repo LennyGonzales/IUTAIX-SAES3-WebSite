@@ -3,6 +3,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+include_once '../Core/AutoLoad.php';
+
+
 class QuestionTest extends TestCase
 {
 

@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once 'Core/AutoLoad.php';
+include_once '../Core/AutoLoad.php';
 
 class UserTest extends TestCase
 {

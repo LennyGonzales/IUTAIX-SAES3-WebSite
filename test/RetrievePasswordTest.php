@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-include_once 'Core/AutoLoad.php';
+include_once '../Core/AutoLoad.php';
 
 class RetrievePasswordTest extends TestCase
 {
