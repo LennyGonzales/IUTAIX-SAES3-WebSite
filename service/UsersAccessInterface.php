@@ -11,4 +11,6 @@ interface UsersAccessInterface
     public function getByEmailAndPassword(string $email, string $password):?User;
 
     public function update(array $A_values = null):bool;
+
+    public function getLeaderboard():?array;
 }

@@ -1,0 +1,73 @@
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5em;
+}
+
+.leaderboard>h1 {
+    font-size: 50px;
+}
+
+.leaderboard>table {
+    counter-reset: tableCount;
+}
+
+.autoIncrementColumn:before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+}
+
+.autoIncrementColumn {
+    width:1px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5em;
+}
+
+.profile>h1 {
+    font-size: 50px;
+}
+
+.profileBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 3em;
+    gap:5em;
+}
+
+.profile-picture {
+    height:25em;
+    width:25em;
+    border-radius:50%;
+    border: black 2px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.info {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap:2em;
+}
+
+.info>h1 {
+    color: #007bff;
+}
+
+@media (min-width: 768px) {
+    .profileBox {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .info {
+        align-items: unset;
+    }
+}

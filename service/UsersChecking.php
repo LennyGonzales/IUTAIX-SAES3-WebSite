@@ -93,4 +93,13 @@ class UsersChecking
 
         return Success::EMAIL_VERIFICATION;
     }
+
+    /**
+     * Return the leaderboard
+     * @param UsersAccessInterface $usersSqlAccess
+     * @return array|null the leaderboard
+     */
+    public function getLeaderboard(UsersAccessInterface $usersSqlAccess):?array {
+        return $usersSqlAccess->getLeaderboard();
+    }
 }

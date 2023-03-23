@@ -66,6 +66,17 @@ class Users extends Model implements UsersAccessInterface {
         $P_db = null;
         $P_sth->closeCursor();
         return $B_state;
+    }
 
+    public function getLeaderboard():?array {
+        $P_db = Connection::initConnection(self::DATABASE);
+        $S_stmnt = "SELECT EMAIL, POINTS FROM USERS ORDER BY POINTS DESC LIMIT 10";
+        $P_sth = $P_db->prepare($S_stmnt);
+        $P_sth->execute();
+        $A_result = $P_sth->fetchAll();
+
+        $P_db = null;
+        $P_sth->closeCursor();
+        return $A_result;
     }
 }
