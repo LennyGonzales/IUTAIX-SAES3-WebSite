@@ -2,6 +2,7 @@
 
 final class StoriesController extends DefaultController
 {
+
     /**
      * Verify if the user is allows to see the page
      * @return void

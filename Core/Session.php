@@ -16,7 +16,8 @@ final class Session
      *
      * @return void
      */
-    public static function start(string $S_status):void {
+    public static function start(string $S_email, string $S_status):void {
+        $_SESSION['email'] = $S_email;
         $_SESSION['user_status'] = $S_status;
     }
 

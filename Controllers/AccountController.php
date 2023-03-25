@@ -19,7 +19,7 @@ final class AccountController extends DefaultController
         $A_details = $usersChecking->verifyAuthentication($A_postParams, $this->getUsersSqlAccess());
 
         if($A_details['message'] == Success::LOGIN) {
-            Session::start($A_details['user_status']);  // Set the session
+            Session::start($A_postParams['email'], $A_details['user_status']);  // Set the session
             header('Location: /home');
             exit;
         }
@@ -73,7 +73,7 @@ final class AccountController extends DefaultController
             $A_details['user_status'] = $usersChecking->getByEmail($A_user['email'], $this->getUsersSqlAccess())['user_status'];
 
             if ($A_details['message'] == Success::SIGNUP_AFTER_VERIFIED) { // If the user exists and the password in the DB is equal to the password entered
-                Session::start($A_details['user_status']);
+                Session::start($A_postParams['email'], $A_details['user_status']);
                 header('Location: /home');
                 exit;
             }
