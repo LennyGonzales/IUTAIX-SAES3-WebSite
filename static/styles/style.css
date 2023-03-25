@@ -61,8 +61,8 @@
     display: inline;
     position: relative;
     overflow: hidden;
-  }
-  .underline:after {
+}
+.underline:after {
     content: "";
     position: absolute;
     z-index: -1;
@@ -74,14 +74,14 @@
     transition-property: width;
     transition-duration: 0.3s;
     transition-timing-function: ease-out;
-  }
-  .underline:hover:after,
-  .underline:focus:after,
-  .underline:active:after {
+}
+.underline:hover:after,
+.underline:focus:after,
+.underline:active:after {
     left: 0;
     right: auto;
     width: 100%;
-  }
+}
 
 .header .navbar a{
     margin-left: 2rem;
@@ -130,14 +130,14 @@
     .header{
         padding: 2rem;
     }
-    
+
 }
 
 @media (max-width: 768px){
     #menu-btn{
         display: initial;
     }
-    
+
     .header .navbar{
         position: absolute;
         top: 115%;

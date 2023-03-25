@@ -85,4 +85,6 @@ class WrittenResponseQuestions extends Model implements QuestionsAccessInterface
         $P_sth->closeCursor();
         return $B_state;
     }
+
+
 }

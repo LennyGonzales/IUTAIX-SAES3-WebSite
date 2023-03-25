@@ -3,9 +3,9 @@
 class Question
 {
     private int $id;
-    private string $module;
-    private string $description;
-    private string $question;
+    public string $module;
+    public string $description;
+    public string $question;
     private int $nbAnswers;
     private int $nbCorrectAnswers;
 
