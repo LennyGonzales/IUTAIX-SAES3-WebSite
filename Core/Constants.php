@@ -11,8 +11,6 @@ final class Constants
 
     const DATA_DIRECTORY      = '/data/';
     const SERVICE_DIRECTORY     = '/service/';
-
-
     const DOMAIN_DIRECTORY      = '/domain/';
 
     const CORE_DIRECTORY       = '/Core/';

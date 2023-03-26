@@ -1,3 +1,13 @@
+.password {
+	display: flex;
+	flex-direction: row;
+}
+
+.togglePassword {
+	position:relative;
+	top: 50%;
+}
+
 .account-title {
 	font-weight: bold;
 	margin: 0;
@@ -12,7 +22,7 @@
 
 .ghost {
 	border-radius: 20px;
-	border: 1px solid white;
+    border: 1px solid white;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -27,17 +37,17 @@
 }
 
 #signInBtn {
-	background-color: var(--blue);
-	background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);
-	border-radius: 20px;
-	color: var(--white);
+    background-color: var(--blue);  
+    background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);  
+    border-radius: 20px;  
+    color: var(--white); 
 }
 
 #signUpBtn {
-	background-color: var(--blue);
-	background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);
-	border-radius: 20px;
-	color: var(--white);
+    background-color: var(--blue);  
+    background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);  
+    border-radius: 20px;   
+    color: var(--white); 
 }
 .ghost:active {
 	transform: scale(0.95);
@@ -53,16 +63,15 @@
 }
 
 .container {
-	border-radius: 13px;
-	background: white;
-	box-shadow:  20px 20px 60px #bebebe,
-	-20px -20px 60px #ffffff;
+    border-radius: 13px;
+    background: white;
+    box-shadow:  20px 20px 60px #bebebe,
+                 -20px -20px 60px #ffffff;
 	position: relative;
 	overflow: hidden;
-	max-width: 60%;
+	width: 768px;
+	max-width: 100%;
 	min-height: 480px;
-	display: flex;
-	margin: 10em auto 10em;
 }
 
 .form-container {
@@ -76,6 +85,7 @@
 	justify-content: center;
 	flex-direction: column;
 	padding: 0 50px;
+	height: 100%;
 	text-align: center;
 }
 
@@ -108,7 +118,7 @@
 		opacity: 0;
 		z-index: 1;
 	}
-
+	
 	50%, 100% {
 		opacity: 1;
 		z-index: 5;
@@ -131,24 +141,21 @@
 }
 
 .overlay {
+	background: url("../content/images/macOS-Big-Sur-wallpaper-inspiration-javierocasio-idownloadblog-Waves-Dark-Alt-4K-1536x1536.jpg");
+	background-repeat: no-repeat;
 	background-size: cover;
-	background:var(--blue);
+	background-position: 0 0;
 	color: #FFFFFF;
 	position: relative;
 	left: -100%;
 	height: 100%;
 	width: 200%;
-	transform: translateX(0);
+  	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
 }
 
-.overlay h1, p{
-	color: var(--white);
-	padding: 0.5em;
-}
-
 .container.right-panel-active .overlay {
-	transform: translateX(50%);
+  	transform: translateX(50%);
 }
 
 .overlay-panel {
