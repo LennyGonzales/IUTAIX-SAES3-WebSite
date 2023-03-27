@@ -11,17 +11,9 @@ class UsersNotVerifiedChecking
      * Verify the credentials and create the not verified account
      * @param array|null $A_values contains the email and the password of the user
      * @param UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess reverse dependencies (ask the interface)
-     * @param UsersAccessInterface $usersSqlAccess reverse dependencies (ask the interface)
      * @return string Create specific messages that need to be returned to the user
      */
-    public function createAccount(array $A_values = null,UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess, UsersAccessInterface $usersSqlAccess):string {
-        $E_state = (new UsersChecking())->verifyMail($usersSqlAccess, $A_values['email']);
-        if($E_state != Success::EMAIL_VERIFICATION) { return $E_state; }
-
-        $E_state = (new UsersChecking())->verifyPassword($A_values['user_password'], $A_values['user_password_verification']);
-        if($E_state != Success::PASSWORD_VERIFICATION) { return $E_state; }
-
-        // Creation of the user
+    public function createAccount(array $A_values = null,UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess):string {
         $A_values['user_password'] = hash('sha512', $A_values['user_password']);
         if(!$usersNotVerifiedSqlAccess->create($A_values)) { return Errors::GENERIC_ERROR;}
 

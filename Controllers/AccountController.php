@@ -36,19 +36,23 @@ final class AccountController extends DefaultController
      */
     public function signUpRequestAction(array $A_parametres = null, array $A_postParams = null): void
     {
-        // Insert user still not verified
-        $usersNotVerifiedChecking = new UsersNotVerifiedChecking();
-        $A_details = $usersNotVerifiedChecking->createAccount($A_postParams, $this->getUsersNotVerifiedSqlAccess(), $this->getUsersSqlAccess());
+        $userChecking = new UsersChecking();
 
-        if ($A_details == Success::SIGNUP) {
-            $A_postParams['token'] = (new RandomTokenGenerator())->generate();      // Generate a random token
-            $usersNotVerifiedChecking->sendMailVerification($A_postParams);
-            header('Location: /account/verifyMail');
-            exit;
+        $S_details = $userChecking->verifyMail($this->getUsersSqlAccess(), $A_postParams['email']);
+        if($S_details == Success::EMAIL_VERIFICATION) { // Verification mail
+            $S_details = $userChecking->verifyPassword($A_postParams['user_password'], $A_postParams['user_password_verification']);
+
+            if($S_details == Success::PASSWORD_VERIFICATION) {  // Verification password
+                $A_postParams['token'] = (new RandomTokenGenerator())->generate();      // Generate a random token
+                $usersNotVerifiedChecking = new UsersNotVerifiedChecking();
+                $usersNotVerifiedChecking->createAccount($A_postParams, $this->getUsersNotVerifiedSqlAccess());
+                $usersNotVerifiedChecking->sendMailVerification($A_postParams);
+                header('Location: /account/verifyMail');
+                exit;
+            }
         }
-
         // If there is an error (email already exists, password not as strong as expected, ...)
-        View::show("message", array('messageType' => 'error', 'message' => $A_details));
+        View::show("message", array('messageType' => 'error', 'message' => $S_details));
         View::show("account/account", array("errorMessage" => true));
     }
 
