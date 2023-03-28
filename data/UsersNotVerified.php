@@ -43,4 +43,18 @@ class UsersNotVerified implements UsersNotVerifiedAccessInterface
         $P_sth->closeCursor();
         return $B_state;
     }
+
+    public function update(array $A_values = null): bool {
+
+        $P_db = Connection::initConnection(self::DATABASE);
+        $S_stmnt = "UPDATE usersnotverified SET TOKEN = :token WHERE EMAIL = :email";
+        $P_sth = $P_db->prepare($S_stmnt);
+        $P_sth->bindValue(':token', $A_values['token'], PDO::PARAM_STR);
+        $P_sth->bindValue(':email', $A_values['email'], PDO::PARAM_STR);
+        $B_state = $P_sth->execute();
+        $P_db = null;
+        $P_sth->closeCursor();
+
+        return $B_state;
+    }
 }

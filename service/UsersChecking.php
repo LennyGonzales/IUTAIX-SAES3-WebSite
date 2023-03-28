@@ -102,4 +102,8 @@ class UsersChecking
     public function getLeaderboard(UsersAccessInterface $usersSqlAccess):?array {
         return $usersSqlAccess->getLeaderboard();
     }
+
+    public function update(UsersAccessInterface $usersSqlAccess, array $A_values):bool {
+        return $usersSqlAccess->update($A_values);
+    }
 }

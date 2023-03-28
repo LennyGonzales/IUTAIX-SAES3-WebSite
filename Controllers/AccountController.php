@@ -42,25 +42,41 @@ final class AccountController extends DefaultController
         if($S_details == Success::EMAIL_VERIFICATION) { // Verification mail
             $S_details = $userChecking->verifyPassword($A_postParams['user_password'], $A_postParams['user_password_verification']);
 
-            if($S_details == Success::PASSWORD_VERIFICATION) {  // Verification password
-                $A_postParams['token'] = (new RandomTokenGenerator())->generate();      // Generate a random token
-                $usersNotVerifiedChecking = new UsersNotVerifiedChecking();
-                $usersNotVerifiedChecking->createAccount($A_postParams, $this->getUsersNotVerifiedSqlAccess());
-                $usersNotVerifiedChecking->sendMailVerification($A_postParams);
-                header('Location: /account/verifyMail');
-                exit;
+            if($S_details == Success::PASSWORD_VERIFICATION) {
+
+                $usersNotVerifiedChecking = new UsersNotVerifiedChecking();// Verification password
+
+                $user = $usersNotVerifiedChecking->getByEmail($A_postParams['email'], $this->getUsersNotVerifiedSqlAccess());
+
+                if ($user != null) {
+                    // If the user has already sent a request, update the token in the database with the new token
+                    $A_postParams['token'] = (new RandomTokenGenerator())->generate();
+                    $usersNotVerifiedChecking->update($A_postParams, $this->getUsersNotVerifiedSqlAccess());
+                    $usersNotVerifiedChecking->sendMailVerification($A_postParams);
+                    header("Location: /account/verifyMail");
+                    exit;
+                }
+                else {
+                    $A_postParams['token'] = (new RandomTokenGenerator())->generate();      // Generate a random token
+                    $usersNotVerifiedChecking->createAccount($A_postParams, $this->getUsersNotVerifiedSqlAccess());
+                    $usersNotVerifiedChecking->sendMailVerification($A_postParams);
+                    header('Location: /account/verifyMail');
+                    exit;
+                }
             }
         }
+
         // If there is an error (email already exists, password not as strong as expected, ...)
         View::show("message", array('messageType' => 'error', 'message' => $S_details));
         View::show("account/account", array("errorMessage" => true));
     }
 
+
     public function verificationAction(array $A_parametres = null, array $A_postParams = null): void    // Put the link in the mail
     {
         $usersNotVerifiedChecking = new UsersNotVerifiedChecking();
         $A_user = $usersNotVerifiedChecking->getByEmail($A_postParams['email'], $this->getUsersNotVerifiedSqlAccess());
-        if($A_user != null) {
+        if($A_user == null) {
             View::show("message", array('messageType' => 'error', 'message' => Errors::EMAIL_NOT_EXISTS));
             View::show("account/account", array("errorMessage" => true));
         } else {

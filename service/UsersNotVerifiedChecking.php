@@ -32,4 +32,8 @@ class UsersNotVerifiedChecking
     public function deleteByEmail(string $S_email = null, UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess):bool {
         return $usersNotVerifiedSqlAccess->deleteByEmail($S_email);
     }
+
+    public function update(array $A_values = null, UsersNotVerifiedAccessInterface $usersNotVerifiedSqlAccess):bool {
+        return $usersNotVerifiedSqlAccess->update($A_values);
+    }
 }
