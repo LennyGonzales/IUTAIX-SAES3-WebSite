@@ -9,12 +9,11 @@ final class Connection
 {
 
     public function getDbCredentials(string $S_databaseName = null):array {
-        $env = parse_ini_file('credentials.env');
         return array(
-            'host' => $env['DB_' . $S_databaseName . '_HOST'],
-            'user' => $env['DB_' . $S_databaseName . '_USER'],
-            'password' => $env['DB_' . $S_databaseName . '_PASSWORD'],
-            'dbname' => $env['DB_' . $S_databaseName . '_DBNAME']
+            'host' => getenv('DB_HOST'),
+            'user' => getenv('DB_USER'),
+            'password' => getenv('DB_PASSWORD'),
+            'dbname' => getenv('DB_' . $S_databaseName . '_DBNAME')
         );
     }
 
