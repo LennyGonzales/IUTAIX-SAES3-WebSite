@@ -189,12 +189,15 @@
 
 .home .video{
     flex: 1 1 45rem;
+
 }
 
 
 .home .video video{
     width: 100%;
     margin-top: 5rem;
+    margin-bottom: 5rem;
+    border-radius: .5rem;
 }
 
 
@@ -212,12 +215,12 @@
 }
 .home .content p{
     font-size: 1.7rem;
+    font-weight: 400;
     padding: 1rem 0;
     max-width: 40rem;
     color: var(--black);
     padding-bottom: 4rem;
 
-    font-weight: bold;
 
     margin-left: 1rem ;
 

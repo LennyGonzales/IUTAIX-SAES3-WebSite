@@ -105,6 +105,6 @@ final class AccountController extends DefaultController
 
     public function verifyMailAction(array $A_parametres = null, array $A_postParams = null): void
     {
-        View::show("Verify_mail/verifyMail", array("errorMessage" => true));
+        View::show("verify_mail/verifyMail", array("errorMessage" => true));
     }
 }
