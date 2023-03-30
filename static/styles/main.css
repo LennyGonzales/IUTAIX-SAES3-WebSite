@@ -16,7 +16,7 @@
     box-sizing: border-box;
     outline: none;
     border: none;
-    text-transform: capitalize;
+    text-transform: none;
     transition: 0.2s ease-in-out;
     color: var(--black);
     text-decoration: none;
@@ -37,6 +37,7 @@ p {
     font-weight: 100;
     line-height: 20px;
     letter-spacing: 0.5px;
+
 }
 
 input {

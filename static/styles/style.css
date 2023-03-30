@@ -29,6 +29,8 @@
     background-color: var(--blue);
     border-radius: .5rem;
     color: var(--white);
+
+    margin-left: 1rem;
 }
 
 .all-btn:hover{
@@ -130,14 +132,14 @@
     .header{
         padding: 2rem;
     }
-    
+
 }
 
 @media (max-width: 768px){
     #menu-btn{
         display: initial;
     }
-    
+
     .header .navbar{
         position: absolute;
         top: 115%;
@@ -205,15 +207,23 @@
     font-size: 4.5rem;
     padding-block-end: 1rem;
     color: var(--very-dark-blue);
-}
+    margin-left: 1rem ;
 
+}
 .home .content p{
     font-size: 1.7rem;
     padding: 1rem 0;
     max-width: 40rem;
-    color: var(--gray);
+    color: var(--black);
     padding-bottom: 4rem;
+
+    font-weight: bold;
+
+    margin-left: 1rem ;
+
+
 }
+
 
 .home .content .home-btn{
     padding: 1.3rem 2rem;
@@ -223,6 +233,7 @@
     box-shadow: .5rem .5rem hsl(231, 69%, 60%);
     border: 2px solid var(--blue);
     border-radius: .5rem;
+
 }
 
 
