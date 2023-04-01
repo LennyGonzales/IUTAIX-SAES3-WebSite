@@ -1,13 +1,13 @@
 # Image de base
 FROM php:7.4-apache
 
-RUN sed 's/;extension=pdo_pqsql/extension=pdo_pgsql/g' /usr/local/etc/php/php.ini-development && apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql && a2enmod rewrite
+RUN sed 's/;extension=pdo_pqsql/extension=pdo_pgsql/g' /usr/local/etc/php/php.ini-development && apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql && a2enmod rewrite && a2enmod ssl
 
 # Copier le fichier de configuration de site virtuel
-COPY mysite.conf /etc/apache2/sites-available/mysite.conf
+COPY networkstories.no-ip.org.conf /etc/apache2/sites-available/networkstories.no-ip.org.conf
 
 # Activer le site virtuel
-RUN a2ensite mysite.conf
+RUN a2ensite networkstories.no-ip.org.conf
 
 # Copier les fichiers de votre site web
 COPY . /var/www/html/
