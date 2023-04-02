@@ -22,8 +22,8 @@ echo "
             <h3>Application</h3>";
 
 if (Session::check()) {
-    echo "<a href=''> <i class='fas fa-chevron-right'></i>Télécharger NetWork Stories sur MacOS</a>";
-    echo "<a href=''> <i class='fas fa-chevron-right'></i>Télécharger NetWork Stories sur Windows</a>";
+    echo "<a href='https://drive.google.com/drive/folders/1smzKLmY_qy_zYplnTqUyGFfzrvJ9mM_s?usp=share_link'> <i class='fas fa-chevron-right'></i>Télécharger NetWork Stories sur MacOS</a>";
+    echo "<a href='https://drive.google.com/drive/folders/1382cDS7G-8YoMpRaqOeQbOafJ9vX_xa1?usp=share_link'> <i class='fas fa-chevron-right'></i>Télécharger NetWork Stories sur Windows</a>";
 } else {
     echo "<a href='/account'> <i class='fas fa-chevron-right'></i>Télécharger NetWork Stories sur MacOS</a>";
     echo "<a href='/account'> <i class='fas fa-chevron-right'></i>Télécharger NetWork Stories sur Windows</a>";
