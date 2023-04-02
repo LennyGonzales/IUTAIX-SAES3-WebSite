@@ -12,6 +12,10 @@ if (Session::check()) {
     if(Session::getSession()['user_status'] !== 'Student') {
         echo "<a href='/stories' class='underline'>Histoires</a>";
     }
+    if ($_SESSION['user_status'] !== 'Student') {
+        echo "<a href='/home/guideDocker' class='underline'>Guide docker</a>";
+
+    }
     echo "<a href='/profile' class='underline'>Profil</a>";
     echo "<a href='/logout' class='btn'>Deconnexion</a>";
 }
