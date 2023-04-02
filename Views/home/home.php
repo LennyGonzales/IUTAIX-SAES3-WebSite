@@ -7,8 +7,8 @@ echo "
             <p>L'objectif de NetWork Stories est de rendre davantage ludique l'enseignement « Réseaux » de première année de l'IUT Informatique d'Aix-Marseille</p>";
 
 if (Session::check()) {
-    echo "<a href='https://drive.google.com/drive/folders/1382cDS7G-8YoMpRaqOeQbOafJ9vX_xa1?usp=share_link' class='all-btn'>Télécharger sur Windows</a>";
-    echo "<a href='https://drive.google.com/drive/folders/1smzKLmY_qy_zYplnTqUyGFfzrvJ9mM_s?usp=share_link' class='all-btn'>Télécharger sur MacOS</a>";
+    echo "<a href='https://drive.google.com/uc?export=download&id=1nFtRUGBqw1D6YoB-ILiXEshpOcMl-ZPK' class='all-btn'>Télécharger sur Windows</a>";
+    echo "<a href='https://drive.google.com/uc?export=download&id=1jcDSwbxR7hPoxQ18jBmvgeAPLU_PVVzO' class='all-btn'>Télécharger sur MacOS</a>";
 
 } else {
     echo "<a href='/account' class='all-btn'>Télécharger sur Windows</a>";
