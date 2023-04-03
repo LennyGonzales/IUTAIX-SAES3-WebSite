@@ -69,4 +69,10 @@
     color: var(--white);
 }
 
+.section-btn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
 /* home section ends */

@@ -2,7 +2,7 @@
 
 echo "<header class='header'>
     <div class='logo'>
-        <img src='/static/content/images/logo-nws.png' alt='logo-nws'>
+        <a href='/home'><img src='/static/content/images/logo-nws.png' alt='logo-nws'></a>
     </div>
 
     <nav class='navbar'>
