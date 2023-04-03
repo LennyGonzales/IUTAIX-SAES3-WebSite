@@ -1,0 +1,73 @@
+/* home section starts  */
+
+.home{
+    padding-top: 15rem;
+    margin:0 5em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    /* main property for responsiveness */
+    gap: 1.5rem;
+}
+
+
+.video{
+    flex: 1 1 45rem;
+
+}
+
+
+.video video{
+    width: 100%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    border-radius: .5rem;
+}
+
+
+.content{
+    flex: 1 1 45rem;
+}
+
+
+.content h1{
+    font-size: 4.5rem;
+    padding-block-end: 1rem;
+    color: var(--very-dark-blue);
+    margin-left: 1rem ;
+
+}
+.content p{
+    font-size: 1.7rem;
+    font-weight: 400;
+    padding: 1rem 0;
+    max-width: 40rem;
+    color: var(--black);
+    padding-bottom: 4rem;
+
+
+    margin-left: 1rem ;
+
+
+}
+
+
+.content .home-btn{
+    padding: 1.3rem 2rem;
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 1.4rem;
+    box-shadow: .5rem .5rem hsl(231, 69%, 60%);
+    border: 2px solid var(--blue);
+    border-radius: .5rem;
+
+}
+
+
+.content .home-btn:hover{
+    background-color: var(--blue);
+    box-shadow: none;
+    color: var(--white);
+}
+
+/* home section ends */

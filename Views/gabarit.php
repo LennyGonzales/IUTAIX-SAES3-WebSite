@@ -10,6 +10,8 @@
         <link rel="stylesheet" type="text/css" href="/static/styles/login-style.css">
         <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
         <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/home.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/footer.css">
         <link rel="icon" href="/static/content/images/logo-nws.png" type="image/ico" />
 
         <title>NetWork Stories</title>
