@@ -3,11 +3,10 @@
 echo "
     <details class='stories-details'>
         <summary>Voir/Modifier/Supprimer toutes les questions à choix multiples</summary>
-        <div class='tabla-responsive'>
-                <table class='table-bordered'>
+        <section class='stories'>
+                <table class='default-table'>
                     <thead>
-                        <Caption>Tableau questions à choix multiples</Caption> 
-                        <tr class='column'>
+                        <tr class='default-table-tr'>
                             <th>Id</th>
                             <th>Module</th>
                             <th>Description</th>
@@ -24,7 +23,7 @@ echo "
                     <tbody>";
 
 foreach($A_view as $A_row) {
-            echo " <tr class='Rows'>
+            echo " <tr class='default-table-tr'>
                         <td>" . $A_row['id'] . "</td>&nbsp;
                         <td>" . $A_row['module'] . "</td>&nbsp;
                         <td>" . $A_row['description'] . "</td>&nbsp;
@@ -43,5 +42,5 @@ foreach($A_view as $A_row) {
 echo "
                 </tbody>
             </table>
-        </div>
+        </section>
     </details>";

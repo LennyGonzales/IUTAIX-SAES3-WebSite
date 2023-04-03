@@ -3,12 +3,11 @@
 echo "
     <details class='stories-details'>
         <summary>Voir/Modifier/Supprimer toutes les questions à réponse écrite</summary>
-        <div class='table-responsive'>
-            <table class='table-bordered'>
-            <Caption>Tableau questions à réponse écrite</Caption>
-            <br>
+        <section class='stories'>
+            <table class='default-table'>
                 <thead>
-                        <tr class='column'><th>Id</th>
+                        <tr class='default-table-tr'>
+                            <th>Id</th>
                             <th>Module</th>
                             <th>Description</th>
                             <th>Question</th>
@@ -21,7 +20,7 @@ echo "
                 <tbody>";
 
 foreach($A_view as $A_row) {
-            echo " <tr class='Rows'>
+            echo " <tr class='default-table-tr'>
                         <td>" . $A_row['id'] . "</td>&nbsp;
                         <td>" . $A_row['module'] . "</td>&nbsp;
                         <td>" . $A_row['description'] . "</td>&nbsp;

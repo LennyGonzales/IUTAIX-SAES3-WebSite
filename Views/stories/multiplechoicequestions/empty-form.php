@@ -2,8 +2,7 @@
 
 echo "<details class='stories-details'>
         <summary>Ajouter une question à choix multiples</summary>
-        <h1>Formulaire d'ajout questions à choix multiples</h1>
-        <form action='/stories/insertMultipleChoiceQuestion' method='post'>
+        <form class='default-form stories-add-form' action='/stories/insertMultipleChoiceQuestion' method='post'>
             Module: <input type='text' name='module' required><br>
             Description: <input type='text' name='description' required><br>
             Question: <input type='text' name='question' required><br>

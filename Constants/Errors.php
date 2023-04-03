@@ -20,7 +20,8 @@ class Errors
 
     // Email
             const EMAIL_NOT_AMU = 'L\'email inséré n\'est pas un email AMU.';
-            const EMAIL_NOT_EXISTS = 'Erreur lié à l\'email ou au token.';
+            const EMAIL_NOT_EXISTS = 'Le mail spécifié n\'existe pas';
+            const EMAIL_OR_TOKENS_NOT_EXISTS = 'Erreur lié à l\'email ou au token.';
 
     // Question
             const QUESTION_ALREADY_EXISTS = 'La question existe déjà !';

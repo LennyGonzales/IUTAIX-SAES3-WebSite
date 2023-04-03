@@ -7,8 +7,9 @@ function getTextIfExists(array $A_view = null, string $S_columnName = null):stri
     return '';
 }
 
-echo "  <h1>Formulaire de modification d'une question à choix multiples</h1>
-        <form action='/stories/updateMultipleChoiceQuestion' method='post'>
+echo "<section class='stories-update-section'>
+        <h1>Formulaire de modification d'une question à choix multiples</h1>
+        <form class='default-form' action='/stories/updateMultipleChoiceQuestion' method='post'>
             <input type='hidden' name='id' value='" . getTextIfExists($A_view, "id") . "' required><br>
             Module: <input type='text' name='module' value='" . getTextIfExists($A_view, "module") . "' required><br>
             Description: <input type='text' name='description' value='" . getTextIfExists($A_view, "description") . "' required><br>
@@ -18,4 +19,5 @@ echo "  <h1>Formulaire de modification d'une question à choix multiples</h1>
             Réponse 2: <input type='text' name='answer_2' value='" . getTextIfExists($A_view, "answer_2") . "' required><br>
             Réponse 3: <input type='text' name='answer_3' value='" . getTextIfExists($A_view, "answer_3") . "' required><br>
             <input type='submit' name='add' value='Modifier'>
-        </form>";
+        </form>
+    </section>";

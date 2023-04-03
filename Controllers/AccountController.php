@@ -77,7 +77,7 @@ final class AccountController extends DefaultController
         $usersNotVerifiedChecking = new UsersNotVerifiedChecking();
         $A_user = $usersNotVerifiedChecking->getByEmail($A_postParams['email'], $this->getUsersNotVerifiedSqlAccess());
         if($A_user == null) {
-            View::show("message", array('messageType' => 'error', 'message' => Errors::EMAIL_NOT_EXISTS));
+            View::show("message", array('messageType' => 'error', 'message' => Errors::EMAIL_OR_TOKENS_NOT_EXISTS));
             View::show("account/account", array("errorMessage" => true));
         } else {
             $usersNotVerifiedChecking->deleteByEmail($A_postParams['email'], $this->getUsersNotVerifiedSqlAccess());

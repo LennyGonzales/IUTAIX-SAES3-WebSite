@@ -3,7 +3,7 @@
 echo "
     <section class='home' id='home'>
         <div class='content'>
-            <h1>NetWork Stories</h1>
+            <h1>NetWork</h1>
             <p>L'objectif de NetWork Stories est de rendre davantage ludique l'enseignement « Réseaux » de première année de l'IUT Informatique d'Aix-Marseille</p>";
 
 if (Session::check()) {

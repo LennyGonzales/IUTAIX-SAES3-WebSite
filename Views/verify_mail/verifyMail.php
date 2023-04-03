@@ -1,5 +1,5 @@
 <?php
-echo("<form class='sigin' method='post' action='/Account/verification'>
+echo("<form class='default-form' method='post' action='/Account/verification'>
         <label><b>Adresse mail</b></label>
         <input type='text' placeholder='Entrez votre adresse mail' name='email' required><br>
         <label><b>Verification de compte</b></label>

@@ -78,6 +78,13 @@
 	text-align: center;
 }
 
+.password {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
 .sign-in-container {
 	left: 0;
 	width: 50%;
@@ -179,4 +186,17 @@
 
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
+}
+
+
+.retrieve-password-form-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 7.5em;
+	gap:5em;
+}
+
+.retrieve-password-form-section>h1 {
+	font-size: 30px;
 }

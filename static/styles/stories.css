@@ -1,0 +1,47 @@
+.stories-details {
+    background-color: #f5f5f5;
+    box-shadow: 0px 17px 15px 0px rgba(0,0,0,0.1);
+    border-radius: 10px;
+
+    width: 90%;
+    height:fit-content;
+    padding: 2em;
+    margin : 5%;
+}
+
+.stories-details:hover {
+    margin-left:2%;
+}
+
+.stories-details > summary {
+    font-size:1.25em;
+}
+
+.stories-details:hover > summary {
+    font-size:1.5em;
+}
+
+.stories {
+    margin-top:5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---- form --- */
+
+.stories-update-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 7.5em;
+    gap:5em;
+}
+
+.stories-update-section>h1 {
+    font-size: 30px;
+}
+
+.stories-add-form {
+    margin-top: 5em;
+}

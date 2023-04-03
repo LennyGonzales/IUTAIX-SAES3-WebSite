@@ -4,9 +4,9 @@ echo "
     <section class='leaderboard'>
         <h1>Classement général</h1>
 
-        <table>
+        <table class='default-table'>
             <thead>
-                <tr>
+                <tr class='default-table-tr'>
                     <th>Position</th>
                     <th>Mail universitaire</th>
                     <th>Points</th>
@@ -15,7 +15,7 @@ echo "
             <tbody>
         ";
 foreach ($A_view as $A_user) {
-        echo "  <tr>
+        echo "  <tr class='default-table-tr'>
                     <td class='autoIncrementColumn'></td>
                     <td>" . $A_user['email'] . "</td>
                     <td>" . $A_user['points'] . "</td>
