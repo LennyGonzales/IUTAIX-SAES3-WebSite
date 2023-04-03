@@ -6,7 +6,7 @@
 ![PHPStorm](http://img.shields.io/badge/-PHPStorm-181717?style=for-the-badge&logo=phpstorm&logoColor=white)
 ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
-## Lien du site web : https://nwstories.alwaysdata.net
+## Lien du site web : http://networkstories.no-ip.org/
 
 ## Notre client
 
@@ -16,7 +16,7 @@
 
 Le principal objectif de son projet est de rendre davantage ludique l'enseignement « Réseaux » de première année de l'IUT Informatique d'Aix-Marseille à l'aide de scénarios.
 
-Grâce au site web, l’utilisateur pourra télécharger l'application après s'être inscrit.
+Grâce au site web, l’utilisateur pourra télécharger l'application (disponible sur Windows et MacOS) après s'être inscrit. Il pourra aussi accéder à son profil où se trouve ses informations (email,nombre de points) et au classement des dix meilleurs joueurs.
 
 En ce qui concerne notre client, il pourra quant à lui gérer la base de donnée en ajoutant, modifiant ou supprimant des scénarios.
 
